@@ -1,8 +1,0 @@
-#Tue Nov 10 14:44:02 CET 2020
-org.modelio.app.module.propertytab.JavaDesigner\ v3.10.00\ GModule\ @file\:///C\:/Users/baure/.modelio/4.1/modules/JavaDesigner_3.10.00/JavaDesigner_3.10.00.jmdac\ runtime\ module_.org.modelio.diagram.perspective.parentId=app.ui.ext_com.partstack.right
-org.modelio.app.module.propertytab.JavaDesigner\ v3.10.00\ GModule\ @file\:///C\:/Users/baure/.modelio/4.1/modules/JavaDesigner_3.10.00/JavaDesigner_3.10.00.jmdac\ runtime\ module_.org.modelio.app.ui.model.perspective.parentId=org.modelio.app.bottom.parts
-org.modelio.app.diagram.editor.OpenedDiagrams2='Diagramme de s\u00E9quence Interaction1' {27f2c6db-e669-44b5-9150-90d4ff84f5f8} Standard.SequenceDiagram
-org.modelio.app.module.propertytab.JavaDesigner\ v3.10.00\ GModule\ @file\:///C\:/Users/baure/.modelio/4.1/modules/JavaDesigner_3.10.00/JavaDesigner_3.10.00.jmdac\ runtime\ module_.org.modelio.full.perspective.parentId=app.ui.ext_com.partstack.bottom
-org.modelio.app.diagram.editor.OpenedDiagrams1='Diagramme de s\u00E9quence Interaction' {d12373b1-af94-4b28-b800-a70ebfeddb42} Standard.SequenceDiagram
-org.modelio.app.diagram.editor.OpenedDiagrams0='Diagramme de cas d'utilisation projet' {863e5ddd-9183-42aa-8291-b487ab669ee5} Standard.UseCaseDiagram
-org.modelio.app.module.propertytab.JavaDesigner\ v3.10.00\ GModule\ @file\:///C\:/Users/baure/.modelio/4.1/modules/JavaDesigner_3.10.00/JavaDesigner_3.10.00.jmdac\ runtime\ module_.org.modelio.development.perspective.parentId=app.ui.ext_com.partstack.bottom
