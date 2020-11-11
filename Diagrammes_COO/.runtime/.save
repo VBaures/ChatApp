@@ -1,2 +1,3 @@
-#Wed Nov 11 10:57:07 CET 2020
+#Wed Nov 11 12:01:08 CET 2020
+org.modelio.app.diagram.editor.OpenedDiagrams1='Diagramme de s\u00E9quence Interaction' {2967d92c-c9b1-4ad1-b47a-63ab2aa4f8a9} Standard.SequenceDiagram
 org.modelio.app.diagram.editor.OpenedDiagrams0='Diagramme de cas d'utilisation diagrammes_coo' {9e25e6c8-21a8-405d-95d3-61dc6d113459} Standard.UseCaseDiagram
