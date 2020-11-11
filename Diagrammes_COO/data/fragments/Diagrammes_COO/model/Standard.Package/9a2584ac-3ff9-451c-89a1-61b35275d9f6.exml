@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="diagrammes_coo" version="4">
+  <OBJECT>
+    <ID name="diagrammes_coo" mc="Standard.Package" uid="9a2584ac-3ff9-451c-89a1-61b35275d9f6"/>
+    <PID name="Diagrammes_COO" mc="Standard.Project" uid="55b57a64-acc6-48c5-ae98-ac8c19a1536d"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[diagrammes_coo]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES></DEPENDENCIES>
+  </OBJECT>
+</EXT>
