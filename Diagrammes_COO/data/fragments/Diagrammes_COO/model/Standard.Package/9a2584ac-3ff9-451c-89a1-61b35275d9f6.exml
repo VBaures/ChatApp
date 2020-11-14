@@ -15,6 +15,7 @@
     <DEPENDENCIES>
       <COMP relation="OwnedBehavior">
         <COMPID name="Interaction" mc="Standard.Interaction" uid="20d8da64-951a-44c8-a57a-e4d84c7f5249"/>
+        <COMPID name="State Machine" mc="Standard.StateMachine" uid="ddee9622-b683-4c7d-9157-28beefea8f4c"/>
       </COMP>
       <COMP relation="OwnedElement">
         <COMPID name="Login System" mc="Standard.Package" uid="90554718-d65b-47d3-a866-867db9b06e69"/>
@@ -22,9 +23,16 @@
         <COMPID name="User" mc="Standard.Actor" uid="e1f7cd82-d860-4591-8f7f-eee6b4d1727b"/>
         <COMPID name="Administration System" mc="Standard.Package" uid="c508079c-89a4-4048-aadc-e8016d136512"/>
         <COMPID name="Administrator" mc="Standard.Actor" uid="58676d4a-178c-4df0-9666-8c6ae7988c84"/>
+        <COMPID name="Agent" mc="Standard.Class" uid="8f72cf80-51c4-404d-b091-8a4adbbd55d8"/>
+        <COMPID name="ChatHandler" mc="Standard.Class" uid="ff748bfc-4f5a-4df9-ac66-12dfd0fcee07"/>
+        <COMPID name="PseudoHandler" mc="Standard.Class" uid="2600e3bd-ffaa-461a-8a8d-ea7f500f4699"/>
+        <COMPID name="BDDHandler" mc="Standard.Class" uid="ed5e3bf1-544a-4a63-95fd-a9eedab226dc"/>
+        <COMPID name="User" mc="Standard.Class" uid="d78920e5-ebf9-467d-bf3f-31c6884f8106"/>
+        <COMPID name="Message" mc="Standard.Class" uid="561f3c5b-a5f1-4d72-94e3-ecee0ef71618"/>
       </COMP>
       <COMP relation="Product">
         <COMPID name="Diagramme de cas d'utilisation diagrammes_coo" mc="Standard.UseCaseDiagram" uid="9e25e6c8-21a8-405d-95d3-61dc6d113459"/>
+        <COMPID name="Diagramme de classe diagrammes_coo" mc="Standard.ClassDiagram" uid="0f4354bf-53e9-4fd9-8c59-fe0e562213aa"/>
       </COMP>
     </DEPENDENCIES>
   </OBJECT>
