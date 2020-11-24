@@ -2,7 +2,9 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$USER_HOME$/Documents/INSA/POO-COO/Projet/Chat">
+      <sourceFolder url="file://$USER_HOME$/Documents/INSA/POO-COO/Projet/Chat/src" isTestSource="false" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
