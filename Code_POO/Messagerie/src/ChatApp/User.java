@@ -1,3 +1,6 @@
+/*
+ * Creator: Vincent Baures
+*/
 package ChatApp;
 
 public class User {
@@ -6,18 +9,19 @@ public class User {
 	protected String pseudo;
 	private int ID;
 	
-	String getUserName () {
+	public String getUserName () {
 		return this.username;
 	}
 	
-	String getPassword () {
+	public String getPassword () {
 		return this.password;
 	}
 	
-	String getPseudo () {
+	public String getPseudo () {
 		return this.pseudo;
 	}
-	int getID () {
+	public int getID () {
 		 return this.ID;
 	}
+	
 }

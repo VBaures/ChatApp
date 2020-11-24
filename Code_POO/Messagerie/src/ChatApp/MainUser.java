@@ -1,8 +1,10 @@
+/*
+ * Creator: Vincent Baures
+*/
 package ChatApp;
 
 public class MainUser extends User {
-
-		void setPseudo (String pseudo) {
+		public void setPseudo (String pseudo) {
 			super.pseudo=pseudo;
 		}
 }
