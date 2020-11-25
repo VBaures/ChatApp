@@ -7,6 +7,6 @@ public class PseudoHandler {
     ArrayList<User> connectedUsers;
 
     public void UpdateConnectedUsers(User newUser){
-        this.connectedUsers;
+        //this.connectedUsers;
     }
 }
