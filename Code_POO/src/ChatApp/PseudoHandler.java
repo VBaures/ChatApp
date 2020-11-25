@@ -1,3 +1,6 @@
+/*
+Creator: Vincent Baures
+ */
 package ChatApp;
 
 import java.util.ArrayList;
@@ -7,6 +10,6 @@ public class PseudoHandler {
     ArrayList<User> connectedUsers;
 
     public void UpdateConnectedUsers(User newUser){
-        this.connectedUsers;
+        this.connectedUsers.add(newUser);
     }
 }

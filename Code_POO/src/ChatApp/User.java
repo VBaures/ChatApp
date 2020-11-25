@@ -1,3 +1,7 @@
+/*
+Creator: Vincent Baures
+ */
+
 package ChatApp;
 
 public class User {

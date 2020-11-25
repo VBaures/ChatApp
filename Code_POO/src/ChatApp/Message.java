@@ -1,5 +1,4 @@
 package ChatApp;
-
 public class Message {
     protected Date time;
     protected User recipient;
