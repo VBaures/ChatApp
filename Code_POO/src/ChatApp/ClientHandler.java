@@ -8,20 +8,19 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Agent {
+public class ClientHandler extends Thread {
 
-    public static void main(String[] args) {
-        ServerHandler t1 = new ServerHandler();
-        ClientHandler t2 = new ClientHandler();
-        t1.start();
-        t2.start();
-
+    public void run(){
+        StartChat(); // c'est la fonction d'extraction qui est dans une autre classe
     }
 
-    public static synchronized void StartChat(int port) {
+    private static synchronized void StartChat() {
         new Thread(() -> {
             try {
-                Socket link = new Socket("localhost", port);
+                Scanner keyboard = new Scanner(System.in);
+                System.out.println("Enter client port");
+                Socket link = new Socket("localhost", keyboard.nextInt());
+                System.out.println("ok");
                 BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
                 PrintWriter out = new PrintWriter(link.getOutputStream(), true);
                 System.out.println(in.readLine());
@@ -34,4 +33,4 @@ public class Agent {
             }
         }).start();
     }
-    }
+}

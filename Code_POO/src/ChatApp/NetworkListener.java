@@ -1,29 +1,31 @@
 package ChatApp;
 
-import java.io.InputStream;
+import java.io.*;
 import java.net.Socket;
 
 public class NetworkListener implements Runnable {
-    final Socket link;
+
+    Socket socket;
 
     public NetworkListener(Socket link) {
-        this.link = link;
+        this.socket=link;
     }
 
-    @Override
+
     public void run() {
-        System.out.println("Thread started");
         try {
-            InputStream in = link.getInputStream();
-            int rcv = 0;
-            while ((rcv = in.read()) != 0) {
-                System.out.println("Received: " + rcv);
-            }
-            System.out.println("Finishing thread");
-            in.close();
-            link.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
+            out.println("awaiting data...");
+            String message;
+            while ((message=in.readLine()) == null) {}
+            System.out.println(message);
+            socket.close();
+
+        }catch(IOException e){
+            System.err.println("Le server est déjà utlisé ! ");
         }
+
     }
+
 }
