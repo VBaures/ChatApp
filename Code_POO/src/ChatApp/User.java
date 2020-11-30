@@ -4,6 +4,8 @@ public class User {
     private String username;
     private String password;
     protected String pseudo;
+    protected String addr_IP;
+    protected Integer port;
     private int ID;
 
     public String getUserName () {
@@ -15,6 +17,8 @@ public class User {
     public String getPseudo () {
         return this.pseudo;
     }
+    public Integer getPort (){return port;}
+    public String getAddr_Ip() {return addr_IP;}
     public int getID () {
         return this.ID;
     }
