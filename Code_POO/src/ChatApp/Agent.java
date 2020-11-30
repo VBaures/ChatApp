@@ -17,21 +17,4 @@ public class Agent {
         t2.start();
 
     }
-
-    public static synchronized void StartChat(int port) {
-        new Thread(() -> {
-            try {
-                Socket link = new Socket("localhost", port);
-                BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream()));
-                PrintWriter out = new PrintWriter(link.getOutputStream(), true);
-                System.out.println(in.readLine());
-                Scanner clavier = new Scanner(System.in);
-                String envoie = clavier.nextLine();
-                out.println(envoie);
-                link.close();
-            } catch (IOException e) {
-                System.err.println("LA CONNEXION A ETE INTERROMPUE ! ");
-            }
-        }).start();
-    }
-    }
+}
