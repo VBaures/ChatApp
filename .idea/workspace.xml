@@ -2,57 +2,74 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dfe758d1-f392-475d-8ce1-1e1a55beaedf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code_POO/src/ChatApp/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code_POO/src/ChatApp/Agent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code_POO/src/ChatApp/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code_POO/src/ChatApp/ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code_POO/src/ChatApp/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code_POO/src/ChatApp/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code_POO/src/ChatApp/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code_POO/src/ChatApp/ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code_POO/src/ChatApp/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code_POO/src/ChatApp/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Projet-COO1/ChatApp/Agent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Projet-COO1/ChatApp/BDDHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Projet-COO1/ChatApp/ChatHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Projet-COO1/ChatApp/ClientHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Projet-COO1/ChatApp/FileMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Projet-COO1/ChatApp/MainUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Projet-COO1/ChatApp/Message.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Projet-COO1/ChatApp/NetworkHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Projet-COO1/ChatApp/NetworkListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Projet-COO1/ChatApp/PseudoHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Projet-COO1/ChatApp/ServerHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Projet-COO1/ChatApp/StringMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Projet-COO1/ChatApp/User.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CodeStyleSettingsInfer">
-    <option name="done" value="true" />
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectCodeStyleSettingsMigration">
-    <option name="version" value="1" />
-  </component>
-  <component name="ProjectId" id="1klwIg68WeYZt4ZhduuEMT767wd" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
   <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/TestTCP" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Code_POO" />
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="RunManager" selected="Application.Agent1">
+    <configuration name="Agent1" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ChatApp.Agent" />
+      <module name="Projet-COO1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Agent2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ChatApp.Agent" />
+      <module name="Projet-COO1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Agent1" />
+      <item itemvalue="Application.Agent2" />
+    </list>
+  </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="dfe758d1-f392-475d-8ce1-1e1a55beaedf" name="Default Changelist" comment="" />
-      <created>1606288410142</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1606288410142</updated>
-    </task>
     <servers />
   </component>
   <component name="WindowStateProjectService">
-<<<<<<< Updated upstream
-    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606296492955">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1606296492955" />
-=======
-    <state x="421" y="115" key="FileChooserDialogImpl" timestamp="1606749341648">
+    <state x="96" y="0" width="1089" height="720" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606752698883">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="421" y="115" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1606749341648" />
->>>>>>> Stashed changes
+    <state x="96" y="0" width="1089" height="720" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.720@0.0.1280.720" timestamp="1606752698883" />
+    <state x="371" y="150" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1606752632732">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="371" y="150" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1280.720@0.0.1280.720" timestamp="1606752632732" />
+    <state x="421" y="115" key="FileChooserDialogImpl" timestamp="1606753211987">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="421" y="115" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1606753211987" />
   </component>
 </project>

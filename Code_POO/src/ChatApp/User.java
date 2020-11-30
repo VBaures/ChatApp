@@ -18,6 +18,7 @@ public class User {
         return this.pseudo;
     }
     public Integer getPort (){return port;}
+    public String getType() {return "User";}
     public String getAddr_Ip() {return addr_IP;}
     public int getID () {
         return this.ID;

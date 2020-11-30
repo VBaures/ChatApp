@@ -1,5 +1,6 @@
 package ChatApp;
 
+import java.io.IOError;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
@@ -23,12 +24,19 @@ public class ServerHandler {
                         ObjectInputStream in = new ObjectInputStream(link.getInputStream());
                         while (true) {
                             Object ObjectReceive = in.readObject();
-                            if (ObjectReceive istanceof Message)
-                            String message = ObjectReceive.toString();
-                            System.out.println(message);
-                            if (message=="Stop") {
-                                link.close();
-                            }                                                     }
+                            if (ObjectReceive instanceof Message){
+                                Message receive = (Message) ObjectReceive;
+                            }else if (ObjectReceive instanceof User){
+                                User receive = (User) ObjectReceive;
+                            }else if (ObjectReceive instanceof String){
+                                String receive = (String) ObjectReceive;
+                                if (receive=="Stop") {
+                                    link.close();
+                                }else{
+                                System.out.println(receive);
+                            }
+                            }
+                        }
 
                     } catch (IOException | ClassNotFoundException e) {
                         System.err.println("Le server est déjà utlisé 2 ! ");

@@ -11,10 +11,8 @@ import java.util.Scanner;
 public class Agent {
 
     public static void main(String[] args) {
-        ServerHandler t1 = new ServerHandler();
-        ClientHandler t2 = new ClientHandler();
-        t1.start();
-        t2.start();
+        ServerHandler server = new ServerHandler();
+        server.StartServer();
 
     }
 }
