@@ -11,8 +11,8 @@ import java.util.Scanner;
 public class Agent {
 
     public static void main(String[] args) {
-        ServerHandler server = new ServerHandler();
-        server.StartServer();
+        ClientHandler client = new ClientHandler();
+        client.StartChat();
 
     }
 }
