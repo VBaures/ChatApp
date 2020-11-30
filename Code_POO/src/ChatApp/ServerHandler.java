@@ -2,19 +2,21 @@ package ChatApp;
 
 import java.io.IOError;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ServerHandler {
-    int port;
+public class ServerHandler extends Thread {
+    public void run(){
+        Connect(); // c'est la fonction d'extraction qui est dans une autre classe
+    }
 
-    void StartServer() {
+    private static void Connect() {
         try {
+            
             Scanner keyboard = new Scanner(System.in);
             System.out.println("Enter server port");
+<<<<<<< HEAD
             this.port=keyboard.nextInt();
             ServerSocket servSocket = new ServerSocket(this.port);
             while (true) {
@@ -37,15 +39,18 @@ public class ServerHandler {
                             }
                             }
                         }
+=======
+            ServerSocket servSocket= new ServerSocket(keyboard.nextInt());
+            Socket link = servSocket.accept();
+            while(true){
+            NetworkListener r1 = new NetworkListener(link);
+            Thread t1 = new Thread(r1);
+            t1.start();}
 
-                    } catch (IOException | ClassNotFoundException e) {
-                        System.err.println("Le server est déjà utlisé 2 ! ");
-                    }
-                }).start();
-            }
-        } catch (IOException e) {
-            System.err.println("Le server est déjà utlisé 2 ! ");
+>>>>>>> parent of 63856b5... Merge branch 'master' of https://github.com/VBaures/Projet-COO
+
+        }catch(IOException e){
+            System.err.println("Le server est déjà utlisé ! ");
         }
     }
-
 }
