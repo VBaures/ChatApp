@@ -44,5 +44,9 @@ public class PseudoHandler {
             main_User.pseudo = Pseudo;
         }
     }
-    
+    public boolean IsConnectedUser (User user) {return true;}
+    public void VerifyLogin (String username,String password){
+
+    }
+    public void NotifyPseudoChange(){}
 }
