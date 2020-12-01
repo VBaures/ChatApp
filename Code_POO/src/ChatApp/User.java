@@ -4,22 +4,27 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     protected String username;
-    protected String password;
     protected String pseudo;
     protected String addr_IP;
-    protected Integer port;
+    protected int port;
     protected int ID;
+
+    public User(){};
+    public User(String username, String pseudo, String addr_IP, int port, int ID ){
+        this.username = username;
+        this.pseudo = pseudo;
+        this.addr_IP = addr_IP;
+        this.port = port;
+        this.ID=ID;
+    }
 
     public String getUserName () {
         return this.username;
     }
-    public String getPassword () {
-        return this.password;
-    }
     public String getPseudo () {
         return this.pseudo;
     }
-    public Integer getPort (){return port;}
+    public int getPort (){return port;}
     public String getType() {return "User";}
     public String getAddr_Ip() {return addr_IP;}
     public int getID () {

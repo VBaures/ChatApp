@@ -10,16 +10,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NetworkHandler extends Thread {
-
-
-
+    ServerHandler serverHandler;
+    Agent agent;
     public NetworkHandler(Agent agent){
         this.agent=agent;
     }
 
-    ArrayList<ChatHandler> currentChats = new ArrayList<>();
+    public void StartServer(){
+        this.serverHandler= new ServerHandler(this,agent.getPseudoHandler().getMain_User().getPort());
+        serverHandler.start();
+    }
 
-    public ArrayList<ChatHandler> getCurrentChats() {
-        return currentChats;
+    public Agent getAgent(){
+        return agent;
+    }
+
+    public void StartChat(int port) throws IOException {
+        System.out.println("Port dans network handler: "+port);
+        ClientHandler client = new ClientHandler(this, port);
+        client.start();
     }
 }

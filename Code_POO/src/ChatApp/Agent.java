@@ -14,17 +14,35 @@ public class Agent {
 
     protected NetworkHandler networkHandler;
     protected ArrayList <ChatHandler> currentChat;
-    protected BDDHandler bddHandler;
     protected PseudoHandler pseudoHandler;
 
     public Agent(){
         networkHandler = new NetworkHandler(this);
         currentChat = new ArrayList<ChatHandler>();
-        bddHandler = new BDDHandler();
+        pseudoHandler = new PseudoHandler();
     }
 
-    void StartChat(String pseudo){
-        currentChat.add(new ChatHandler())
+    public void StartAgent(){
+        networkHandler.StartServer();
     }
+
+    public void StartChat(String pseudo) throws IOException {
+        System.out.println(pseudoHandler.connectedUsers.get(0).getPseudo());
+        User recipient = pseudoHandler.FindUser(pseudo);
+        currentChat.add(new ChatHandler(recipient));
+        System.out.println("Nom du destinataire:" + recipient.getUserName());
+        System.out.println("Port du destinataire:" + recipient.getPort());
+        networkHandler.StartChat(recipient.getPort());
+
+    }
+
+    public PseudoHandler getPseudoHandler() {
+        return pseudoHandler;
+    }
+
+    public ArrayList<ChatHandler> getCurrentChat() {
+        return currentChat;
+    }
+
 
 }

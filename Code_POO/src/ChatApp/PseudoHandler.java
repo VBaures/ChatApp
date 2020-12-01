@@ -8,8 +8,12 @@ public class PseudoHandler {
     //a voir si la liste des personnes connectés n'est pas de type public
     protected ArrayList<User> connectedUsers;
 
+    public PseudoHandler(){
+        this.connectedUsers = new ArrayList<User>();
+            }
+
     public void UpdateConnectedUsers(User new_User) {
-        //this.connectedUsers;
+        this.connectedUsers.add(new_User);
     }
 
     public MainUser getMain_User() {
@@ -38,13 +42,12 @@ public class PseudoHandler {
     //...on a trouvé Bernard
 
     public User FindUser (String Pseudo){
-        User userTrouve = new User();
         for (int i = 0; i < connectedUsers.size(); i++) {
-            if (connectedUsers.get(i).pseudo == Pseudo) {
-                userTrouve=connectedUsers.get(i);
+            if (connectedUsers.get(i).getPseudo().equals(Pseudo)) {
+                return connectedUsers.get(i);
             }
         }
-        return userTrouve;
+        return(null);
     }
 
     //si le pseudo est ok alors l'utilisateur prend ce pseudo
@@ -68,4 +71,8 @@ public class PseudoHandler {
     //TODO quand on aura fait la base de données
     public void VerifyLogin (String username,String password){}
     public void NotifyPseudoChange(){ }
+
+    public void setMain_User(MainUser main_User) {
+        this.main_User = main_User;
+    }
 }

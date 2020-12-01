@@ -12,6 +12,7 @@ public class ServerHandler extends Thread {
     protected int port;
     protected NetworkHandler networkHandler;
     ObjectOutputStream out;
+
     public ServerHandler(NetworkHandler networkHandler, int port) {
         this.port=port;
         this.networkHandler=networkHandler;
@@ -22,10 +23,12 @@ public class ServerHandler extends Thread {
     public void run() {
         try {
             ServerSocket servSocket = new ServerSocket(this.port);
+            System.out.println("TCP Server créé");
             while (true) {
                 Socket link = servSocket.accept();
+                System.out.println("TCP Client connecté");
                 ObjectOutputStream out = new ObjectOutputStream(link.getOutputStream());
-                networkHandler.getCurrentChats().add(new ChatHandler(out));
+                networkHandler.getAgent().getCurrentChat().add(new ChatHandler(out));
 
                 new Thread(() ->{
                     ReceptionWaiting(link);
@@ -38,7 +41,7 @@ public class ServerHandler extends Thread {
 
     public void ReceptionWaiting(Socket link) {
         try {
-            System.out.println("Connecté");
+            System.out.println("TCP Server écoute");
             ObjectInputStream in = new ObjectInputStream(link.getInputStream());
             while (true) {
                 Object ObjectReceive = in.readObject();
