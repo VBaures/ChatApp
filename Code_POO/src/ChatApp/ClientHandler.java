@@ -6,11 +6,10 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class ClientHandler extends Thread{
-    NetworkHandler networkHandler;
     int port;
+    Agent agent;
 
-
-    public ClientHandler(int port, NetworkHandler networkHandler) throws IOException {
+    public ClientHandler(int port, throws IOException {
         this.port = port;
     }
 
@@ -21,7 +20,7 @@ public class ClientHandler extends Thread{
                 //System.out.println("Enter client port");
                 Socket link = new Socket("localhost", this.port);
                 ObjectOutputStream out = new ObjectOutputStream(link.getOutputStream());
-                networkHandler.getCurrentChats().add(new ChatHandler(out));
+                agent.getCurrentChats().add(new ChatHandler(out));
                 ObjectInputStream in = new ObjectInputStream(link.getInputStream());
                 while (true) {
                     try {
@@ -39,18 +38,4 @@ public class ClientHandler extends Thread{
                 }
         }).start();
     }
-
-
-
-    public void Send(Object object){
-        try {
-            this.out.writeObject(object);
-            if (object == null) {
-                link.close();
-            }
-        } catch (IOException e) {
-            System.err.println("Problème envoie ! ");
-        }
-    }
-
 }

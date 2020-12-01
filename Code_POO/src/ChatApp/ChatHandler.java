@@ -1,5 +1,6 @@
 package ChatApp;
 
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -10,7 +11,11 @@ public class ChatHandler {
     public ChatHandler(ObjectOutputStream output){
         this.output=output;
     }
-    public  ObjectOutputStream getOutput(){
-        return this.output;
+
+    public void Send(Object object) {
+        try {
+            this.output.writeObject(object);
+        } catch (IOException e) {
+        }
     }
 }

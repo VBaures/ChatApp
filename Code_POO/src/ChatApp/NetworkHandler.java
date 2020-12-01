@@ -10,6 +10,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NetworkHandler extends Thread {
+
+
+
+    public NetworkHandler(Agent agent){
+        this.agent=agent;
+    }
+
     ArrayList<ChatHandler> currentChats = new ArrayList<>();
 
     public ArrayList<ChatHandler> getCurrentChats() {
