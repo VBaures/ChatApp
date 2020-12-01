@@ -1,12 +1,14 @@
 package ChatApp;
 
-public class User {
-    private String username;
-    private String password;
+import java.io.Serializable;
+
+public class User implements Serializable {
+    protected String username;
+    protected String password;
     protected String pseudo;
     protected String addr_IP;
     protected Integer port;
-    private int ID;
+    protected int ID;
 
     public String getUserName () {
         return this.username;

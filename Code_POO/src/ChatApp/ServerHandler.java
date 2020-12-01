@@ -2,55 +2,74 @@ package ChatApp;
 
 import java.io.IOError;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class ServerHandler extends Thread {
-    public void run(){
-        Connect(); // c'est la fonction d'extraction qui est dans une autre classe
+    protected int port;
+    protected NetworkHandler networkHandler;
+    ObjectOutputStream out;
+    public ServerHandler(NetworkHandler networkHandler, int port) {
+        this.port=port;
+        this.networkHandler=networkHandler;
     }
 
-    private static void Connect() {
+    ;
+
+    public void run() {
         try {
-            
-            Scanner keyboard = new Scanner(System.in);
-            System.out.println("Enter server port");
-<<<<<<< HEAD
-            this.port=keyboard.nextInt();
             ServerSocket servSocket = new ServerSocket(this.port);
             while (true) {
                 Socket link = servSocket.accept();
-                new Thread(() -> {
-                    try {
-                        ObjectInputStream in = new ObjectInputStream(link.getInputStream());
-                        while (true) {
-                            Object ObjectReceive = in.readObject();
-                            if (ObjectReceive instanceof Message){
-                                Message receive = (Message) ObjectReceive;
-                            }else if (ObjectReceive instanceof User){
-                                User receive = (User) ObjectReceive;
-                            }else if (ObjectReceive instanceof String){
-                                String receive = (String) ObjectReceive;
-                                if (receive=="Stop") {
-                                    link.close();
-                                }else{
-                                System.out.println(receive);
-                            }
-                            }
-                        }
-=======
-            ServerSocket servSocket= new ServerSocket(keyboard.nextInt());
-            Socket link = servSocket.accept();
-            while(true){
-            NetworkListener r1 = new NetworkListener(link);
-            Thread t1 = new Thread(r1);
-            t1.start();}
+                ObjectOutputStream out = new ObjectOutputStream(link.getOutputStream());
+                networkHandler.getCurrentChats().add(new ChatHandler(out));
 
->>>>>>> parent of 63856b5... Merge branch 'master' of https://github.com/VBaures/Projet-COO
-
-        }catch(IOException e){
+                new Thread(() ->{
+                    ReceptionWaiting(link);
+                }).start();
+            }
+        } catch (IOException e) {
             System.err.println("Le server est déjà utlisé ! ");
+        }
+    }
+
+    public void ReceptionWaiting(Socket link) {
+        try {
+            System.out.println("Connecté");
+            ObjectInputStream in = new ObjectInputStream(link.getInputStream());
+            while (true) {
+                Object ObjectReceive = in.readObject();
+                if (ObjectReceive instanceof StringMessage) {
+                    StringMessage receive = (StringMessage) ObjectReceive;
+                    System.out.println("Un message vient d'être reçu");
+                    System.out.println("Content: ");
+                    System.out.println(receive.getContent());
+                } else if (ObjectReceive instanceof MainUser) {
+                    MainUser receive = (MainUser) ObjectReceive;
+                    System.out.println("Les informations d'un utilisateur viennent d'être reçu");
+                    System.out.println("Pseudo: " + receive.pseudo);
+                    System.out.println();
+                } else if (ObjectReceive instanceof String) {
+                    String receive = (String) ObjectReceive;
+                    System.out.println(receive);
+                    if (receive == "Stop") {
+                        link.close();
+                    }
+                }
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Problème reception ! ");
+        }
+    }
+
+    public void Send(Object object, ChatHandler chatHandler) {
+        try {
+            chatHandler.output.writeObject(object);
+        } catch (IOException e) {
         }
     }
 }
