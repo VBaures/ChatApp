@@ -1,4 +1,4 @@
-//author 
+//author
 package ChatApp;
 import java.awt.event.*;
 import java.awt.*;
