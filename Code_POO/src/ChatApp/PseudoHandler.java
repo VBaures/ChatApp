@@ -37,6 +37,16 @@ public class PseudoHandler {
     }
     //...on a trouvé Bernard
 
+    public User FindUser (String Pseudo){
+        User userTrouve = new User();
+        for (int i = 0; i < connectedUsers.size(); i++) {
+            if (connectedUsers.get(i).pseudo == Pseudo) {
+                userTrouve=connectedUsers.get(i);
+            }
+        }
+        return userTrouve;
+    }
+
     //si le pseudo est ok alors l'utilisateur prend ce pseudo
     //cette fonction est utilise pour CHANGER LE PSEUDO aussi
     public void ChoosePseudo(String Pseudo) {
