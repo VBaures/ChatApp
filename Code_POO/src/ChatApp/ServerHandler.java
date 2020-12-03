@@ -21,21 +21,24 @@ public class ServerHandler extends Thread {
         try {
             ServerSocket servSocketTCP = new ServerSocket(this.port);
             datagramSocket = new DatagramSocket(this.port);
-            while (true) {
                 new Thread(()->{
-                    try {
-                        UDPReceptionWaiting();
-                    } catch (IOException | ClassNotFoundException e) {
-                        e.printStackTrace();
+                    while(true) {
+                        try {
+                            UDPReceptionWaiting();
+                        } catch (IOException | ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }).start();
                 Socket linkTCP = servSocketTCP.accept();
                 ObjectOutputStream outTCP = new ObjectOutputStream(linkTCP.getOutputStream());
-                networkHandler.getAgent().getCurrentChat().add(new ChatHandler(networkHandler.getAgent().getPseudoHandler().getConnectedUsers().get(0),outTCP));
-                new Thread(() ->{
-                    TCPReceptionWaiting(linkTCP);
+                networkHandler.getAgent().getCurrentChat().add(new ChatHandler(networkHandler.getAgent().getPseudoHandler().FindUser(linkTCP.getPort()),outTCP));
+                new Thread(() -> {
+                    while (true) {
+                        TCPReceptionWaiting(linkTCP);
+                    }
                 }).start();
-            }
+
         } catch (IOException e) {
             System.err.println("Le server est déjà utIlisé ! ");
         }
@@ -82,7 +85,7 @@ public class ServerHandler extends Thread {
             User receive2 = (User) is.readObject();
             if (receive1.trim().equals("Connection")) {
                 networkHandler.getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
-                sendUDP("RetourConnection", networkHandler.getAgent().getPseudoHandler().getMain_User(), receive2.getPort());
+                sendUDP("RetourConnection", networkHandler.getAgent().getPseudoHandler().getMain_User(), receive2.getServerPort());
             } else if (receive1.trim().equals("RetourConnection")) {
                 networkHandler.getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
             }
@@ -107,8 +110,8 @@ public class ServerHandler extends Thread {
     }
 
     void broadcastUDP(String message, Object obj) throws IOException {
-        for (int port = 1234; port <= 1237; port++) {
-            if (port!=networkHandler.getAgent().getPseudoHandler().getMain_User().getPort()) {
+        for (int port = 1234; port <= 1238; port++) {
+            if (port!=networkHandler.getAgent().getPseudoHandler().getMain_User().getServerPort()) {
                 sendUDP(message, obj, port);
             }
         }

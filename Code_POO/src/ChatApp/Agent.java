@@ -29,7 +29,7 @@ public class Agent {
     public void StartChat(String pseudo) throws IOException {
         User recipient = pseudoHandler.FindUser(pseudo);
         currentChat.add(new ChatHandler(recipient));
-        networkHandler.StartChat(recipient.getPort());
+        networkHandler.StartChat(recipient.getServerPort());
 
     }
 

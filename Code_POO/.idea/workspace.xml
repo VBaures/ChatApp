@@ -22,22 +22,18 @@
     <list default="true" id="51430ecc-8b77-4d86-87fd-f9c5009e24de" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/FileMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/FileMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/Message.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/NetworkHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/NetworkHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/PseudoHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/PseudoHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/StringMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/StringMessage.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/Agent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/ChatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ChatHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/BDD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/BDD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/FileMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/FileMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/MainUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/MainUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/NetworkHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/NetworkHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/PseudoHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/PseudoHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/StringMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/StringMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,10 +93,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Agent4" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ChatApp.Main" />
+      <module name="Code_POO" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Agent1" />
       <item itemvalue="Application.Agent2" />
       <item itemvalue="Application.Agent3" />
+      <item itemvalue="Application.Agent4" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -131,10 +135,10 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="121" y="0" key="#Project_Structure/0.0.1280.720@0.0.1280.720" timestamp="1606756631836" />
-    <state x="96" y="0" width="1089" height="720" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606989956708">
+    <state x="96" y="0" width="1089" height="720" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607025540583">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="96" y="0" width="1089" height="720" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.720@0.0.1280.720" timestamp="1606989956708" />
+    <state x="96" y="0" width="1089" height="720" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.720@0.0.1280.720" timestamp="1607025540583" />
     <state x="371" y="153" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1606839070309">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
@@ -151,22 +155,22 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="461" y="67" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1606756730946" />
-    <state width="1237" height="216" key="GridCell.Tab.0.bottom" timestamp="1606990124534">
+    <state width="1237" height="190" key="GridCell.Tab.0.bottom" timestamp="1607026287818">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="216" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1606990124534" />
-    <state width="1237" height="216" key="GridCell.Tab.0.center" timestamp="1606990124534">
+    <state width="1237" height="190" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1607026287818" />
+    <state width="1237" height="190" key="GridCell.Tab.0.center" timestamp="1607026287818">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="216" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1606990124534" />
-    <state width="1237" height="216" key="GridCell.Tab.0.left" timestamp="1606990124534">
+    <state width="1237" height="190" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1607026287818" />
+    <state width="1237" height="190" key="GridCell.Tab.0.left" timestamp="1607026287818">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="216" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1606990124534" />
-    <state width="1237" height="216" key="GridCell.Tab.0.right" timestamp="1606990124534">
+    <state width="1237" height="190" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1607026287818" />
+    <state width="1237" height="190" key="GridCell.Tab.0.right" timestamp="1607026287818">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="216" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1606990124534" />
+    <state width="1237" height="190" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1607026287818" />
     <state x="121" y="0" key="SettingsEditor" timestamp="1606756731660">
       <screen x="0" y="0" width="1280" height="720" />
     </state>

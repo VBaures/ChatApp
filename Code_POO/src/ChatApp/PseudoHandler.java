@@ -52,7 +52,7 @@ public class PseudoHandler {
 
     public User FindUser (int port){
         for (int i = 0; i < connectedUsers.size(); i++) {
-            if (connectedUsers.get(i).getPort()==port) {
+            if (connectedUsers.get(i).getClientPort()==port) {
                 return connectedUsers.get(i);
             }
         }

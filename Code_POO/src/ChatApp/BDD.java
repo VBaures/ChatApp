@@ -1,4 +1,4 @@
-package ChatApp;
+/*package ChatApp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -52,4 +52,4 @@ public class BDDHandler {
             e.printStackTrace();
         }
     }
-}
+}*/

@@ -17,7 +17,7 @@ public class NetworkHandler extends Thread {
     }
 
     public void StartServer() throws IOException {
-        this.serverHandler= new ServerHandler(this,agent.getPseudoHandler().getMain_User().getPort());
+        this.serverHandler= new ServerHandler(this,agent.getPseudoHandler().getMain_User().getServerPort());
         serverHandler.start();
         serverHandler.broadcastUDP("Connection",agent.getPseudoHandler().getMain_User());
     }

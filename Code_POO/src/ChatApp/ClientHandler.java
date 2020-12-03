@@ -1,6 +1,7 @@
 package ChatApp;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
@@ -20,7 +21,7 @@ public class ClientHandler extends Thread{
                 //Scanner keyboard = new Scanner(System.in);
                 //System.out.println("Enter client port");
 
-                Socket link = new Socket("localhost", this.port);
+                Socket link = new Socket(InetAddress.getByName("localhost"), this.port, InetAddress.getByName("localhost"), networkHandler.getAgent().getPseudoHandler().getMain_User().getClientPort());
 
                 ObjectOutputStream out = new ObjectOutputStream(link.getOutputStream());
 
