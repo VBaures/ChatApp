@@ -22,16 +22,13 @@ public class Agent {
         pseudoHandler = new PseudoHandler();
     }
 
-    public void StartAgent(){
+    public void StartAgent() throws IOException {
         networkHandler.StartServer();
     }
 
     public void StartChat(String pseudo) throws IOException {
-        System.out.println(pseudoHandler.connectedUsers.get(0).getPseudo());
         User recipient = pseudoHandler.FindUser(pseudo);
         currentChat.add(new ChatHandler(recipient));
-        System.out.println("Nom du destinataire:" + recipient.getUserName());
-        System.out.println("Port du destinataire:" + recipient.getPort());
         networkHandler.StartChat(recipient.getPort());
 
     }
@@ -42,6 +39,17 @@ public class Agent {
 
     public ArrayList<ChatHandler> getCurrentChat() {
         return currentChat;
+    }
+
+    public ChatHandler findChatHandler(String pseudo){
+        ChatHandler chat = null;
+        int i;
+        for (i=0;i<this.currentChat.size();i++){
+            if (this.currentChat.get(i).getRecipient().getPseudo().equals(pseudo)){
+                chat=this.currentChat.get(i);
+            }
+        }
+        return chat;
     }
 
 

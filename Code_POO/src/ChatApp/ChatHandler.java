@@ -11,7 +11,8 @@ public class ChatHandler {
     User recipient;
     ArrayList<Message> messageHistory;
 
-    public ChatHandler(ObjectOutputStream out){
+    public ChatHandler(User recipient, ObjectOutputStream out){
+        this.recipient=recipient;
         this.output=out;
     }
     public ChatHandler(User user){
@@ -27,5 +28,19 @@ public class ChatHandler {
 
     void setOutput(ObjectOutputStream output){
         this.output=output;
+    }
+
+    ObjectOutputStream getOutput (){return this.output;}
+
+    public User getRecipient(){
+        return this.recipient;
+    }
+
+    boolean isEqual(ChatHandler chatHandler){
+        boolean bool = false;
+        if ((this.recipient == chatHandler.getRecipient())&(this.output == chatHandler.getOutput())) {
+            bool=true;
+        }
+        return bool;
     }
 }

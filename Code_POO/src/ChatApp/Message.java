@@ -4,9 +4,19 @@ import java.util.Date;
 public class Message implements Serializable {
     protected Date time;
     protected User recipient;
+    protected User sender;
+
+    public Message(User recipient, User sender){
+        this.recipient=recipient;
+        this.sender=sender;
+    }
+
     public Date getTime (){return this.time;}
     public String getType(){return "Message";}
     public User getRecipient() {
         return this.recipient;
+    }
+    public User getSender() {
+        return this.sender;
     }
 }

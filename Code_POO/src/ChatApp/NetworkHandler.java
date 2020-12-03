@@ -16,9 +16,10 @@ public class NetworkHandler extends Thread {
         this.agent=agent;
     }
 
-    public void StartServer(){
+    public void StartServer() throws IOException {
         this.serverHandler= new ServerHandler(this,agent.getPseudoHandler().getMain_User().getPort());
         serverHandler.start();
+        serverHandler.broadcastUDP("Connection",agent.getPseudoHandler().getMain_User());
     }
 
     public Agent getAgent(){
@@ -26,7 +27,6 @@ public class NetworkHandler extends Thread {
     }
 
     public void StartChat(int port) throws IOException {
-        System.out.println("Port dans network handler: "+port);
         ClientHandler client = new ClientHandler(this, port);
         client.start();
     }
