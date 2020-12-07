@@ -21,19 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="51430ecc-8b77-4d86-87fd-f9c5009e24de" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ClientHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/NetworkHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/NetworkHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/PseudoHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/PseudoHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/Agent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/BDD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/BDD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/MainUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/MainUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/NetworkHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/NetworkHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/PseudoHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/PseudoHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +56,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="ToolWindowRun.ShowToolbar" value="false" />
+    <property name="full.screen.before.presentation.mode" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -143,6 +135,10 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="371" y="153" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1280.720@0.0.1280.720" timestamp="1606839070309" />
+    <state x="321" y="96" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1607101554281">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="321" y="96" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1280.720@0.0.1280.720" timestamp="1607101554281" />
     <state x="424" y="255" width="432" height="217" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1606839123504">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
@@ -155,22 +151,22 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="461" y="67" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1606756730946" />
-    <state width="1237" height="190" key="GridCell.Tab.0.bottom" timestamp="1607026287818">
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1607359888769">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="190" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1607026287818" />
-    <state width="1237" height="190" key="GridCell.Tab.0.center" timestamp="1607026287818">
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1607359888769" />
+    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1607359888769">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="190" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1607026287818" />
-    <state width="1237" height="190" key="GridCell.Tab.0.left" timestamp="1607026287818">
+    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1607359888769" />
+    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1607359888769">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="190" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1607026287818" />
-    <state width="1237" height="190" key="GridCell.Tab.0.right" timestamp="1607026287818">
+    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1607359888769" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1607359888769">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="190" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1607026287818" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1607359888769" />
     <state x="121" y="0" key="SettingsEditor" timestamp="1606756731660">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
