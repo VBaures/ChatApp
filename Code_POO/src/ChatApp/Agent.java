@@ -15,11 +15,14 @@ public class Agent {
     protected NetworkHandler networkHandler;
     protected ArrayList <ChatHandler> currentChat;
     protected PseudoHandler pseudoHandler;
+    JListSimple affichage;
 
     public Agent(){
         networkHandler = new NetworkHandler(this);
         currentChat = new ArrayList<ChatHandler>();
         pseudoHandler = new PseudoHandler();
+        affichage= new JListSimple(this);
+        affichage.start();
     }
 
     public void StartAgent() throws IOException {
@@ -39,6 +42,10 @@ public class Agent {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public JListSimple getAffichage(){
+        return  this.affichage;
     }
 
     public PseudoHandler getPseudoHandler() {

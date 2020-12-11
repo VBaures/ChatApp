@@ -36,11 +36,13 @@ public class UDP extends Thread {
                         sendUDP("RetourConnection", serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User(), receive2.getServerPort());
                     } else if (receive1.trim().equals("RetourConnection")) {
                         serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
+                        System.out.println("Reception retour");
                     }
                     System.out.println("Liste connected user");
                     for (int i = 0; i < serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().size(); i++) {
                         System.out.println(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().get(i).getUserName());
                     }
+                    serverHandler.getNetworkHandler().getAgent().getAffichage().Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
                 }
             } catch (IOException | ClassNotFoundException e) {
                 System.err.println("Problème reception ! ");
