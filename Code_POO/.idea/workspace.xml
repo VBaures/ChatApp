@@ -64,6 +64,11 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ChatApp" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Agent2">
     <configuration name="Agent1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ChatApp.Main" />

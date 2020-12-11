@@ -1,5 +1,6 @@
 package ChatApp;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,6 +10,7 @@ public class Main {
     static User user;
     static MainUser mainUser;
     public static void main(String[] args) throws IOException, InterruptedException {
+
         System.out.println("Quel agent veux-tu créer?");
         Scanner keyboard = new Scanner(System.in);
         String people = keyboard.nextLine();
@@ -29,6 +31,8 @@ public class Main {
         Agent agent = new Agent();
         agent.getPseudoHandler().setMain_User(mainUser);
         agent.StartAgent();
+        JListSimple affichage= new JListSimple();
+        affichage.start();
         while(true) {
             System.out.println("Avec qui voulez-vous communiquer?");
             String destinataire = keyboard.nextLine();
