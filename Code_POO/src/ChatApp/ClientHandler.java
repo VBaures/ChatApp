@@ -26,6 +26,7 @@ public class ClientHandler extends Thread{
                 ObjectOutputStream out = new ObjectOutputStream(link.getOutputStream());
 
                 networkHandler.getAgent().getCurrentChat().get(networkHandler.getAgent().getCurrentChat().size()-1).setOutput(out);
+                networkHandler.getAgent().getCurrentChat().get(networkHandler.getAgent().getCurrentChat().size()-1).setSocket(link);
                 ObjectInputStream in = new ObjectInputStream(link.getInputStream());
                 ;
                 while (true) {

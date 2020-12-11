@@ -30,7 +30,15 @@ public class Agent {
         User recipient = pseudoHandler.FindUser(pseudo);
         currentChat.add(new ChatHandler(recipient));
         networkHandler.StartChat(recipient.getServerPort());
+    }
 
+    public void StopChat(ChatHandler chatHandler){
+        try {
+            chatHandler.StopChat();
+            currentChat.remove(chatHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public PseudoHandler getPseudoHandler() {
