@@ -32,17 +32,24 @@ public class UDP extends Thread {
                     ObjectInputStream is = new ObjectInputStream(in);
                     User receive2 = (User) is.readObject();
                     if (receive1.trim().equals("Connection")) {
-                        serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
-                        sendUDP("RetourConnection", serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User(), receive2.getServerPort());
+                        //synchronized (this) {
+                            serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
+                            sendUDP("RetourConnection", serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User(), receive2.getServerPort());
+                            serverHandler.getNetworkHandler().getAgent().getAffichage().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
+                        //}
                     } else if (receive1.trim().equals("RetourConnection")) {
-                        serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
-                        System.out.println("Reception retour");
+                        //synchronized (this) {
+                            serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
+                            System.out.println("Reception retour");
+                            serverHandler.getNetworkHandler().getAgent().getAffichage().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
+                        //}
                     }
                     System.out.println("Liste connected user");
                     for (int i = 0; i < serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().size(); i++) {
                         System.out.println(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().get(i).getUserName());
                     }
-                    serverHandler.getNetworkHandler().getAgent().getAffichage().Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
+                    //serverHandler.getNetworkHandler().getAgent().getAffichage().Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
+                    System.out.println("Mise à jour fini");
                 }
             } catch (IOException | ClassNotFoundException e) {
                 System.err.println("Problème reception ! ");

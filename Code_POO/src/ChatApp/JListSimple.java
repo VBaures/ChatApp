@@ -11,24 +11,18 @@ class JListSimple extends JPanel
     JScrollPane pane;
     // Le contenu de la JList
     JList list;
-    JFrame frame;
-    Agent agent;
+    UsersWindows usersWindows;
 
 
     public void Mise_a_jour (ArrayList<User> connectUsers){
-        System.out.println("Mise à jour:");
         ArrayList<String> connected = new ArrayList<String>();
         for(int i=0; i<connectUsers.size(); i++){
-            System.out.println(connectUsers.get(i).getUserName());
             connected.add(connectUsers.get(i).getUserName());
         }
         list.setListData(connected.toArray());
-        list.revalidate();
-        list.repaint();
-        System.out.println("Fin Mise à jour:");
     }
-    public JListSimple(Agent agent) {
-        this.agent=agent;
+    public JListSimple(UsersWindows usersWindows) {
+        this.usersWindows=usersWindows;
         this.setLayout(new BorderLayout( ));
         list=new JList();
         // Ajouter la JList dans le JScrolPane
@@ -39,17 +33,7 @@ class JListSimple extends JPanel
         add(pane, BorderLayout.CENTER);
         add(btnPrint, BorderLayout.SOUTH);
     }
-
-
-    public void start() {
-        frame = new JFrame("Connectés");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(this);
-        frame.setSize(250, 200);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
-    }
-
+    
     // Afficher le éléments sélectionnés de la JList
     class SessionChat implements ActionListener {
         public void actionPerformed(ActionEvent e) {

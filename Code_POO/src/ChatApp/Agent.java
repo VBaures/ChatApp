@@ -15,13 +15,13 @@ public class Agent {
     protected NetworkHandler networkHandler;
     protected ArrayList <ChatHandler> currentChat;
     protected PseudoHandler pseudoHandler;
-    JListSimple affichage;
+    UsersWindows affichage;
 
     public Agent(){
         networkHandler = new NetworkHandler(this);
         currentChat = new ArrayList<ChatHandler>();
         pseudoHandler = new PseudoHandler();
-        affichage= new JListSimple(this);
+        affichage= new UsersWindows(this);
         affichage.start();
     }
 
@@ -44,7 +44,7 @@ public class Agent {
         }
     }
 
-    public JListSimple getAffichage(){
+    public UsersWindows getAffichage(){
         return  this.affichage;
     }
 
