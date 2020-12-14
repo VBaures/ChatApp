@@ -22,4 +22,6 @@ public class UsersWindows extends Thread{
         }*/
     }
 
+    public Agent getAgent(){return this.agent;}
+
 }

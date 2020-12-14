@@ -20,14 +20,13 @@ public class TCP extends Thread {
         try {
             ObjectOutputStream outTCP = new ObjectOutputStream(link.getOutputStream());
             ObjectInputStream inTCP = new ObjectInputStream(link.getInputStream());
-            serverHandler.getNetworkHandler().getAgent().getCurrentChat().add(new ChatHandler(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUser(link.getPort()), outTCP, link));
+            serverHandler.getNetworkHandler().getAgent().getCurrentChat().add(new ChatHandler(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUser(link.getPort()), outTCP, link, serverHandler.getNetworkHandler().getAgent()));
             while (true) {
                 Object ObjectReceive = inTCP.readObject();
                 if (ObjectReceive instanceof StringMessage) {
                     StringMessage receive = (StringMessage) ObjectReceive;
-                    System.out.println("Un message vient d'être reçu");
-                    System.out.println("From: "+receive.getSender().getUserName());
-                    System.out.println("Content: "+receive.getContent());
+                    serverHandler.getNetworkHandler().getAgent().findChatHandler(receive.getSender().getPseudo()).getMessageHistory().add(receive);
+                    serverHandler.getNetworkHandler().getAgent().findChatHandler(receive.getSender().getPseudo()).getChatPage().Mise_a_jour();
                 } else if (ObjectReceive instanceof MainUser) {
                     MainUser receive = (MainUser) ObjectReceive;
                     System.out.println("Les informations d'un utilisateur viennent d'être reçu");

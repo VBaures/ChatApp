@@ -67,7 +67,7 @@
       <recent name="ChatApp" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Agent3">
+  <component name="RunManager" selected="Application.Agent2">
     <configuration name="Agent1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ChatApp.Main" />
       <module name="Code_POO" />
@@ -155,22 +155,26 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="461" y="67" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1606756730946" />
-    <state width="1237" height="239" key="GridCell.Tab.0.bottom" timestamp="1607695768927">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state width="1323" height="82" key="GridCell.Tab.0.bottom" timestamp="1607955324797">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1237" height="239" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1607695768927" />
-    <state width="1237" height="239" key="GridCell.Tab.0.center" timestamp="1607695768927">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state width="1323" height="82" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1607955324797" />
+    <state width="1323" height="82" key="GridCell.Tab.0.center" timestamp="1607955324797">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1237" height="239" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1607695768927" />
-    <state width="1237" height="239" key="GridCell.Tab.0.left" timestamp="1607695768926">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state width="1323" height="82" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1607955324797" />
+    <state width="1323" height="82" key="GridCell.Tab.0.left" timestamp="1607955324796">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1237" height="239" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1607695768926" />
-    <state width="1237" height="239" key="GridCell.Tab.0.right" timestamp="1607695768927">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state width="1323" height="82" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1607955324796" />
+    <state width="1323" height="82" key="GridCell.Tab.0.right" timestamp="1607955324797">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1237" height="239" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1607695768927" />
+    <state width="1323" height="82" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1607955324797" />
     <state x="121" y="0" key="SettingsEditor" timestamp="1606756731660">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
@@ -191,6 +195,14 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/ChatApp/FileMessage.java</url>
+          <line>11</line>
+          <properties class="ChatApp.FileMessage" method="setContent">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

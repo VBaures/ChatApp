@@ -16,7 +16,6 @@ public class ClientHandler extends Thread{
     }
 
     public void run() {
-        new Thread(() -> {
             try {
                 //Scanner keyboard = new Scanner(System.in);
                 //System.out.println("Enter client port");
@@ -31,10 +30,12 @@ public class ClientHandler extends Thread{
                 ;
                 while (true) {
                     try {
+
                         StringMessage receive = (StringMessage) in.readObject();
-                        System.out.println("Un message vient d'être reçu");
-                        System.out.println("From: "+receive.getSender().getUserName());
-                        System.out.println("Content: "+receive.getContent());
+                        networkHandler.getAgent().findChatHandler(receive.getSender().getPseudo()).setOutput(out);
+                        networkHandler.getAgent().findChatHandler(receive.getSender().getPseudo()).setSocket(link);
+                        networkHandler.getAgent().findChatHandler(receive.getSender().getPseudo()).getMessageHistory().add(receive);
+                        networkHandler.getAgent().findChatHandler(receive.getSender().getPseudo()).getChatPage().Mise_a_jour();
                     } catch (IOException e) {
                         System.err.println("Problème envoie ! ");
                     } catch (ClassNotFoundException e) {
@@ -45,6 +46,6 @@ public class ClientHandler extends Thread{
                 } catch(IOException e){
                     System.err.println("LA CONNEXION A ETE INTERROMPUE ! ");
                 }
-        }).start();
+
     }
 }

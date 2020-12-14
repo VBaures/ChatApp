@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 class JListSimple extends JPanel
@@ -12,12 +13,14 @@ class JListSimple extends JPanel
     // Le contenu de la JList
     JList list;
     UsersWindows usersWindows;
+    JList liste_message;
+    JScrollPane pane2;
 
 
     public void Mise_a_jour (ArrayList<User> connectUsers){
         ArrayList<String> connected = new ArrayList<String>();
         for(int i=0; i<connectUsers.size(); i++){
-            connected.add(connectUsers.get(i).getUserName());
+            connected.add(connectUsers.get(i).getPseudo());
         }
         list.setListData(connected.toArray());
     }
@@ -45,32 +48,15 @@ class JListSimple extends JPanel
                         (String)list.getModel( ).getElementAt(selected[i]);
                 System.out.println("  " + element);
                 //JOptionPane.showMessageDialog(null, element);
-                PageChat newpage = new PageChat();
-                newpage.affichage();
+                //ChatPage newpage = new ChatPage();
+                //newpage.affichage();
+                try {
+                    usersWindows.getAgent().StartChat(element);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         }
     }
-    public class PageChat{
 
-        public void affichage(){
-
-            JFrame fram= new JFrame("Application");
-            fram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            fram.setSize(new Dimension(1000,1000));
-            JPanel panel1= new JPanel(new GridLayout(1,4));
-            JPanel panel2= new JPanel(new GridLayout(1,4));
-            JLabel label1=new JLabel ("Bonjour");
-            label1.setForeground(Color.BLUE);
-            JButton bouton=new JButton("Envoyer");
-            bouton.setForeground(Color.GRAY);
-            JTextField zone_texte=new JTextField();
-            panel2.add(zone_texte);
-            panel2.add(bouton);
-            panel1.add(label1, BorderLayout.PAGE_START);
-            fram.getContentPane().add(panel1, BorderLayout.PAGE_START);
-            fram.getContentPane().add(panel2, BorderLayout.PAGE_END);
-            fram.pack();
-            fram.setVisible(true);
-            fram.setLocationRelativeTo(null);}
-        }
 }

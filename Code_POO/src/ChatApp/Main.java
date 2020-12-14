@@ -31,7 +31,7 @@ public class Main {
         Agent agent = new Agent();
         agent.getPseudoHandler().setMain_User(mainUser);
         agent.StartAgent();
-        while(true) {
+        /*while(true) {
             System.out.println("Avec qui voulez-vous communiquer?");
             String destinataire = keyboard.nextLine();
             ChatHandler chatHandler = agent.findChatHandler(destinataire);
@@ -42,6 +42,6 @@ public class Main {
             String content = keyboard.nextLine();
             StringMessage message = new StringMessage(agent.findChatHandler(destinataire).getRecipient(), agent.getPseudoHandler().getMain_User(), content);
             agent.findChatHandler(destinataire).Send(message);
-        }
+        }*/
     }
 }

@@ -1,7 +1,7 @@
 package ChatApp;
 import java.io.Serializable;
 import java.util.Date;
-public class Message implements Serializable {
+public abstract class Message implements Serializable {
     protected Date time;
     protected User recipient;
     protected User sender;
@@ -11,6 +11,7 @@ public class Message implements Serializable {
         this.sender=sender;
     }
 
+    public abstract String getContent();
     public Date getTime (){return this.time;}
     public String getType(){return "Message";}
     public User getRecipient() {
