@@ -31,8 +31,10 @@ public class Agent {
 
     public void StartChat(String pseudo) throws IOException {
         User recipient = pseudoHandler.FindUser(pseudo);
-        currentChat.add(new ChatHandler(recipient));
-        networkHandler.StartChat(recipient.getServerPort());
+        ChatHandler chatHandler = new ChatHandler(recipient,this);
+        System.out.println("Historique "+chatHandler.getMessageHistory());
+        currentChat.add(chatHandler);
+        networkHandler.StartChat(chatHandler);
     }
 
     public void StopChat(ChatHandler chatHandler){

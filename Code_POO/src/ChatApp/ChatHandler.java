@@ -10,7 +10,7 @@ public class ChatHandler {
     Socket socket;
     ObjectOutputStream output;
     User recipient;
-    ArrayList<Message> messageHistory;
+    ArrayList<Message> messageHistory = new ArrayList<Message>();
     Agent agent;
     ChatPage chatPage;
 
@@ -21,10 +21,14 @@ public class ChatHandler {
         this.agent=agent;
         messageHistory=new ArrayList<Message>();
         chatPage =  new ChatPage(this.agent, this);
-        chatPage.affichage();
+        chatPage.start();
     }
-    public ChatHandler(User user){
-        this.recipient=user;
+    public ChatHandler(User recipient, Agent agent){
+        this.recipient=recipient;
+        this.agent=agent;
+        messageHistory=new ArrayList<Message>();
+        chatPage =  new ChatPage(this.agent, this);
+        chatPage.start();
     }
 
     public void Send(String object) {
@@ -33,7 +37,9 @@ public class ChatHandler {
             StringMessage message = new StringMessage(recipient, agent.getPseudoHandler().getMain_User(), object);
             this.output.writeObject(message);
             this.getMessageHistory().add(message);
+            System.out.println("Message History :"+messageHistory);
             chatPage.Mise_a_jour();
+            System.out.println("Mise à jour ok");
         } catch (IOException e) {
         }
     }

@@ -8,11 +8,11 @@ import java.util.Scanner;
 
 public class ClientHandler extends Thread{
     NetworkHandler networkHandler;
-    int port;
+    ChatHandler chatHandler;
 
-    public ClientHandler(NetworkHandler networkHandler, int port) throws IOException {
+    public ClientHandler(NetworkHandler networkHandler, ChatHandler chatHandler) throws IOException {
         this.networkHandler = networkHandler;
-        this.port = port;
+        this.chatHandler = chatHandler;
     }
 
     public void run() {
@@ -20,22 +20,21 @@ public class ClientHandler extends Thread{
                 //Scanner keyboard = new Scanner(System.in);
                 //System.out.println("Enter client port");
 
-                Socket link = new Socket(InetAddress.getByName("localhost"), this.port, InetAddress.getByName("localhost"), networkHandler.getAgent().getPseudoHandler().getMain_User().getClientPort());
+                Socket link = new Socket(InetAddress.getByName("localhost"), chatHandler.getRecipient().getServerPort(), InetAddress.getByName("localhost"), networkHandler.getAgent().getPseudoHandler().getMain_User().getClientPort());
 
                 ObjectOutputStream out = new ObjectOutputStream(link.getOutputStream());
 
-                networkHandler.getAgent().getCurrentChat().get(networkHandler.getAgent().getCurrentChat().size()-1).setOutput(out);
-                networkHandler.getAgent().getCurrentChat().get(networkHandler.getAgent().getCurrentChat().size()-1).setSocket(link);
                 ObjectInputStream in = new ObjectInputStream(link.getInputStream());
-                ;
+                networkHandler.getAgent().findChatHandler(chatHandler.getRecipient().getPseudo()).setOutput(out);
+                networkHandler.getAgent().findChatHandler(chatHandler.getRecipient().getPseudo()).setSocket(link);
+                System.out.println(chatHandler.getMessageHistory());
                 while (true) {
                     try {
-
                         StringMessage receive = (StringMessage) in.readObject();
-                        networkHandler.getAgent().findChatHandler(receive.getSender().getPseudo()).setOutput(out);
-                        networkHandler.getAgent().findChatHandler(receive.getSender().getPseudo()).setSocket(link);
-                        networkHandler.getAgent().findChatHandler(receive.getSender().getPseudo()).getMessageHistory().add(receive);
-                        networkHandler.getAgent().findChatHandler(receive.getSender().getPseudo()).getChatPage().Mise_a_jour();
+                        chatHandler.setOutput(out);
+                        chatHandler.setSocket(link);
+                        chatHandler.getMessageHistory().add(receive);
+                        chatHandler.getChatPage().Mise_a_jour();
                     } catch (IOException e) {
                         System.err.println("Problème envoie ! ");
                     } catch (ClassNotFoundException e) {

@@ -4,21 +4,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
-public class ChatPage implements ActionListener {
+public class ChatPage extends Thread implements ActionListener {
         ChatHandler chatHandler;
         Agent agent;
-
+        ArrayList<JPanel> listMessage;
         JTextField zone_texte;
-        JList liste;
+        JPanel liste;
         JScrollPane pane;
 
         public ChatPage(Agent agent, ChatHandler chatHandler){
             this.agent=agent;
             this.chatHandler=chatHandler;
+            this.listMessage = new ArrayList<>();
         }
 
-        public void affichage(){
+        public void run(){
 
             JFrame fram= new JFrame("Application");
             fram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -35,8 +37,11 @@ public class ChatPage implements ActionListener {
             panel2.add(zone_texte);
             panel2.add(bouton);
             //panel1.add(label1, BorderLayout.PAGE_START);
-            liste=new JList();
+            GridLayout layout = new GridLayout(0,1);
+            liste=new JPanel();
+            liste.setLayout(layout);
             pane = new JScrollPane(liste);
+            pane.setSize(300,300);
             //fram.getContentPane().add(panel1, BorderLayout.PAGE_START);
             fram.getContentPane().add(panel2, BorderLayout.PAGE_END);
             fram.getContentPane().add(pane,BorderLayout.PAGE_START);
@@ -47,7 +52,9 @@ public class ChatPage implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             String getvalue= zone_texte.getText();
+            System.out.println("Message :"+getvalue);
             chatHandler.Send(getvalue);
+            System.out.println("Message envoyé");
         }
         public JPanel creation (String message, String pseudo /*Date date*/, Color couleur ){
             JPanel pane= new JPanel();
@@ -68,29 +75,29 @@ public class ChatPage implements ActionListener {
                     liste.add(creation(chatHandler.getMessageHistory().get(i).getContent()
                             ,chatHandler.getMessageHistory().get(i).getSender().getPseudo(),
                             /*chatHandler.getMessageHistory().get(i).getTime(),*/
-                            Color.RED));
+                            Color.RED),BorderLayout.SOUTH);
                 }
                 else {liste.add(creation(chatHandler.getMessageHistory().get(i).getContent()
                         ,chatHandler.getMessageHistory().get(i).getSender().getPseudo(),
                         /*chatHandler.getMessageHistory().get(i).getTime(),*/
-                        Color.BLUE));}
+                        Color.BLUE),BorderLayout.SOUTH);}
             }
+            liste.updateUI();
         }
 
-        public void Mise_a_jour (){
-            int index = chatHandler.getMessageHistory().size()-1;
+        public void Mise_a_jour () {
+            int index = chatHandler.getMessageHistory().size() - 1;
             if (chatHandler.getMessageHistory().get(index).getRecipient().getPseudo().equals
                     (agent.getPseudoHandler().getMain_User().getPseudo())) {
 
                 liste.add(creation(chatHandler.getMessageHistory().get(index).getContent()
-                        ,chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
-                        /*chatHandler.getMessageHistory().get(index).getTime(),*/
-                        Color.RED));
+                        , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
+                        Color.RED),BorderLayout.SOUTH);
+            } else {
+                liste.add(creation(chatHandler.getMessageHistory().get(index).getContent()
+                        , chatHandler.getMessageHistory().get(index).getSender().getPseudo(), Color.BLUE),BorderLayout.SOUTH);
             }
-            else {liste.add(creation(chatHandler.getMessageHistory().get(index).getContent()
-                    ,chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
-                    /*chatHandler.getMessageHistory().get(index).getTime(),*/
-                    Color.BLUE));}
+            liste.updateUI();
         }
     }
 

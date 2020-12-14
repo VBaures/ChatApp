@@ -25,8 +25,8 @@ public class NetworkHandler extends Thread {
         return agent;
     }
 
-    public void StartChat(int port) throws IOException {
-        ClientHandler client = new ClientHandler(this, port);
+    public void StartChat(ChatHandler chatHandler) throws IOException {
+        ClientHandler client = new ClientHandler(this, chatHandler );
         client.start();
     }
 }
