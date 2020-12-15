@@ -43,6 +43,13 @@ public class UDP extends Thread {
                             System.out.println("Reception retour");
                             serverHandler.getNetworkHandler().getAgent().getAffichage().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
                         //}
+                    } else if (receive1.trim().equals("NewPseudo")){
+                        User user = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUser(receive2.getPseudo());
+                        if (user!=null){
+                            serverHandler.getNetworkHandler().getAgent().UpdatePseudo(receive2.getPseudo(), user.getPseudo());
+                        } else {
+                            serverHandler.getNetworkHandler().getAgent().getPseudoHandler().UpdateConnectedUsers(receive2);
+                        }
                     }
                     System.out.println("Liste connected user");
                     for (int i = 0; i < serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().size(); i++) {

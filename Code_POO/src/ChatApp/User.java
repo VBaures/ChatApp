@@ -28,6 +28,11 @@ public class User implements Serializable {
     }
     public int getServerPort (){return this.serverPort;}
     public int getClientPort (){return this.clientPort;}
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
     public String getType() {return "User";}
     public String getAddr_Ip() {return addr_IP;}
     public int getID () {

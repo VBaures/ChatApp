@@ -61,10 +61,9 @@ public class PseudoHandler {
 
     //si le pseudo est ok alors l'utilisateur prend ce pseudo
     //cette fonction est utilise pour CHANGER LE PSEUDO aussi
-    public void ChoosePseudo(String Pseudo) {
-        if (!VerifyPseudo(Pseudo)) {
-            main_User.pseudo = Pseudo;
-        }
+    public void ChoosePseudo(String NewPseudo, String OldPseudo) {
+        FindUser(OldPseudo).setPseudo(NewPseudo);
+
     }
 
     public boolean IsConnectedUser (User user) {
