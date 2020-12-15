@@ -158,12 +158,9 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="461" y="67" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1606756730946" />
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-    <state width="1237" height="239" key="GridCell.Tab.0.bottom" timestamp="1608043176176">
-=======
+    =======
     <state width="1237" height="239" key="GridCell.Tab.0.bottom" timestamp="1607974938023">
->>>>>>> parent of e2fc1e4... Ajout Date Message
+      &gt;&gt;&gt;&gt;&gt;&gt;&gt; parent of e2fc1e4... Ajout Date Message
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state width="1237" height="239" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1607974938023" />
@@ -183,7 +180,7 @@
     </state>
     <state width="1237" height="239" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1607974938023" />
     <state width="1323" height="82" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1607955324797" />
-=======
+    =======
     <state width="1323" height="82" key="GridCell.Tab.0.bottom" timestamp="1608043748137">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -204,7 +201,7 @@
     </state>
     <state width="1237" height="239" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1607974938023" />
     <state width="1323" height="82" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1608043748136" />
->>>>>>> Stashed changes
+    &gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes
     <state x="121" y="0" key="SettingsEditor" timestamp="1606756731660">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
@@ -228,7 +225,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/ChatApp/FileMessage.java</url>
           <line>11</line>
-          <properties class="ChatApp.FileMessage" method="setContent">
+          <properties class="ChatApp.FileMessage">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="2" />
