@@ -15,14 +15,17 @@ public class Agent {
     protected NetworkHandler networkHandler;
     protected ArrayList <ChatHandler> currentChat;
     protected PseudoHandler pseudoHandler;
-    UsersWindows affichage;
+    AuthentificationPage authentificationPage;
+    PseudoPage pseudoPage;
+    UsersWindows usersWindows;
 
     public Agent(){
         networkHandler = new NetworkHandler(this);
         currentChat = new ArrayList<ChatHandler>();
-        pseudoHandler = new PseudoHandler();
-        affichage= new UsersWindows(this);
-        affichage.start();
+        pseudoHandler = new PseudoHandler(this);
+        authentificationPage = new AuthentificationPage(this);
+        pseudoPage = new PseudoPage(this);
+        usersWindows = new UsersWindows(this);
     }
 
     public void StartAgent() throws IOException {
@@ -36,7 +39,6 @@ public class Agent {
         currentChat.add(chatHandler);
         networkHandler.StartChat(chatHandler);
     }
-
     public void StopChat(ChatHandler chatHandler){
         try {
             chatHandler.StopChat();
@@ -46,9 +48,6 @@ public class Agent {
         }
     }
 
-    public UsersWindows getAffichage(){
-        return  this.affichage;
-    }
 
     public PseudoHandler getPseudoHandler() {
         return pseudoHandler;
@@ -69,5 +68,27 @@ public class Agent {
         return chat;
     }
 
+    public NetworkHandler getNetworkHandler() {
+        return networkHandler;
+    }
 
+    public PseudoPage getPseudoPage(){
+        return this.pseudoPage;
+    }
+
+    public UsersWindows getUsersWindows() {
+        return this.usersWindows;
+    }
+
+    public void UpdatePseudo(String NewPseudo, String OldPseudo){
+        pseudoHandler.ChoosePseudo(NewPseudo, OldPseudo);
+        findChatHandler(OldPseudo).getRecipient().setPseudo(NewPseudo);
+        for (int i=0; i<findChatHandler(OldPseudo).getMessageHistory().size(); i++){
+            if (findChatHandler(OldPseudo).getMessageHistory().get(i).getRecipient().getPseudo().equals(OldPseudo)){
+                findChatHandler(OldPseudo).getMessageHistory().get(i).getRecipient().setPseudo(NewPseudo);
+            }else if (findChatHandler(OldPseudo).getMessageHistory().get(i).getSender().getPseudo().equals(OldPseudo)){
+                findChatHandler(OldPseudo).getMessageHistory().get(i).getSender().setPseudo(NewPseudo);
+            }
+        }
+    }
 }

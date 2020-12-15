@@ -29,4 +29,8 @@ public class NetworkHandler extends Thread {
         ClientHandler client = new ClientHandler(this, chatHandler );
         client.start();
     }
+
+    public ServerHandler getServerHandler(){
+        return this.serverHandler;
+    }
 }

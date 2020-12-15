@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Code_POO:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -21,12 +26,19 @@
   <component name="ChangeListManager">
     <list default="true" id="51430ecc-8b77-4d86-87fd-f9c5009e24de" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/NetworkHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/NetworkHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/PseudoHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/PseudoHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/Agent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/ChatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ChatHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/ChatPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ChatPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/AuthentificationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/AuthentificationPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/NetworkHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/NetworkHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/TCP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/TCP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/PseudoHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/PseudoHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/PseudoPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/PseudoPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/UDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/UDP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/UsersWindows.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/UsersWindows.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,10 +69,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="full.screen.before.presentation.mode" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -138,10 +151,10 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="96" y="0" width="1089" height="720" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.720@0.0.1280.720" timestamp="1607025540583" />
-    <state x="371" y="153" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1606839070309">
+    <state x="371" y="153" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1608059562458">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="371" y="153" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1280.720@0.0.1280.720" timestamp="1606839070309" />
+    <state x="371" y="153" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1280.720@0.0.1280.720" timestamp="1608059562458" />
     <state x="321" y="96" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1607101554281">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
@@ -158,54 +171,30 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="461" y="67" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1606756730946" />
-    =======
-    <state width="1237" height="239" key="GridCell.Tab.0.bottom" timestamp="1607974938023">
-      &gt;&gt;&gt;&gt;&gt;&gt;&gt; parent of e2fc1e4... Ajout Date Message
+    <state width="618" height="277" key="GridCell.Tab.0.bottom" timestamp="1608054461063">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="239" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1607974938023" />
-    <state width="1323" height="82" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1607955324797" />
-    <state width="1237" height="239" key="GridCell.Tab.0.center" timestamp="1607974938022">
-      <screen x="0" y="0" width="1280" height="720" />
-    </state>
-    <state width="1237" height="239" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1607974938022" />
-    <state width="1323" height="82" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1607955324797" />
-    <state width="1237" height="239" key="GridCell.Tab.0.left" timestamp="1607974938022">
-      <screen x="0" y="0" width="1280" height="720" />
-    </state>
-    <state width="1237" height="239" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1607974938022" />
-    <state width="1323" height="82" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1607955324796" />
-    <state width="1237" height="239" key="GridCell.Tab.0.right" timestamp="1607974938023">
-      <screen x="0" y="0" width="1280" height="720" />
-    </state>
-    <state width="1237" height="239" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1607974938023" />
-    <state width="1323" height="82" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1607955324797" />
-    =======
-    <state width="1323" height="82" key="GridCell.Tab.0.bottom" timestamp="1608043748137">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1237" height="239" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1607974938023" />
+    <state width="618" height="277" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1608054461063" />
     <state width="1323" height="82" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608043748137" />
-    <state width="1323" height="82" key="GridCell.Tab.0.center" timestamp="1608043748136">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1237" height="239" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1607974938022" />
-    <state width="1323" height="82" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1608043748136" />
-    <state width="1323" height="82" key="GridCell.Tab.0.left" timestamp="1608043748136">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1237" height="239" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1607974938022" />
-    <state width="1323" height="82" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1608043748136" />
-    <state width="1323" height="82" key="GridCell.Tab.0.right" timestamp="1608043748136">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1237" height="239" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1607974938023" />
-    <state width="1323" height="82" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1608043748136" />
-    &gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes
-    <state x="121" y="0" key="SettingsEditor" timestamp="1606756731660">
+    <state width="618" height="277" key="GridCell.Tab.0.center" timestamp="1608054461063">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="121" y="0" key="SettingsEditor/0.0.1280.720@0.0.1280.720" timestamp="1606756731660" />
+    <state width="618" height="277" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1608054461063" />
+    <state width="1323" height="82" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1608043748136" />
+    <state width="618" height="277" key="GridCell.Tab.0.left" timestamp="1608054461063">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state width="618" height="277" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1608054461063" />
+    <state width="1323" height="82" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1608043748136" />
+    <state width="618" height="277" key="GridCell.Tab.0.right" timestamp="1608054461063">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state width="618" height="277" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1608054461063" />
+    <state width="1323" height="82" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1608043748136" />
+    <state x="121" y="0" key="SettingsEditor" timestamp="1608059648992">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="121" y="0" key="SettingsEditor/0.0.1280.720@0.0.1280.720" timestamp="1608059648992" />
     <state x="189" y="91" width="903" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1606813136256">
       <screen x="0" y="0" width="1280" height="720" />
     </state>

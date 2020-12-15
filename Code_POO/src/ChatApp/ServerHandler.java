@@ -37,6 +37,10 @@ public class ServerHandler extends Thread {
         }
     }
 
+    public UDP getUdp() {
+        return udp;
+    }
+
     public NetworkHandler getNetworkHandler(){
         return this.networkHandler;
     }

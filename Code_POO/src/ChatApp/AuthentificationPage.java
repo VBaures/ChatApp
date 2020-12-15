@@ -6,9 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class AuthentificationPage implements ActionListener {
-
-    public void AuthentificationPage (){
-    JFrame frame= new JFrame("Application");
+    Agent agent;
+    JFrame frame;
+    public AuthentificationPage (Agent agent){
+        this.agent=agent;
+    frame= new JFrame("Application");
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.setSize(new Dimension(1000,1000));
     JPanel panel1= new JPanel(new GridLayout(2,2));
@@ -41,10 +43,8 @@ class AuthentificationPage implements ActionListener {
 
         //TODO; a completer quand BDD prete
         public void actionPerformed (ActionEvent e){
-            PseudoPage newpage = new PseudoPage();
-
-
-
+            frame.dispose();
+            agent.getPseudoPage().getFrame().setVisible(true);
     }
 }
 

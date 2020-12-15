@@ -8,7 +8,7 @@ public class PseudoHandler {
     //a voir si la liste des personnes connectés n'est pas de type public
     protected ArrayList<User> connectedUsers;
 
-    public PseudoHandler(){
+    public PseudoHandler(Agent agent){
         this.connectedUsers = new ArrayList<User>();
             }
 
@@ -31,13 +31,13 @@ public class PseudoHandler {
 
     //on regarde dans l'array. A la recherche de Bernard.....
     public boolean VerifyPseudo(String Pseudo) {
-        boolean deja_utilise = false;
+        boolean non_utilise = true;
         for (int i = 0; i < connectedUsers.size(); i++) {
-            if (connectedUsers.get(i).pseudo == Pseudo) {
-                deja_utilise = true;
+            if (connectedUsers.get(i).getPseudo().trim().equals(Pseudo)) {
+                non_utilise = false;
             }
         }
-        return deja_utilise;
+        return non_utilise;
     }
     //...on a trouvé Bernard
 
