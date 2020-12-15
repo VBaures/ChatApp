@@ -13,6 +13,7 @@ public class ChatPage extends Thread implements ActionListener {
         JTextField zone_texte;
         JPanel liste;
         JScrollPane pane;
+        JScrollBar bare;
 
         public ChatPage(Agent agent, ChatHandler chatHandler){
             this.agent=agent;
@@ -24,7 +25,8 @@ public class ChatPage extends Thread implements ActionListener {
 
             JFrame fram= new JFrame("Application");
             fram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            fram.setSize(new Dimension(1000,1000));
+
+            fram.getContentPane().setPreferredSize(new Dimension(300,300));
             JPanel panel1= new JPanel(new GridLayout(1,4));
             JPanel panel2= new JPanel(new GridLayout(1,4));
 
@@ -40,11 +42,14 @@ public class ChatPage extends Thread implements ActionListener {
             GridLayout layout = new GridLayout(0,1);
             liste=new JPanel();
             liste.setLayout(layout);
+            bare = new JScrollBar(JScrollBar.HORIZONTAL,0,1000,0,1000);
             pane = new JScrollPane(liste);
-            pane.setSize(300,300);
+
+            pane.setHorizontalScrollBar(bare);
+
             //fram.getContentPane().add(panel1, BorderLayout.PAGE_START);
             fram.getContentPane().add(panel2, BorderLayout.PAGE_END);
-            fram.getContentPane().add(pane,BorderLayout.PAGE_START);
+            fram.getContentPane().add(pane,BorderLayout.CENTER);
             fram.pack();
             fram.setVisible(true);
             fram.setLocationRelativeTo(null);}
@@ -56,17 +61,19 @@ public class ChatPage extends Thread implements ActionListener {
             chatHandler.Send(getvalue);
             System.out.println("Message envoyé");
         }
-        public JPanel creation (String message, String pseudo /*Date date*/, Color couleur ){
+        public JPanel creation (String message, String pseudo, String date, Color couleur ){
             JPanel pane= new JPanel();
             JLabel label2=new JLabel(pseudo + " : ");
-            //JLabel label3=new JLabel(date.toString());
+            JLabel label3=new JLabel(date);
             JLabel label=new JLabel(message);
             label.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,15));
+            label3.setFont(new java.awt.Font(Font.SERIF,Font.ITALIC,10));
             label2.setForeground(couleur);
             pane.setLayout(new FlowLayout(FlowLayout.LEFT));
             pane.add(label2);
+            pane.add(label3);
             pane.add(label);
-            //pane.add(label3,BorderLayout.PAGE_START);
+
             return pane;
         }
         public void debut (){
@@ -76,12 +83,12 @@ public class ChatPage extends Thread implements ActionListener {
 
                     liste.add(creation(chatHandler.getMessageHistory().get(i).getContent()
                             ,chatHandler.getMessageHistory().get(i).getSender().getPseudo(),
-                            /*chatHandler.getMessageHistory().get(i).getTime(),*/
+                            chatHandler.getMessageHistory().get(i).getFormatTime(),
                             Color.RED),BorderLayout.SOUTH);
                 }
                 else {liste.add(creation(chatHandler.getMessageHistory().get(i).getContent()
                         ,chatHandler.getMessageHistory().get(i).getSender().getPseudo(),
-                        /*chatHandler.getMessageHistory().get(i).getTime(),*/
+                        chatHandler.getMessageHistory().get(i).getFormatTime(),
                         Color.BLUE),BorderLayout.SOUTH);}
             }
             liste.updateUI();
@@ -94,12 +101,14 @@ public class ChatPage extends Thread implements ActionListener {
 
                 liste.add(creation(chatHandler.getMessageHistory().get(index).getContent()
                         , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
-                        Color.RED),BorderLayout.SOUTH);
+                        chatHandler.getMessageHistory().get(index).getFormatTime(),Color.RED),BorderLayout.SOUTH);
             } else {
                 liste.add(creation(chatHandler.getMessageHistory().get(index).getContent()
-                        , chatHandler.getMessageHistory().get(index).getSender().getPseudo(), Color.BLUE),BorderLayout.SOUTH);
+                        , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),chatHandler.getMessageHistory().get(index).getFormatTime(), Color.BLUE),BorderLayout.SOUTH);
             }
             liste.updateUI();
+            pane.getHorizontalScrollBar().setValue(pane.getHorizontalScrollBar().getMaximum());
+
         }
     }
 
