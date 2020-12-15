@@ -58,12 +58,14 @@ public class ChatPage extends Thread implements ActionListener {
         }
         public JPanel creation (String message, String pseudo /*Date date*/, Color couleur ){
             JPanel pane= new JPanel();
-            JLabel label2=new JLabel(pseudo);
+            JLabel label2=new JLabel(pseudo + " : ");
             //JLabel label3=new JLabel(date.toString());
             JLabel label=new JLabel(message);
+            label.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,15));
             label2.setForeground(couleur);
-            pane.add(label,BorderLayout.SOUTH);
-            pane.add(label2,BorderLayout.NORTH);
+            pane.setLayout(new FlowLayout(FlowLayout.LEFT));
+            pane.add(label2);
+            pane.add(label);
             //pane.add(label3,BorderLayout.PAGE_START);
             return pane;
         }
