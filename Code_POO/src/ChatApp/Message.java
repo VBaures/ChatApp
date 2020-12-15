@@ -9,6 +9,7 @@ public abstract class Message implements Serializable {
     public Message(User recipient, User sender){
         this.recipient=recipient;
         this.sender=sender;
+        this.time = new Date();
     }
 
     public abstract String getContent();
