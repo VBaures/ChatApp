@@ -32,6 +32,7 @@ public class PseudoHandler {
     //on regarde dans l'array. A la recherche de Bernard.....
     public boolean VerifyPseudo(String Pseudo) {
         boolean non_utilise = true;
+        System.out.println("Users connectés:" + connectedUsers);
         for (int i = 0; i < connectedUsers.size(); i++) {
             if (connectedUsers.get(i).getPseudo().trim().equals(Pseudo)) {
                 non_utilise = false;
