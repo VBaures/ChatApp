@@ -57,11 +57,11 @@ public class Agent {
         return currentChat;
     }
 
-    public ChatHandler findChatHandler(String pseudo){
+    public ChatHandler findChatHandler(int id){
         ChatHandler chat = null;
         int i;
         for (i=0;i<this.currentChat.size();i++){
-            if (this.currentChat.get(i).getRecipient().getPseudo().equals(pseudo)){
+            if (this.currentChat.get(i).getRecipient().getID()==id){
                 chat=this.currentChat.get(i);
             }
         }
@@ -80,14 +80,16 @@ public class Agent {
         return this.usersWindows;
     }
 
-    public void UpdatePseudo(String NewPseudo, String OldPseudo){
-        pseudoHandler.ChoosePseudo(NewPseudo, OldPseudo);
-        findChatHandler(OldPseudo).getRecipient().setPseudo(NewPseudo);
-        for (int i=0; i<findChatHandler(OldPseudo).getMessageHistory().size(); i++){
-            if (findChatHandler(OldPseudo).getMessageHistory().get(i).getRecipient().getPseudo().equals(OldPseudo)){
-                findChatHandler(OldPseudo).getMessageHistory().get(i).getRecipient().setPseudo(NewPseudo);
-            }else if (findChatHandler(OldPseudo).getMessageHistory().get(i).getSender().getPseudo().equals(OldPseudo)){
-                findChatHandler(OldPseudo).getMessageHistory().get(i).getSender().setPseudo(NewPseudo);
+    public void UpdatePseudo(String NewPseudo, int id){
+        pseudoHandler.ChoosePseudo(NewPseudo, id);
+        if (findChatHandler(id)!=null) {
+            findChatHandler(id).getRecipient().setPseudo(NewPseudo);
+            for (int i = 0; i < findChatHandler(id).getMessageHistory().size(); i++) {
+                if (findChatHandler(id).getMessageHistory().get(i).getRecipient().getID() == id) {
+                    findChatHandler(id).getMessageHistory().get(i).getRecipient().setPseudo(NewPseudo);
+                } else if (findChatHandler(id).getMessageHistory().get(i).getSender().getID() == id) {
+                    findChatHandler(id).getMessageHistory().get(i).getSender().setPseudo(NewPseudo);
+                }
             }
         }
     }

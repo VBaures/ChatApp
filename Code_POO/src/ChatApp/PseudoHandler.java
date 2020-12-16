@@ -51,9 +51,9 @@ public class PseudoHandler {
         return(null);
     }
 
-    public User FindUser (int port){
+    public User FindUser (int id){
         for (int i = 0; i < connectedUsers.size(); i++) {
-            if (connectedUsers.get(i).getClientPort()==port) {
+            if (connectedUsers.get(i).getID()==id) {
                 return connectedUsers.get(i);
             }
         }
@@ -62,8 +62,8 @@ public class PseudoHandler {
 
     //si le pseudo est ok alors l'utilisateur prend ce pseudo
     //cette fonction est utilise pour CHANGER LE PSEUDO aussi
-    public void ChoosePseudo(String NewPseudo, String OldPseudo) {
-        FindUser(OldPseudo).setPseudo(NewPseudo);
+    public void ChoosePseudo(String NewPseudo, int id) {
+        FindUser(id).setPseudo(NewPseudo);
 
     }
 

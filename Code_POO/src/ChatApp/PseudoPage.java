@@ -41,6 +41,7 @@ public class PseudoPage implements ActionListener {
         if (agent.getPseudoHandler().VerifyPseudo(getvalue)){
             agent.getPseudoHandler().getMain_User().setPseudo(getvalue);
             try {
+                System.out.println("Pseudo envoyé: "+agent.getPseudoHandler().getMain_User().getPseudo());
                 agent.getNetworkHandler().getServerHandler().getUdp().broadcastUDP("NewPseudo", agent.getPseudoHandler().getMain_User());
             } catch (IOException ioException) {
                 ioException.printStackTrace();

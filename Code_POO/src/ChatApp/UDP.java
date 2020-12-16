@@ -43,11 +43,11 @@ public class UDP extends Thread {
                             serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
                         //}
                     } else if (receive1.trim().equals("NewPseudo")){
-                        User user = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUser(receive2.getPseudo());
-                        if (user!=null){
-                            serverHandler.getNetworkHandler().getAgent().UpdatePseudo(receive2.getPseudo(), user.getPseudo());
-                        } else {
+                        User user = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUser(receive2.getID());
+                        if (user==null){
                             serverHandler.getNetworkHandler().getAgent().getPseudoHandler().UpdateConnectedUsers(receive2);
+                        } else {
+                            serverHandler.getNetworkHandler().getAgent().UpdatePseudo(receive2.getPseudo(), user.getID());
                         }
                         serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
                     }
