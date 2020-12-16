@@ -1,5 +1,7 @@
 package ChatApp;
 
+import org.w3c.dom.Document;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,16 +16,16 @@ public class ChatPage extends Thread implements ActionListener {
         JPanel liste;
         JScrollPane pane;
         JScrollBar bare;
-
+        JFrame fram;
         public ChatPage(Agent agent, ChatHandler chatHandler){
             this.agent=agent;
             this.chatHandler=chatHandler;
             this.listMessage = new ArrayList<>();
+            fram= new JFrame("Chat avec " + chatHandler.getRecipient().username);
         }
 
         public void run(){
 
-            JFrame fram= new JFrame("Application");
             fram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
             fram.getContentPane().setPreferredSize(new Dimension(300,300));
@@ -57,9 +59,11 @@ public class ChatPage extends Thread implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             String getvalue= zone_texte.getText();
-            System.out.println("Message :"+getvalue);
+            if (getvalue.equals("")){}
+            else {System.out.println("Message :"+getvalue);
+            zone_texte.setText("");
             chatHandler.Send(getvalue);
-            System.out.println("Message envoyé");
+            System.out.println("Message envoyé");}
         }
         public JPanel creation (String message, String pseudo, String date, Color couleur ){
             JPanel pane= new JPanel();
@@ -107,8 +111,6 @@ public class ChatPage extends Thread implements ActionListener {
                         , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),chatHandler.getMessageHistory().get(index).getFormatTime(), Color.BLUE),BorderLayout.SOUTH);
             }
             liste.updateUI();
-            pane.getHorizontalScrollBar().setValue(pane.getHorizontalScrollBar().getMaximum());
-
         }
     }
 
