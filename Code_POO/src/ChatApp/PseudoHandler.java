@@ -34,7 +34,7 @@ public class PseudoHandler {
         boolean non_utilise = true;
         System.out.println("Users connectés:" + connectedUsers);
         for (int i = 0; i < connectedUsers.size(); i++) {
-            if (connectedUsers.get(i).getPseudo().trim().equals(Pseudo)) {
+            if ((connectedUsers.get(i).getPseudo().trim().equals(Pseudo)) || Pseudo.equals("")) {
                 non_utilise = false;
             }
         }

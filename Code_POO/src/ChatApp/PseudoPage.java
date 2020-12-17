@@ -15,7 +15,7 @@ public class PseudoPage implements ActionListener {
         frame= new JFrame("Choose pseudo");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(new Dimension(1000,1000));
-        JPanel panel1= new JPanel(new GridLayout(2,2));
+        JPanel panel1= new JPanel(new BorderLayout());
 
 
         JLabel title= new JLabel("Veuillez rentrer un pseudo");
@@ -23,8 +23,8 @@ public class PseudoPage implements ActionListener {
         ppseudo= new JTextField(SwingConstants.RIGHT);
         JButton bouton= new JButton("VALIDER");
         panel1.add(title,BorderLayout.PAGE_START);
-        panel1.add(pseudo);
-        panel1.add(ppseudo);
+        panel1.add(pseudo,BorderLayout.LINE_START);
+        panel1.add(ppseudo,BorderLayout.CENTER);
         panel1.add(bouton, BorderLayout.PAGE_END);
 
         frame.getContentPane().add(panel1, BorderLayout.CENTER);
