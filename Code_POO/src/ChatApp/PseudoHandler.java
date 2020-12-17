@@ -84,4 +84,13 @@ public class PseudoHandler {
     public void setMain_User(MainUser main_User) {
         this.main_User = main_User;
     }
+
+    public User FindUserByPort(int port) {
+        for (int i = 0; i < connectedUsers.size(); i++) {
+            if (connectedUsers.get(i).getClientPort()==port) {
+                return connectedUsers.get(i);
+            }
+        }
+        return null;
+    }
 }

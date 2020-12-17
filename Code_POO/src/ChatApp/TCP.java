@@ -20,7 +20,8 @@ public class TCP extends Thread {
         try {
             ObjectOutputStream outTCP = new ObjectOutputStream(link.getOutputStream());
             ObjectInputStream inTCP = new ObjectInputStream(link.getInputStream());
-            serverHandler.getNetworkHandler().getAgent().getCurrentChat().add(new ChatHandler(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUser(link.getPort()), outTCP, link, serverHandler.getNetworkHandler().getAgent()));
+            User sender = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUserByPort(link.getPort());
+            serverHandler.getNetworkHandler().getAgent().getCurrentChat().add(new ChatHandler(sender, outTCP, link, serverHandler.getNetworkHandler().getAgent()));
             while (true) {
                 Object ObjectReceive = inTCP.readObject();
                 if (ObjectReceive instanceof StringMessage) {
@@ -28,16 +29,10 @@ public class TCP extends Thread {
                     System.out.println("Message reçu :"+ receive.getContent());
                     serverHandler.getNetworkHandler().getAgent().findChatHandler(receive.getSender().getID()).getMessageHistory().add(receive);
                     serverHandler.getNetworkHandler().getAgent().findChatHandler(receive.getSender().getID()).getChatPage().Mise_a_jour();
-                } else if (ObjectReceive instanceof MainUser) {
-                    MainUser receive = (MainUser) ObjectReceive;
-                    System.out.println("Les informations d'un utilisateur viennent d'être reçu");
-                    System.out.println("Pseudo: " + receive.pseudo);
-                    System.out.println();
                 } else if (ObjectReceive instanceof String) {
                     String receive = (String) ObjectReceive;
-                    System.out.println(receive);
-                    if (receive == "Stop") {
-                        link.close();
+                    if ((receive.equals("StopChat"))&(serverHandler.getNetworkHandler().getAgent().findChatHandler(sender.getID())!=null)){
+                        serverHandler.getNetworkHandler().getAgent().StopChat(serverHandler.getNetworkHandler().getAgent().findChatHandler(sender.getID()));
                     }
                 }
             }

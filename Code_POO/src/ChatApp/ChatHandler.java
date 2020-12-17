@@ -45,7 +45,9 @@ public class ChatHandler {
     }
 
     public void StopChat() throws IOException {
+        output.writeObject("StopChat");
         socket.close();
+
     }
 
     void setOutput(ObjectOutputStream output){
