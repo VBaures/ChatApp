@@ -18,6 +18,7 @@ public class Agent {
     AuthentificationPage authentificationPage;
     PseudoPage pseudoPage;
     UsersWindows usersWindows;
+    BDDpage bddpage;
 
     public Agent(){
         networkHandler = new NetworkHandler(this);
@@ -26,6 +27,7 @@ public class Agent {
         authentificationPage = new AuthentificationPage(this);
         pseudoPage = new PseudoPage(this);
         usersWindows = new UsersWindows(this);
+        bddpage=new BDDpage(this);
     }
 
     public void StartAgent() throws IOException {
@@ -77,6 +79,8 @@ public class Agent {
     public PseudoPage getPseudoPage(){
         return this.pseudoPage;
     }
+
+    public BDDpage getBddpage(){return this.bddpage;}
 
     public UsersWindows getUsersWindows() {
         return this.usersWindows;
