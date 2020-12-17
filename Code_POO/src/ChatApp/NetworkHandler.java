@@ -11,9 +11,12 @@ import java.util.Scanner;
 
 public class NetworkHandler extends Thread {
     ServerHandler serverHandler;
+    ArrayList<ClientHandler> listClientHandler;
     Agent agent;
+
     public NetworkHandler(Agent agent){
         this.agent=agent;
+        this.listClientHandler=new ArrayList<>();
     }
 
     public void StartServer() throws IOException {
@@ -27,7 +30,24 @@ public class NetworkHandler extends Thread {
 
     public void StartChat(ChatHandler chatHandler) throws IOException {
         ClientHandler client = new ClientHandler(this, chatHandler );
+        listClientHandler.add(client);
         client.start();
+    }
+
+    public void StopChat(ChatHandler chatHandler){
+        ClientHandler clientHandler = findClientHandler(chatHandler.getRecipient().getID());
+        if (clientHandler!=null){
+            listClientHandler.remove(clientHandler);
+        }
+    }
+
+    public ClientHandler findClientHandler(int ID){
+        for (int i=0; i<listClientHandler.size(); i++){
+            if (listClientHandler.get(i).getChatHandler().getRecipient().getID()==ID){
+                return listClientHandler.get(i);
+            }
+        }
+        return null;
     }
 
     public ServerHandler getServerHandler(){

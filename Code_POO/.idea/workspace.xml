@@ -26,9 +26,17 @@
   <component name="ChangeListManager">
     <list default="true" id="51430ecc-8b77-4d86-87fd-f9c5009e24de" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/NetworkHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/NetworkHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/PseudoHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/PseudoHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/Agent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/ChatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ChatHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/ChatPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ChatPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/NetworkHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/NetworkHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/PseudoHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/PseudoHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/TCP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/TCP.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -138,10 +146,10 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="121" y="0" key="#Project_Structure/0.0.1280.720@0.0.1280.720" timestamp="1606756631836" />
-    <state x="96" y="0" width="1089" height="720" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607025540583">
+    <state x="96" y="0" width="1089" height="720" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608200369804">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="96" y="0" width="1089" height="720" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.720@0.0.1280.720" timestamp="1607025540583" />
+    <state x="96" y="0" width="1089" height="720" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.720@0.0.1280.720" timestamp="1608200369804" />
     <state x="371" y="153" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1608059562458">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
@@ -162,34 +170,54 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="461" y="67" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1606756730946" />
-    <state width="1237" height="202" key="GridCell.Tab.0.bottom" timestamp="1608194241958">
+    <state width="1237" height="137" key="GridCell.Tab.0.bottom" timestamp="1608224539137">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="202" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1608194241958" />
+    <state width="1237" height="137" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1608224539137" />
     <state width="1323" height="82" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1608043748137" />
-    <state width="1237" height="202" key="GridCell.Tab.0.center" timestamp="1608194241958">
+    <state width="1237" height="137" key="GridCell.Tab.0.center" timestamp="1608224539136">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="202" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1608194241958" />
+    <state width="1237" height="137" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1608224539136" />
     <state width="1323" height="82" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1608043748136" />
-    <state width="1237" height="202" key="GridCell.Tab.0.left" timestamp="1608194241957">
+    <state width="1237" height="137" key="GridCell.Tab.0.left" timestamp="1608224539136">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="202" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1608194241957" />
+    <state width="1237" height="137" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1608224539136" />
     <state width="1323" height="82" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1608043748136" />
-    <state width="1237" height="202" key="GridCell.Tab.0.right" timestamp="1608194241958">
+    <state width="1237" height="137" key="GridCell.Tab.0.right" timestamp="1608224539136">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="202" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1608194241958" />
+    <state width="1237" height="137" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1608224539136" />
     <state width="1323" height="82" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1608043748136" />
+    <state width="1237" height="220" key="GridCell.Tab.1.bottom" timestamp="1608202811991">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state width="1237" height="220" key="GridCell.Tab.1.bottom/0.0.1280.720@0.0.1280.720" timestamp="1608202811991" />
+    <state width="1237" height="220" key="GridCell.Tab.1.center" timestamp="1608202811991">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state width="1237" height="220" key="GridCell.Tab.1.center/0.0.1280.720@0.0.1280.720" timestamp="1608202811991" />
+    <state width="1237" height="220" key="GridCell.Tab.1.left" timestamp="1608202811991">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state width="1237" height="220" key="GridCell.Tab.1.left/0.0.1280.720@0.0.1280.720" timestamp="1608202811991" />
+    <state width="1237" height="220" key="GridCell.Tab.1.right" timestamp="1608202811991">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state width="1237" height="220" key="GridCell.Tab.1.right/0.0.1280.720@0.0.1280.720" timestamp="1608202811991" />
     <state x="121" y="0" key="SettingsEditor" timestamp="1608059648992">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="121" y="0" key="SettingsEditor/0.0.1280.720@0.0.1280.720" timestamp="1608059648992" />
-    <state x="189" y="91" width="903" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1606813136256">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1608210277892">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="189" y="91" width="903" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1280.720@0.0.1280.720" timestamp="1606813136256" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1280.720@0.0.1280.720" timestamp="1608210277892" />
+    <state x="189" y="91" width="903" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1608201945106">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="189" y="91" width="903" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1280.720@0.0.1280.720" timestamp="1608201945106" />
     <state x="91" y="0" key="new project wizard" timestamp="1606985574066">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
@@ -209,6 +237,16 @@
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ChatApp/ChatHandler.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ChatApp/Agent.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

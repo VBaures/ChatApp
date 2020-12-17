@@ -29,6 +29,7 @@ public class ServerHandler extends Thread {
             udp.start();
             while (true) {
                 Socket linkTCP = servSocketTCP.accept();
+                linkTCP.setKeepAlive(false);
                 this.tcp = new TCP(this, linkTCP);
                 tcp.start();
             }

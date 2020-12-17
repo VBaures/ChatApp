@@ -41,7 +41,9 @@ public class Agent {
     }
     public void StopChat(ChatHandler chatHandler){
         try {
+            System.out.println("Chat trouvé: "+findChatHandler(chatHandler.getRecipient().getID()));
             chatHandler.StopChat();
+            networkHandler.StopChat(chatHandler);
             currentChat.remove(chatHandler);
         } catch (IOException e) {
             e.printStackTrace();

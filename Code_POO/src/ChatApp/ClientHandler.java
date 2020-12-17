@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class ClientHandler extends Thread{
     NetworkHandler networkHandler;
     ChatHandler chatHandler;
+    Socket link;
 
     public ClientHandler(NetworkHandler networkHandler, ChatHandler chatHandler) throws IOException {
         this.networkHandler = networkHandler;
@@ -19,32 +20,51 @@ public class ClientHandler extends Thread{
             try {
                 //Scanner keyboard = new Scanner(System.in);
                 //System.out.println("Enter client port");
-
-                Socket link = new Socket(InetAddress.getByName("localhost"), chatHandler.getRecipient().getServerPort(), InetAddress.getByName("localhost"), networkHandler.getAgent().getPseudoHandler().getMain_User().getClientPort());
-
+                this.link = new Socket(InetAddress.getByName("localhost"), chatHandler.getRecipient().getServerPort(), InetAddress.getByName("localhost"), networkHandler.getAgent().getPseudoHandler().getMain_User().getClientPort());
+                link.setKeepAlive(false);
+                System.out.println("client link créé");
                 ObjectOutputStream out = new ObjectOutputStream(link.getOutputStream());
 
                 ObjectInputStream in = new ObjectInputStream(link.getInputStream());
                 networkHandler.getAgent().findChatHandler(chatHandler.getRecipient().getID()).setOutput(out);
                 networkHandler.getAgent().findChatHandler(chatHandler.getRecipient().getID()).setSocket(link);
-                System.out.println(chatHandler.getMessageHistory());
-                while (true) {
+                chatHandler.setOutput(out);
+                chatHandler.setSocket(link);
+                User sender = networkHandler.getAgent().getPseudoHandler().FindUserByPortServer(link.getPort());
+                while(true){
                     try {
-                        StringMessage receive = (StringMessage) in.readObject();
-                        chatHandler.setOutput(out);
-                        chatHandler.setSocket(link);
-                        chatHandler.getMessageHistory().add(receive);
-                        chatHandler.getChatPage().Mise_a_jour();
+                        Object ObjectReceive=in.readObject();
+                        System.out.println(ObjectReceive);
+                        if (ObjectReceive instanceof StringMessage) {
+                            StringMessage receive = (StringMessage) ObjectReceive;
+                            System.out.println("Message reçu :"+ receive.getContent());
+                            chatHandler.getMessageHistory().add(receive);
+                            chatHandler.getChatPage().Mise_a_jour();
+                        } else if (ObjectReceive instanceof String) {
+                            String receive = (String) ObjectReceive;
+                            System.out.println(receive);
+                            if (receive.equals("StopChat")){
+                                networkHandler.getAgent().getCurrentChat().remove(chatHandler);
+                                chatHandler.getChatPage().getFram().dispose();
+                                break;
+                            }
+                        }
                     } catch (IOException e) {
-                        System.err.println("Problème envoie ! ");
+                        break;
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     }
                 }
+                out.close();
+                in.close();
+                link.close();
 
-                } catch(IOException e){
+            } catch(IOException e){
                     System.err.println("LA CONNEXION A ETE INTERROMPUE ! ");
-                }
+            }
+    }
 
+    public ChatHandler getChatHandler(){
+        return this.chatHandler;
     }
 }

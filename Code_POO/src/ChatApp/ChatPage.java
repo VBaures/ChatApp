@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Date;
 public class ChatPage extends Thread implements ActionListener {
@@ -27,7 +29,13 @@ public class ChatPage extends Thread implements ActionListener {
         public void run(){
 
             fram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+            fram.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    agent.StopChat(chatHandler);
+                    fram.dispose();
+                }
+            });
             fram.getContentPane().setPreferredSize(new Dimension(300,300));
             JPanel panel1= new JPanel(new GridLayout(1,4));
             JPanel panel2= new JPanel(new GridLayout(1,4));
@@ -111,6 +119,10 @@ public class ChatPage extends Thread implements ActionListener {
                         , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),chatHandler.getMessageHistory().get(index).getFormatTime(), Color.BLUE),BorderLayout.SOUTH);
             }
             liste.updateUI();
+        }
+
+        public JFrame getFram(){
+            return this.fram;
         }
     }
 

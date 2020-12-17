@@ -20,10 +20,10 @@ public class TCP extends Thread {
         try {
             ObjectOutputStream outTCP = new ObjectOutputStream(link.getOutputStream());
             ObjectInputStream inTCP = new ObjectInputStream(link.getInputStream());
-            User sender = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUserByPort(link.getPort());
+            User sender = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUserByPortClient(link.getPort());
             serverHandler.getNetworkHandler().getAgent().getCurrentChat().add(new ChatHandler(sender, outTCP, link, serverHandler.getNetworkHandler().getAgent()));
-            while (true) {
-                Object ObjectReceive = inTCP.readObject();
+            while(true){
+                Object ObjectReceive=inTCP.readObject();
                 if (ObjectReceive instanceof StringMessage) {
                     StringMessage receive = (StringMessage) ObjectReceive;
                     System.out.println("Message reçu :"+ receive.getContent());
@@ -32,10 +32,13 @@ public class TCP extends Thread {
                 } else if (ObjectReceive instanceof String) {
                     String receive = (String) ObjectReceive;
                     if ((receive.equals("StopChat"))&(serverHandler.getNetworkHandler().getAgent().findChatHandler(sender.getID())!=null)){
-                        serverHandler.getNetworkHandler().getAgent().StopChat(serverHandler.getNetworkHandler().getAgent().findChatHandler(sender.getID()));
+                        serverHandler.getNetworkHandler().getAgent().findChatHandler(sender.getID()).getChatPage().getFram().dispose();
+                        serverHandler.getNetworkHandler().getAgent().getCurrentChat().remove(serverHandler.getNetworkHandler().getAgent().findChatHandler(sender.getID()));
+                        break;
                     }
                 }
             }
+            link.close();
 
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Problème reception ! ");
