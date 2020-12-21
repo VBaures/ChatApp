@@ -19,6 +19,8 @@ public class ChatPage extends Thread implements ActionListener {
         JScrollPane pane;
         JScrollBar bare;
         JFrame fram;
+        JButton bouton;
+        JButton bouton2;
         public ChatPage(Agent agent, ChatHandler chatHandler){
             this.agent=agent;
             this.chatHandler=chatHandler;
@@ -42,12 +44,14 @@ public class ChatPage extends Thread implements ActionListener {
 
             //JLabel label1=new JLabel ("Bonjour");
             //label1.setForeground(Color.BLUE);
-            JButton bouton=new JButton("Envoyer");
+            bouton=new JButton("Envoyer");
+            bouton2=new JButton("Envoie Fichier");
             bouton.addActionListener(this);
             bouton.setForeground(Color.GRAY);
             zone_texte=new JTextField();
-            panel2.add(zone_texte);
-            panel2.add(bouton);
+            panel2.add(zone_texte,BorderLayout.LINE_START);
+            panel2.add(bouton,BorderLayout.CENTER);
+            panel2.add(bouton2,BorderLayout.LINE_END);
             //panel1.add(label1, BorderLayout.PAGE_START);
             GridLayout layout = new GridLayout(0,1);
             liste=new JPanel();
@@ -66,12 +70,18 @@ public class ChatPage extends Thread implements ActionListener {
 
 
         public void actionPerformed(ActionEvent e) {
+            if (e.getSource()==bouton){
             String getvalue= zone_texte.getText();
             if (getvalue.equals("")){}
             else {System.out.println("Message :"+getvalue);
             zone_texte.setText("");
             chatHandler.Send(getvalue);
-            System.out.println("Message envoyé");}
+            System.out.println("Message envoyé");}}
+            else {
+                if (e.getSource()==bouton2){
+
+                }
+            }
         }
         public JPanel creation (String message, String pseudo, String date, Color couleur ){
             JPanel pane= new JPanel();
