@@ -1,15 +1,20 @@
 package ChatApp;
 import java.io.File;
-public class FileMessage extends Message {
-    protected byte[] content = new byte[8192];
+import java.io.IOException;
+import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-    public FileMessage (User recipient, User sender, String filePath){
+public class FileMessage extends Message implements Serializable {
+    protected byte[] content;
+
+    public FileMessage (User recipient, User sender, String filePath) throws IOException {
         super(recipient,sender);
-        this.Content=content;
+        Path path = Paths.get(filePath);
+        this.content= Files.readAllBytes(path);
     }
 
-    public Object getContent (){return this.Content ;}
-    public void setContent (File fichier) {
-        this.Content =fichier;
-    }
+    public byte[] getContentFile (){return this.content;}
+
 }

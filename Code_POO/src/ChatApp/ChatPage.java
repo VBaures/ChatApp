@@ -85,7 +85,6 @@ public class ChatPage extends Thread implements ActionListener {
             pane.add(label2);
             pane.add(label3);
             pane.add(label);
-
             return pane;
         }
         public void debut (){
