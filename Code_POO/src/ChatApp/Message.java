@@ -17,7 +17,6 @@ public abstract class Message implements Serializable {
         this.time= new Date();
     }
 
-    public abstract String getContent();
     public Date getTime (){return this.time;}
     public String getFormatTime(){return this.dateFormat.format(this.time);}
     public String getType(){return "Message";}

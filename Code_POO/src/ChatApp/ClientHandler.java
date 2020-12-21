@@ -37,7 +37,7 @@ public class ClientHandler extends Thread{
                         System.out.println(ObjectReceive);
                         if (ObjectReceive instanceof StringMessage) {
                             StringMessage receive = (StringMessage) ObjectReceive;
-                            System.out.println("Message reçu :"+ receive.getContent());
+                            System.out.println("Message reçu :"+ receive.getContentString());
                             chatHandler.getMessageHistory().add(receive);
                             chatHandler.getChatPage().Mise_a_jour();
                         } else if (ObjectReceive instanceof String) {

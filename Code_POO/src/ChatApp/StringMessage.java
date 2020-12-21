@@ -12,7 +12,7 @@ public class StringMessage extends Message implements Serializable {
 
     }
 
-    public String getContent (){return this.Content ;}
+    public String getContentString (){return this.Content ;}
     public void setContent (String string) {this.Content=string;}
 
 

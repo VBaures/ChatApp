@@ -26,7 +26,7 @@ public class TCP extends Thread {
                 Object ObjectReceive=inTCP.readObject();
                 if (ObjectReceive instanceof StringMessage) {
                     StringMessage receive = (StringMessage) ObjectReceive;
-                    System.out.println("Message reçu :"+ receive.getContent());
+                    System.out.println("Message reçu :"+ receive.getContentString());
                     serverHandler.getNetworkHandler().getAgent().findChatHandler(receive.getSender().getID()).getMessageHistory().add(receive);
                     serverHandler.getNetworkHandler().getAgent().findChatHandler(receive.getSender().getID()).getChatPage().Mise_a_jour();
                 } else if (ObjectReceive instanceof String) {

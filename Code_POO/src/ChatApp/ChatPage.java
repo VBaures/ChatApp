@@ -92,16 +92,23 @@ public class ChatPage extends Thread implements ActionListener {
             for (int i = 0; i < chatHandler.getMessageHistory().size(); i++) {
                 if (chatHandler.getMessageHistory().get(i).getRecipient().getPseudo().equals
                         (agent.getPseudoHandler().getMain_User().getPseudo())) {
-
-                    liste.add(creation(chatHandler.getMessageHistory().get(i).getContent()
-                            ,chatHandler.getMessageHistory().get(i).getSender().getPseudo(),
-                            chatHandler.getMessageHistory().get(i).getFormatTime(),
-                            Color.RED),BorderLayout.SOUTH);
+                    if (chatHandler.getMessageHistory().get(i) instanceof StringMessage) {
+                        StringMessage message = (StringMessage) chatHandler.getMessageHistory().get(i);
+                        liste.add(creation(message.getContentString()
+                                , chatHandler.getMessageHistory().get(i).getSender().getPseudo(),
+                                chatHandler.getMessageHistory().get(i).getFormatTime(),
+                                Color.RED), BorderLayout.SOUTH);
+                    }
                 }
-                else {liste.add(creation(chatHandler.getMessageHistory().get(i).getContent()
-                        ,chatHandler.getMessageHistory().get(i).getSender().getPseudo(),
-                        chatHandler.getMessageHistory().get(i).getFormatTime(),
-                        Color.BLUE),BorderLayout.SOUTH);}
+                else {
+                    if (chatHandler.getMessageHistory().get(i) instanceof StringMessage) {
+                        StringMessage message = (StringMessage) chatHandler.getMessageHistory().get(i);
+                        liste.add(creation(message.getContentString()
+                                , chatHandler.getMessageHistory().get(i).getSender().getPseudo(),
+                                chatHandler.getMessageHistory().get(i).getFormatTime(),
+                                Color.BLUE), BorderLayout.SOUTH);
+                    }
+                }
             }
             liste.updateUI();
         }
@@ -110,13 +117,19 @@ public class ChatPage extends Thread implements ActionListener {
             int index = chatHandler.getMessageHistory().size() - 1;
             if (chatHandler.getMessageHistory().get(index).getRecipient().getPseudo().equals
                     (agent.getPseudoHandler().getMain_User().getPseudo())) {
-
-                liste.add(creation(chatHandler.getMessageHistory().get(index).getContent()
-                        , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
-                        chatHandler.getMessageHistory().get(index).getFormatTime(),Color.RED),BorderLayout.SOUTH);
+                if (chatHandler.getMessageHistory().get(index) instanceof StringMessage) {
+                    StringMessage message = (StringMessage) chatHandler.getMessageHistory().get(index);
+                    liste.add(creation(message.getContentString()
+                            , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
+                            chatHandler.getMessageHistory().get(index).getFormatTime(), Color.RED), BorderLayout.SOUTH);
+                }
             } else {
-                liste.add(creation(chatHandler.getMessageHistory().get(index).getContent()
-                        , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),chatHandler.getMessageHistory().get(index).getFormatTime(), Color.BLUE),BorderLayout.SOUTH);
+                if (chatHandler.getMessageHistory().get(index) instanceof StringMessage) {
+                    StringMessage message = (StringMessage) chatHandler.getMessageHistory().get(index);
+                    liste.add(creation(message.getContentString()
+                            , chatHandler.getMessageHistory().get(index).getSender().getPseudo(), chatHandler.getMessageHistory().get(index).getFormatTime(), Color.BLUE), BorderLayout.SOUTH);
+
+                }
             }
             liste.updateUI();
         }
