@@ -47,6 +47,7 @@ public class ChatPage extends Thread implements ActionListener {
             bouton=new JButton("Envoyer");
             bouton2=new JButton("Envoie Fichier");
             bouton.addActionListener(this);
+            bouton2.addActionListener(this);
             bouton.setForeground(Color.GRAY);
             zone_texte=new JTextField();
             panel2.add(zone_texte,BorderLayout.LINE_START);
@@ -71,18 +72,27 @@ public class ChatPage extends Thread implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             if (e.getSource()==bouton){
-            String getvalue= zone_texte.getText();
-            if (getvalue.equals("")){}
-            else {System.out.println("Message :"+getvalue);
-            zone_texte.setText("");
-            chatHandler.Send(getvalue);
-            System.out.println("Message envoyé");}}
-            else {
-                if (e.getSource()==bouton2){
-
+                String getvalue= zone_texte.getText();
+                if (getvalue.equals("")){}
+                else {
+                    System.out.println("Message :"+getvalue);
+                    zone_texte.setText("");
+                    chatHandler.Send(getvalue);
+                    System.out.println("Message envoyé");}
                 }
+
+            else {
+                // création de la boîte de dialogue
+                System.out.println("ola");
+                JFileChooser dialogue = new JFileChooser();
+
+                // affichage
+                dialogue.showOpenDialog(null);
+
+
             }
         }
+
         public JPanel creation (String message, String pseudo, String date, Color couleur ){
             JPanel pane= new JPanel();
             JLabel label2=new JLabel(pseudo + " : ");
