@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class UsersWindows extends Thread implements ActionListener {
 
@@ -45,6 +47,7 @@ public class UsersWindows extends Thread implements ActionListener {
         m11= new JMenuItem("Changer Pseudo");
         m22=new JMenuItem("Aide");
         m11.addActionListener(this);
+        m22.addActionListener(this);
         m1.add(m11);
         m2.add(m22);
 
@@ -69,6 +72,24 @@ public class UsersWindows extends Thread implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==m11){
             agent.getPseudoPage().getFrame().setVisible(true);
+        }
+        else{
+            File fichier = new File("C:/Users/calme/Documents/include.pdf");
+            // On vérifie que la classe Desktop soit bien supportée :
+            if (Desktop.isDesktopSupported()) {
+                // On récupère l'instance du desktop :
+                Desktop desktop = Desktop.getDesktop();
+                // On vérifie que la fonction open est bien supportée :
+                if (desktop.isSupported(Desktop.Action.OPEN)) {
+                    // Et on lance l'application associé au fichier pour l'ouvrir :
+                    try {
+                        desktop.open(fichier);
+                    }
+                    catch(IOException ex) {
+                        // Gestion de l'erreur
+                    }
+                }
+            }
         }
     }
 }
