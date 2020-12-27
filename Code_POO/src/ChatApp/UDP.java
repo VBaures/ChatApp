@@ -38,10 +38,15 @@ public class UDP extends Thread {
                         //}
                     } else if (receive1.trim().equals("RetourConnection")) {
                         //synchronized (this) {
-                            serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
-                            System.out.println("Reception retour");
-                            serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
+                        serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
+                        System.out.println("Reception retour");
+                        serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
                         //}
+                    }else if (receive1.trim().equals("Disconnect")) {
+                        System.out.println("Deconnexion de: "+receive2.getPseudo());
+                        serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().remove(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUser(receive2.getID()));
+                        serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
+
                     } else if (receive1.trim().equals("NewPseudo")){
                         User user = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUser(receive2.getID());
                         if (user==null){

@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -35,7 +37,19 @@ public class UsersWindows extends Thread implements ActionListener {
 
         //gestion fenetre
         frame = new JFrame("Connectés");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    try {
+                        agent.Disconnect();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    frame.dispose();
+                    System.exit(0);
+                }
+            });
         frame.setContentPane(jListSimple);
 
         //gestion et création des composants
@@ -66,6 +80,11 @@ public class UsersWindows extends Thread implements ActionListener {
 
     public JFrame getFrame() {
         return frame;
+    }
+
+    public int Close() throws IOException {
+        agent.Disconnect();
+        return 0;
     }
 
     //gestion du bouton
