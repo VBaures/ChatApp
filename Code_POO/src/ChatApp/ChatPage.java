@@ -1,3 +1,8 @@
+/*
+    Classe gérant une session de chat entre deux utilisateurs,
+     de l'ouverture à la fermeture de la  page de chat
+ */
+
 package ChatApp;
 
 import org.w3c.dom.Document;
@@ -10,7 +15,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Date;
+
 public class ChatPage extends Thread implements ActionListener {
+
+        //déclaration descomposant et des objets
         ChatHandler chatHandler;
         Agent agent;
         ArrayList<JPanel> listMessage;
@@ -21,6 +29,8 @@ public class ChatPage extends Thread implements ActionListener {
         JFrame fram;
         JButton bouton;
         JButton bouton2;
+
+        //déclaration du constructeur de la classe
         public ChatPage(Agent agent, ChatHandler chatHandler){
             this.agent=agent;
             this.chatHandler=chatHandler;
@@ -28,8 +38,8 @@ public class ChatPage extends Thread implements ActionListener {
             fram= new JFrame("Chat avec " + chatHandler.getRecipient().username);
         }
 
+        //implémentation de la méthode run
         public void run(){
-
             fram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             fram.addWindowListener(new WindowAdapter() {
                 @Override
@@ -38,38 +48,44 @@ public class ChatPage extends Thread implements ActionListener {
                     fram.dispose();
                 }
             });
+
+            //gestion fenêtre
             fram.getContentPane().setPreferredSize(new Dimension(300,300));
+
+
+            //gestion et création des composants
             JPanel panel1= new JPanel(new GridLayout(1,4));
             JPanel panel2= new JPanel(new GridLayout(1,4));
-
-            //JLabel label1=new JLabel ("Bonjour");
-            //label1.setForeground(Color.BLUE);
             bouton=new JButton("Envoyer");
             bouton2=new JButton("Envoie Fichier");
             bouton.addActionListener(this);
             bouton2.addActionListener(this);
             bouton.setForeground(Color.GRAY);
             zone_texte=new JTextField();
+
+            //ajout composant panels
             panel2.add(zone_texte,BorderLayout.LINE_START);
             panel2.add(bouton,BorderLayout.CENTER);
             panel2.add(bouton2,BorderLayout.LINE_END);
-            //panel1.add(label1, BorderLayout.PAGE_START);
+
+            //gestion de l'affichage des message avec un affichage en mode déroulant vertical
             GridLayout layout = new GridLayout(0,1);
             liste=new JPanel();
             liste.setLayout(layout);
             bare = new JScrollBar(JScrollBar.HORIZONTAL,0,1000,0,1000);
             pane = new JScrollPane(liste);
-
             pane.setHorizontalScrollBar(bare);
 
-            //fram.getContentPane().add(panel1, BorderLayout.PAGE_START);
+            //ajout panels dans la fenetre
             fram.getContentPane().add(panel2, BorderLayout.PAGE_END);
             fram.getContentPane().add(pane,BorderLayout.CENTER);
+
+            //gestion fenetre
             fram.pack();
             fram.setVisible(true);
             fram.setLocationRelativeTo(null);}
 
-
+        //gestion du bouton: on peut envoyer soit des messages soit des fichiers
         public void actionPerformed(ActionEvent e) {
             if (e.getSource()==bouton){
                 String getvalue= zone_texte.getText();
@@ -82,17 +98,20 @@ public class ChatPage extends Thread implements ActionListener {
                 }
 
             else {
+                EnvoieFichierPage envoie_fichier=new EnvoieFichierPage();
                 // création de la boîte de dialogue
-                System.out.println("ola");
+               /*System.out.println("ola");
                 JFileChooser dialogue = new JFileChooser();
 
                 // affichage
-                dialogue.showOpenDialog(null);
+                dialogue.showOpenDialog(null);*/
 
 
             }
         }
 
+        /*déclaration de la méthode creation qui permet de crée le message entier envoyé avec le
+        nom de l'envoyeur, la date et le contenu du message */
         public JPanel creation (String message, String pseudo, String date, Color couleur ){
             JPanel pane= new JPanel();
             JLabel label2=new JLabel(pseudo + " : ");
@@ -107,6 +126,9 @@ public class ChatPage extends Thread implements ActionListener {
             pane.add(label);
             return pane;
         }
+
+        /*délaration de la méthode debut qui permet d'aller chercher l'éventuel historique
+        des messages envoyés entre les deux utilisteurs */
         public void debut (){
             for (int i = 0; i < chatHandler.getMessageHistory().size(); i++) {
                 if (chatHandler.getMessageHistory().get(i).getRecipient().getPseudo().equals
@@ -132,6 +154,7 @@ public class ChatPage extends Thread implements ActionListener {
             liste.updateUI();
         }
 
+        //declaration de la méthode Mise_a_jour qui rajoute le message envoyé à la liste des messages envoyées
         public void Mise_a_jour () {
             int index = chatHandler.getMessageHistory().size() - 1;
             if (chatHandler.getMessageHistory().get(index).getRecipient().getPseudo().equals

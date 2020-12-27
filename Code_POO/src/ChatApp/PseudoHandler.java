@@ -1,4 +1,7 @@
-//author Alicia Calmet, si problème m'appeler
+/*
+    Classe gérant le pseudonyme de l'utilisateur et l'unicité des pseudonymes.
+ */
+
 package ChatApp;
 
 import java.util.ArrayList;
