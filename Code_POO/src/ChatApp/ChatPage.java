@@ -9,14 +9,15 @@ import org.w3c.dom.Document;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ChatPage extends Thread implements ActionListener {
+public class ChatPage extends Thread implements ActionListener{
 
         //déclaration descomposant et des objets
         ChatHandler chatHandler;
@@ -98,15 +99,9 @@ public class ChatPage extends Thread implements ActionListener {
                 }
 
             else {
-                EnvoieFichierPage envoie_fichier=new EnvoieFichierPage();
-                // création de la boîte de dialogue
-               /*System.out.println("ola");
                 JFileChooser dialogue = new JFileChooser();
-
-                // affichage
-                dialogue.showOpenDialog(null);*/
-
-
+                dialogue.showOpenDialog(null);
+                chatHandler.Send(dialogue.getSelectedFile());
             }
         }
 
@@ -117,6 +112,28 @@ public class ChatPage extends Thread implements ActionListener {
             JLabel label2=new JLabel(pseudo + " : ");
             JLabel label3=new JLabel(date);
             JLabel label=new JLabel(message);
+            label.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    openFile(e);
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                }
+            });
             label.setFont(new java.awt.Font(Font.SERIF,Font.BOLD,15));
             label3.setFont(new java.awt.Font(Font.SERIF,Font.ITALIC,10));
             label2.setForeground(couleur);
@@ -124,6 +141,7 @@ public class ChatPage extends Thread implements ActionListener {
             pane.add(label2);
             pane.add(label3);
             pane.add(label);
+            listMessage.add(pane);
             return pane;
         }
 
@@ -161,9 +179,17 @@ public class ChatPage extends Thread implements ActionListener {
                     (agent.getPseudoHandler().getMain_User().getPseudo())) {
                 if (chatHandler.getMessageHistory().get(index) instanceof StringMessage) {
                     StringMessage message = (StringMessage) chatHandler.getMessageHistory().get(index);
-                    liste.add(creation(message.getContentString()
+                   JPanel panel = creation(message.getContentString()
+                           , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
+                    chatHandler.getMessageHistory().get(index).getFormatTime(), Color.RED);
+                    liste.add(panel, BorderLayout.SOUTH);
+                }
+                else if (chatHandler.getMessageHistory().get(index) instanceof FileMessage) {
+                    FileMessage message = (FileMessage) chatHandler.getMessageHistory().get(index);
+                    JPanel panel = creation("Fichier: " + message.getFileName()
                             , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
-                            chatHandler.getMessageHistory().get(index).getFormatTime(), Color.RED), BorderLayout.SOUTH);
+                            chatHandler.getMessageHistory().get(index).getFormatTime(), Color.RED);
+                    liste.add(panel, BorderLayout.SOUTH);
                 }
             } else {
                 if (chatHandler.getMessageHistory().get(index) instanceof StringMessage) {
@@ -172,6 +198,13 @@ public class ChatPage extends Thread implements ActionListener {
                             , chatHandler.getMessageHistory().get(index).getSender().getPseudo(), chatHandler.getMessageHistory().get(index).getFormatTime(), Color.BLUE), BorderLayout.SOUTH);
 
                 }
+                else if (chatHandler.getMessageHistory().get(index) instanceof FileMessage) {
+                    FileMessage message = (FileMessage) chatHandler.getMessageHistory().get(index);
+                    JPanel panel = creation("Fichier: " + message.getFileName()
+                            , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
+                            chatHandler.getMessageHistory().get(index).getFormatTime(), Color.BLUE);
+                    liste.add(panel, BorderLayout.SOUTH);
+                }
             }
             liste.updateUI();
         }
@@ -179,6 +212,28 @@ public class ChatPage extends Thread implements ActionListener {
         public JFrame getFram(){
             return this.fram;
         }
+
+    public void openFile(MouseEvent e) {
+        Message message = chatHandler.getMessageHistory().get(listMessage.indexOf(e.getSource())%listMessage.size());
+        if (message instanceof FileMessage){
+            FileMessage fileMessage = (FileMessage) message;
+            JFileChooser dialogue = new JFileChooser();
+            dialogue.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            dialogue.showOpenDialog(e.getComponent());
+            dialogue.getCurrentDirectory();
+            System.out.println("Enregistrement fichier sous: " + dialogue.getSelectedFile().toString()+"\\"+fileMessage.getFileName());
+            try {
+                FileOutputStream stream = new FileOutputStream(dialogue.getSelectedFile().toString()+"\\"+fileMessage.getFileName());
+                stream.write(fileMessage.getContentFile());
+                stream.close();
+                System.out.println("Fin enregistrement");
+            } catch (FileNotFoundException f){
+
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
     }
+}
 
 

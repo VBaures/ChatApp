@@ -29,6 +29,12 @@ public class TCP extends Thread {
                     System.out.println("Message reçu :"+ receive.getContentString());
                     serverHandler.getNetworkHandler().getAgent().findChatHandler(receive.getSender().getID()).getMessageHistory().add(receive);
                     serverHandler.getNetworkHandler().getAgent().findChatHandler(receive.getSender().getID()).getChatPage().Mise_a_jour();
+                } else if (ObjectReceive instanceof FileMessage) {
+                    FileMessage receive = (FileMessage) ObjectReceive;
+                    System.out.println("Message avec file reçu");
+                    serverHandler.getNetworkHandler().getAgent().findChatHandler(receive.getSender().getID()).getMessageHistory().add(receive);
+                    serverHandler.getNetworkHandler().getAgent().findChatHandler(receive.getSender().getID()).getChatPage().Mise_a_jour();
+
                 } else if (ObjectReceive instanceof String) {
                     String receive = (String) ObjectReceive;
                     if ((receive.equals("StopChat"))&(serverHandler.getNetworkHandler().getAgent().findChatHandler(sender.getID())!=null)){

@@ -1,5 +1,6 @@
 package ChatApp;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -31,15 +32,24 @@ public class ChatHandler {
         chatPage.start();
     }
 
-    public void Send(String object) {
+    public void Send(Object object) {
         try {
-
-            StringMessage message = new StringMessage(recipient, agent.getPseudoHandler().getMain_User(), object);
-            this.output.writeObject(message);
-            this.getMessageHistory().add(message);
-            System.out.println("Message History :"+messageHistory);
-            chatPage.Mise_a_jour();
-            System.out.println("Mise à jour ok");
+            if (object instanceof  String) {
+                String content = (String) object;
+                StringMessage message = new StringMessage(recipient, agent.getPseudoHandler().getMain_User(), content);
+                this.output.writeObject(message);
+                this.getMessageHistory().add(message);
+                System.out.println("Message History :" + messageHistory);
+                chatPage.Mise_a_jour();
+                System.out.println("Mise à jour ok");
+            } else if (object instanceof File){
+                File content = (File) object;
+                System.out.println("Envoie d'un fichier");
+                FileMessage message = new FileMessage(recipient, agent.getPseudoHandler().getMain_User(), content.getPath());
+                this.output.writeObject(message);
+                this.getMessageHistory().add(message);
+                chatPage.Mise_a_jour();
+            }
         } catch (IOException e) {
         }
     }
