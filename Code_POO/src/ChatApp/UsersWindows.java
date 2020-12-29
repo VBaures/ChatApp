@@ -55,7 +55,7 @@ public class UsersWindows extends Thread implements ActionListener {
         //gestion et création des composants
         barre_menu=new JMenuBar();
         m1= new JMenu("Pseudo");
-        m2=new JMenu("Help ! J'ai besoin d'aide !");
+        m2=new JMenu("J'ai besoin d'aide !");
         barre_menu.add(m1);
         barre_menu.add(m2);
         m11= new JMenuItem("Changer Pseudo");

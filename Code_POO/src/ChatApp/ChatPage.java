@@ -51,14 +51,14 @@ public class ChatPage extends Thread implements ActionListener{
             });
 
             //gestion fenêtre
-            fram.getContentPane().setPreferredSize(new Dimension(300,300));
+            fram.getContentPane().setPreferredSize(new Dimension(400,400));
 
 
             //gestion et création des composants
             JPanel panel1= new JPanel(new GridLayout(1,4));
             JPanel panel2= new JPanel(new GridLayout(1,4));
             bouton=new JButton("Envoyer");
-            bouton2=new JButton("Envoie Fichier");
+            bouton2=new JButton("Envoyer Fichier");
             bouton.addActionListener(this);
             bouton2.addActionListener(this);
             bouton.setForeground(Color.GRAY);
