@@ -23,6 +23,7 @@ public class UsersWindows extends Thread implements ActionListener {
     JMenu m1;
     JMenu m2;
     JMenuItem  m11;
+    JMenuItem m12;
     JMenuItem m22;
 
     //declaration du constructeur de la classe
@@ -53,15 +54,18 @@ public class UsersWindows extends Thread implements ActionListener {
 
         //gestion et création des composants
         barre_menu=new JMenuBar();
-        m1= new JMenu("Pseudo");
+        m1= new JMenu("Options");
         m2=new JMenu("J'ai besoin d'aide !");
         barre_menu.add(m1);
         barre_menu.add(m2);
+        m12=new JMenuItem("Déconnexion");
         m11= new JMenuItem("Changer Pseudo");
         m22=new JMenuItem("Aide");
         m11.addActionListener(this);
+        m12.addActionListener(this);
         m22.addActionListener(this);
         m1.add(m11);
+        m1.add(m12);
         m2.add(m22);
 
         //ajout composant panels
@@ -91,7 +95,7 @@ public class UsersWindows extends Thread implements ActionListener {
         if (e.getSource()==m11){
             agent.getPseudoPage().getFrame().setVisible(true);
         }
-        else{
+        else if (e.getSource()==m22){
             File fichier = new File("C:/Users/calme/Documents/include.pdf");
             // On vérifie que la classe Desktop soit bien supportée :
             if (Desktop.isDesktopSupported()) {
@@ -108,6 +112,16 @@ public class UsersWindows extends Thread implements ActionListener {
                     }
                 }
             }
+        }
+        else {
+            try {
+                agent.Disconnect();
+
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            frame.dispose();
+            System.exit(0);
         }
     }
 }
