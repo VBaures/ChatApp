@@ -37,7 +37,6 @@ public class UsersWindows extends Thread implements ActionListener {
 
         //gestion fenetre
         frame = new JFrame("Connectés");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {

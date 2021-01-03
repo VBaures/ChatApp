@@ -53,8 +53,8 @@ public class Agent {
     }
 
     public void Disconnect() throws IOException {
-        for (ChatHandler chat : currentChat){
-            StopChat(chat);
+        for (int i =0 ; i<currentChat.size();i++){
+            StopChat(currentChat.get(i));
         }
         networkHandler.getServerHandler().getUdp().broadcastUDP("Disconnect",pseudoHandler.getMain_User());
     }
