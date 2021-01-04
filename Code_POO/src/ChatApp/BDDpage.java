@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class BDDpage implements ActionListener {
 
@@ -62,7 +63,11 @@ public class BDDpage implements ActionListener {
         String getvalue_login= plogin.getText();
         String getValue_mdp=pmdp.getText();
         if (e.getSource()==bouton){
-
+            try {
+                agent.getBddHandler().insertUser(getvalue_login);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 

@@ -1,5 +1,4 @@
 package ChatApp;
-package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,15 +9,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Base64;
 
-public class BDDHandler {
+public class HandlerBDD {
     // Connect to your database.
     private String username = "tp_servlet_011";
 	private String password = "cei6neiJ";
 	private String url = "jbdc:mysql://srv-bdens.insa-toulouse.fr:3306/tp_servlet_011?useSSL=false";
-	
+	private Agent agent;
 	private Connection connection;
 	
-	
+	public HandlerBDD(Agent agent){
+		this.agent=agent;
+		OpenConnection();
+	}
+
 	public void OpenConnection() {
 		try {
 			/*Load driver*/
@@ -81,12 +84,12 @@ public class BDDHandler {
 	}
 	
 	public ArrayList<Message> getHistoriqueMessages(String idUser2) {
-		String idUser1 = Utilisateur.getSelf().getId();
+		String idUser1 = Integer.toString(agent.getPseudoHandler().getMain_User().getID());
 		String str = "datetime(d1,'unixepoch','localtime')";
 		return null;
 	}
 	
-	private int getIDUser(String username) throws SQLException {
+	public int getIDUser(String username) throws SQLException {
 		String getIDRequest = "SELECT id" + "FROM user" + "WHERE username = ? ;";
 		PreparedStatement PrepStatement = this.connection.prepareStatement(getIDRequest);
 		PrepStatement.setString(1, username);
@@ -99,7 +102,7 @@ public class BDDHandler {
 
 	}
 	
-	private void insertUser(String username) throws SQLException {
+	public void insertUser(String username) throws SQLException {
 		String insertUserRequest = "INSERT INTO user (username)" + "VALUES (?);";
 		PreparedStatement PrepStatement = this.connection.prepareStatement(insertUserRequest);
 		PrepStatement.setString(1, username);
@@ -133,14 +136,10 @@ public class BDDHandler {
 	}
 	
 	private byte[] processMessageContent(Message m) {
-		if (m.getTypeMessage() == TypeMessage.TEXTE) {
-			MessageTexte mTxt = (MessageTexte) m;
-			String mContent = mTxt.getContenu();
+			StringMessage mTxt = (StringMessage) m;
+			String mContent = mTxt.getContentString();
 			byte[] encodedContent = Base64.getEncoder().encode(mContent.getBytes());
 			return encodedContent;
-		}
-
-		return null;
 	}
 	
 	public int insertMessage(String user1, String user2, int idConversation, Message m) {
@@ -150,9 +149,8 @@ public class BDDHandler {
 //			int idUser1 = this.getIDUser(user1);
 //			int idUser2 = this.getIDUser(user2);
 //			int idConversation = this.getIDConversation(idUser1, idUser2);
-			String dateMessage = m.getDate();
+			String dateMessage = m.getFormatTime();
 			byte[] content = this.processMessageContent(m);
-			
 			String insertMessageRequest = "INSERT INTO message(id_conversation, content, date) "
 					+ "VALUES (?, ?, ?);";
 			

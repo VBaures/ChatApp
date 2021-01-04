@@ -19,6 +19,7 @@ public class Agent {
     PseudoPage pseudoPage;
     UsersWindows usersWindows;
     BDDpage bddpage;
+    HandlerBDD bddHandler;
 
     public Agent(){
         networkHandler = new NetworkHandler(this);
@@ -28,6 +29,7 @@ public class Agent {
         pseudoPage = new PseudoPage(this);
         usersWindows = new UsersWindows(this);
         bddpage=new BDDpage(this);
+        bddHandler = new HandlerBDD(this);
     }
 
     public void StartAgent() throws IOException {
@@ -87,6 +89,10 @@ public class Agent {
     }
 
     public BDDpage getBddpage(){return this.bddpage;}
+
+    public HandlerBDD getBddHandler() {
+        return bddHandler;
+    }
 
     public UsersWindows getUsersWindows() {
         return this.usersWindows;

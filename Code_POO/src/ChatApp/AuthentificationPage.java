@@ -4,12 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 class AuthentificationPage implements ActionListener {
     Agent agent;
     JFrame frame;
     JButton bouton;
     JButton bouton_BDD;
+    JTextField pusername;
+    JTextField ppassword;
+
+
+
     public AuthentificationPage (Agent agent){
         this.agent=agent;
         //gestion fenetre
@@ -24,8 +30,8 @@ class AuthentificationPage implements ActionListener {
         JLabel label_vide=new JLabel();
         JLabel title= new JLabel("Veuillez vous connectez");
         JLabel puser = new JLabel("Username ", SwingConstants.LEFT);
-        JTextField pusername= new JTextField(SwingConstants.RIGHT);
-        JTextField ppassword= new JTextField(2);
+        pusername= new JTextField(SwingConstants.RIGHT);
+        ppassword= new JTextField(2);
         JLabel ppass = new JLabel("Password", SwingConstants.LEFT);
 
         //les boutons
@@ -62,9 +68,19 @@ class AuthentificationPage implements ActionListener {
         //gestion des actions sur les boutons
         public void actionPerformed (ActionEvent e){
         if (e.getSource()==bouton){
-            frame.dispose();
-            agent.getPseudoPage().getFrame().setVisible(true);}
-        else{
+            String getvalue_login= pusername.getText();
+            String getValue_mdp=ppassword.getText();
+            int id=-1;
+            try {
+                id = agent.getBddHandler().getIDUser(getvalue_login);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            if (id!=-1){
+                frame.dispose();
+                agent.getPseudoPage().getFrame().setVisible(true);
+            }
+        }else{
             agent.getBddpage().getFrame().setVisible(true);
         }
     }
