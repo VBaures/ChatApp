@@ -62,18 +62,12 @@ public class BDDpage implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String getvalue_login= plogin.getText();
         String getValue_mdp=pmdp.getText();
-        System.out.println("cliqué");
         if (e.getSource()==bouton){
             try {
                 agent.getBddHandler().insertUser(getvalue_login);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-        }
-        try {
-            agent.getBddHandler().getAllUser();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
     }
 
