@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.lang.ref.Cleaner;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,7 +30,12 @@ public class Agent {
         pseudoPage = new PseudoPage(this);
         usersWindows = new UsersWindows(this);
         bddpage=new BDDpage(this);
-        bddHandler = new HandlerBDD(this);
+        try {
+            bddHandler = new HandlerBDD(this);
+        }catch (SQLException e){
+            System.err.println(e);
+            e.printStackTrace();
+        }
     }
 
     public void StartAgent() throws IOException {

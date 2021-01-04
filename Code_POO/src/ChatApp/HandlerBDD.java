@@ -1,33 +1,30 @@
 package ChatApp;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.nio.charset.StandardCharsets;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Base64;
 
 public class HandlerBDD {
     // Connect to your database.
-    private String username = "tp_servlet_011";
+    private String name = "tp_servlet_011";
 	private String password = "cei6neiJ";
-	private String url = "jbdc:mysql://srv-bdens.insa-toulouse.fr:3306/tp_servlet_011?useSSL=false";
+	private String url = "jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/tp_servlet_011?useSSL=false";
 	private Agent agent;
 	private Connection connection;
 	
-	public HandlerBDD(Agent agent){
+	public HandlerBDD(Agent agent) throws SQLException {
 		this.agent=agent;
 		OpenConnection();
+		createTableUser();
 	}
 
 	public void OpenConnection() {
 		try {
 			/*Load driver*/
-			Class.forName("com.mysql.jbdc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			try {
-				connection=DriverManager.getConnection(url,username,password);
+				connection=DriverManager.getConnection(url,name,password);
 				System.out.println("Connection established");
 			}
 			catch(SQLException e) {
@@ -36,7 +33,8 @@ public class HandlerBDD {
 			}
 		}
 		catch (ClassNotFoundException e) {
-			System.out.println("Erreur dans la connexion à la BDD");
+			System.err.println(e);
+			e.printStackTrace();
 		}
 	}
 	
@@ -53,9 +51,10 @@ public class HandlerBDD {
 	}
 	
 	private void createTableUser() throws SQLException {
-		String createTableUser = "CREATE TABLE IF NOT EXISTS user (\r\n"
-				+ "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\r\n"
-				+ "    username TEXT    NOT NULL\r\n" + ");";
+		String createTableUser = "CREATE TABLE IF NOT EXISTS user (" +
+				"id INTEGER NOT NULL AUTO_INCREMENT,"
+				+"username TEXT NOT NULL," +
+				"PRIMARY KEY (id))";
 
 		Statement statement = this.connection.createStatement();
 		statement.execute(createTableUser);
@@ -99,9 +98,9 @@ public class HandlerBDD {
 			return res.getInt("id");
 		}
 		return -1;
-
 	}
-	
+
+
 	public void insertUser(String username) throws SQLException {
 		String insertUserRequest = "INSERT INTO user (username)" + "VALUES (?);";
 		PreparedStatement PrepStatement = this.connection.prepareStatement(insertUserRequest);
