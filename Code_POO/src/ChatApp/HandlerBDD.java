@@ -89,10 +89,11 @@ public class HandlerBDD {
 		return null;
 	}
 	
-	public int getIDUser(String username) throws SQLException {
-		String getIDRequest = "SELECT id" + "FROM user" + "WHERE username = ? ;";
+	public int getIDUser(String username, String password) throws SQLException {
+		String getIDRequest = "SELECT id" + "FROM user" + "WHERE username = username" + "AND password = password ;";
 		PreparedStatement PrepStatement = this.connection.prepareStatement(getIDRequest);
 		PrepStatement.setString(1, username);
+		PrepStatement.setString(2, password);
 		ResultSet res = PrepStatement.executeQuery();
 
 		if (res.next()) {
@@ -102,10 +103,11 @@ public class HandlerBDD {
 
 	}
 	
-	public void insertUser(String name) throws SQLException {
-		String insertUserRequest = "INSERT INTO user (username)" + "VALUES (?);";
+	public void insertUser(String username, String password) throws SQLException {
+		String insertUserRequest = "INSERT INTO user (username)" + "VALUES (username,password);";
 		PreparedStatement PrepStatement = this.connection.prepareStatement(insertUserRequest);
-		PrepStatement.setString(1, name);
+		PrepStatement.setString(1, username);
+		PrepStatement.setString(2, password);
 		int nb = PrepStatement.executeUpdate();
 		System.out.println("Nombre de ligne(s) insérée(s) : " + nb);
 	}
