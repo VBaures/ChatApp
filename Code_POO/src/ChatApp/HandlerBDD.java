@@ -11,7 +11,7 @@ import java.util.Base64;
 
 public class HandlerBDD {
     // Connect to your database.
-    private String username = "tp_servlet_011";
+    private String login = "tp_servlet_011";
 	private String password = "cei6neiJ";
 	private String url = "jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/tp_servlet_011?useSSL=false";
 	private Agent agent;
@@ -27,7 +27,7 @@ public class HandlerBDD {
 			/*Load driver*/
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			try {
-				connection=DriverManager.getConnection(url,username,password);
+				connection=DriverManager.getConnection(url,login,password);
 				System.out.println("Connection established");
 			}
 			catch(SQLException e) {
@@ -55,7 +55,7 @@ public class HandlerBDD {
 	private void createTableUser() throws SQLException {
 		String createTableUser = "CREATE TABLE IF NOT EXISTS user (\r\n"
 				+ "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\r\n"
-				+ "    username TEXT    NOT NULL\r\n" + ");";
+				+ "    username TEXT NOT NULL\r\n" + ");";
 
 		Statement statement = this.connection.createStatement();
 		statement.execute(createTableUser);
@@ -102,14 +102,12 @@ public class HandlerBDD {
 
 	}
 	
-	public void insertUser(String username) throws SQLException {
+	public void insertUser(String name) throws SQLException {
 		String insertUserRequest = "INSERT INTO user (username)" + "VALUES (?);";
 		PreparedStatement PrepStatement = this.connection.prepareStatement(insertUserRequest);
-		PrepStatement.setString(1, username);
+		PrepStatement.setString(1, name);
 		int nb = PrepStatement.executeUpdate();
-
 		System.out.println("Nombre de ligne(s) insérée(s) : " + nb);
-
 	}
 	
 	private int getIDConversation(int idUser1, int idUser2) throws SQLException {

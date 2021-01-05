@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class BDDpage implements ActionListener {
@@ -35,7 +36,7 @@ public class BDDpage implements ActionListener {
         JLabel mdp=new JLabel("Mot de passe :");
         plogin=new JTextField();
         pmdp =new JTextField();
-        JButton bouton=new JButton("Envoyer");
+        bouton=new JButton("Envoyer");
         bouton.addActionListener(this);
         bouton.setForeground(Color.GRAY);
         login.setForeground(Color.DARK_GRAY);
@@ -62,13 +63,15 @@ public class BDDpage implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String getvalue_login= plogin.getText();
         String getValue_mdp=pmdp.getText();
+        System.out.println(getvalue_login);
         if (e.getSource()==bouton){
             try {
                 agent.getBddHandler().insertUser(getvalue_login);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException f) {
+                ;
             }
         }
+        fram.dispose();
     }
 
 
