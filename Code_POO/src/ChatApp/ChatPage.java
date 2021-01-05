@@ -30,6 +30,8 @@ public class ChatPage extends Thread implements ActionListener{
         JFrame fram;
         JButton bouton;
         JButton bouton2;
+        JMenuBar barre_menu;
+        JMenu m1;
 
         //déclaration du constructeur de la classe
         public ChatPage(Agent agent, ChatHandler chatHandler){
@@ -55,19 +57,26 @@ public class ChatPage extends Thread implements ActionListener{
 
 
             //gestion et création des composants
-            JPanel panel1= new JPanel(new GridLayout(1,4));
+            JPanel panel1= new JPanel(new GridLayout(1,1));
             JPanel panel2= new JPanel(new GridLayout(1,4));
             bouton=new JButton("Envoyer");
             bouton2=new JButton("Envoyer Fichier");
             bouton.addActionListener(this);
             bouton2.addActionListener(this);
             bouton.setForeground(Color.GRAY);
+
             zone_texte=new JTextField();
 
+            barre_menu=new JMenuBar();
+            m1= new JMenu("Stop Chat");
+            m1.setForeground(Color.RED);
+            barre_menu.add(m1);
+            m1.addActionListener(this);
             //ajout composant panels
             panel2.add(zone_texte,BorderLayout.LINE_START);
             panel2.add(bouton,BorderLayout.CENTER);
             panel2.add(bouton2,BorderLayout.LINE_END);
+
 
             //gestion de l'affichage des message avec un affichage en mode déroulant vertical
             GridLayout layout = new GridLayout(0,1);
@@ -82,6 +91,7 @@ public class ChatPage extends Thread implements ActionListener{
             fram.getContentPane().add(pane,BorderLayout.CENTER);
 
             //gestion fenetre
+            fram.getContentPane().add(BorderLayout.NORTH,barre_menu);
             fram.pack();
             fram.setVisible(true);
             fram.setLocationRelativeTo(null);}
@@ -99,9 +109,20 @@ public class ChatPage extends Thread implements ActionListener{
                 }
 
             else {
+                if (e.getSource()==bouton2){
                 JFileChooser dialogue = new JFileChooser();
                 dialogue.showOpenDialog(null);
                 chatHandler.Send(dialogue.getSelectedFile());
+            }
+            else{
+                    try {
+                        chatHandler.StopChat();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    fram.dispose();
+                    System.exit(0);
+                 }
             }
         }
 
