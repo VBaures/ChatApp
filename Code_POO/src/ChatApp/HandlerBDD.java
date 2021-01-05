@@ -13,7 +13,7 @@ public class HandlerBDD {
     // Connect to your database.
     private String username = "tp_servlet_011";
 	private String password = "cei6neiJ";
-	private String url = "jbdc:mysql://srv-bdens.insa-toulouse.fr:3306/tp_servlet_011?useSSL=false";
+	private String url = "jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/tp_servlet_011?useSSL=false";
 	private Agent agent;
 	private Connection connection;
 	
@@ -25,7 +25,7 @@ public class HandlerBDD {
 	public void OpenConnection() {
 		try {
 			/*Load driver*/
-			Class.forName("com.mysql.jbdc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			try {
 				connection=DriverManager.getConnection(url,username,password);
 				System.out.println("Connection established");
