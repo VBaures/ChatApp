@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ChatHandler {
@@ -14,8 +15,16 @@ public class ChatHandler {
     ArrayList<Message> messageHistory = new ArrayList<Message>();
     Agent agent;
     ChatPage chatPage;
+    int ID;
 
     public ChatHandler(User recipient, ObjectOutputStream out, Socket socket, Agent agent){
+        try {
+            ID = agent.getBddHandler().getIDConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
+            System.out.println("ID conversation = "+ID);
+        }catch (SQLException e){
+            System.out.println(e);
+            e.printStackTrace();
+        }
         this.recipient=recipient;
         this.output=out;
         this.socket=socket;
@@ -25,6 +34,14 @@ public class ChatHandler {
         chatPage.start();
     }
     public ChatHandler(User recipient, Agent agent){
+        try {
+            agent.getBddHandler().insertConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
+            ID = agent.getBddHandler().getIDConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
+            System.out.println("ID conversation = "+ID);
+        }catch (SQLException e){
+            System.out.println(e);
+            e.printStackTrace();
+        }
         this.recipient=recipient;
         this.agent=agent;
         messageHistory=new ArrayList<Message>();

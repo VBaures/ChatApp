@@ -83,12 +83,18 @@ public class HandlerBDD {
 
 	}
 	
-	public ArrayList<Message> getHistoriqueMessages(String idUser2) {
-		String idUser1 = Integer.toString(agent.getPseudoHandler().getMain_User().getID());
-		String str = "datetime(d1,'unixepoch','localtime')";
-		return null;
+	public ArrayList<Message> getHistoriqueMessages(int ID_Conversation) throws SQLException {
+		ArrayList<Message> messages = new ArrayList<>();
+		String getMessageRequest = "SELECT * FROM message WHERE id_conversation=? ";
+		PreparedStatement PrepStatement = this.connection.prepareStatement(getMessageRequest);
+		PrepStatement.setString(1, Integer.toString(ID_Conversation));
+		ResultSet res = PrepStatement.executeQuery();
+		while (res.next()){
+			//Ajouter les messages à la liste mais je ne sais pas comment récupérer le sender et le receiver
+		}
+		return messages;
 	}
-	
+
 	public int getIDUser(String username, String password) throws SQLException {
 		String getIDRequest = "SELECT id FROM user WHERE username = ? AND password = ?";
 		PreparedStatement PrepStatement = this.connection.prepareStatement(getIDRequest);
@@ -113,8 +119,8 @@ public class HandlerBDD {
 		return nb;
 	}
 	
-	private int getIDConversation(int idUser1, int idUser2) throws SQLException {
-		String getIDRequest = "SELECT id_conversation FROM conversation WHERE (id_emetteur = ? AND id_recepteur = ?) OR (id_emetteur = ? AND id_recepteur = ?) ;";
+	public int getIDConversation(int idUser1, int idUser2) throws SQLException {
+		String getIDRequest = "SELECT id_conversation FROM conversation WHERE (id_emetteur = ? AND id_recepteur = ?) OR (id_emetteur = ? AND id_recepteur = ?)";
 		PreparedStatement PrepStatement = this.connection.prepareStatement(getIDRequest);
 		PrepStatement.setInt(1, idUser1);
 		PrepStatement.setInt(2, idUser2);

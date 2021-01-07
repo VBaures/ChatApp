@@ -40,17 +40,15 @@ public class Agent {
 
     public void StartChat(String pseudo) throws IOException {
         User recipient = pseudoHandler.FindUser(pseudo);
-        try {
-            bddHandler.insertConversation(pseudoHandler.getMain_User().getID(), recipient.getID());
-        }catch (SQLException e){
-            System.out.println(e);
-            e.printStackTrace();
-        }
         ChatHandler chatHandler = new ChatHandler(recipient,this);
         System.out.println("Historique "+chatHandler.getMessageHistory());
         currentChat.add(chatHandler);
         networkHandler.StartChat(chatHandler);
     }
+
+
+
+
     public void StopChat(ChatHandler chatHandler){
         try {
             System.out.println("Chat trouvé: "+findChatHandler(chatHandler.getRecipient().getID()));

@@ -15,7 +15,7 @@ public class PseudoHandler {
 
     public PseudoHandler(Agent agent)  {
         this.connectedUsers = new ArrayList<User>();
-        main_User = new MainUser("notdefine","localhost", 1234, 1235, -1);
+        main_User = new MainUser("notdefine","localhost", 1236, 1237, -1);
     }
 
     public void UpdateConnectedUsers(User new_User) {
