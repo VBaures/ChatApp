@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class ChatHandler {
@@ -19,7 +20,7 @@ public class ChatHandler {
 
     public ChatHandler(User recipient, ObjectOutputStream out, Socket socket, Agent agent){
         try {
-            ID = agent.getBddHandler().getIDConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
+            this.ID = agent.getBddHandler().getIDConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
             System.out.println("ID conversation = "+ID);
         }catch (SQLException e){
             System.out.println(e);
@@ -29,9 +30,15 @@ public class ChatHandler {
         this.output=out;
         this.socket=socket;
         this.agent=agent;
-        messageHistory=new ArrayList<Message>();
+        try {
+            messageHistory = agent.getBddHandler().getHistoriqueMessages(ID);
+        }catch (SQLException | IOException | ParseException e){
+            System.out.println(e);
+            e.printStackTrace();
+        }
         chatPage =  new ChatPage(this.agent, this);
         chatPage.start();
+        chatPage.debut();
     }
     public ChatHandler(User recipient, Agent agent){
         try {
@@ -44,9 +51,15 @@ public class ChatHandler {
         }
         this.recipient=recipient;
         this.agent=agent;
-        messageHistory=new ArrayList<Message>();
+        try {
+            messageHistory = agent.getBddHandler().getHistoriqueMessages(ID);
+        }catch (SQLException | IOException | ParseException e){
+            System.out.println(e);
+            e.printStackTrace();
+        }
         chatPage =  new ChatPage(this.agent, this);
         chatPage.start();
+        chatPage.debut();
     }
 
     public void Send(Object object) {
@@ -59,6 +72,7 @@ public class ChatHandler {
                 System.out.println("Message History :" + messageHistory);
                 chatPage.Mise_a_jour();
                 System.out.println("Mise à jour ok");
+                agent.getBddHandler().insertMessage(message.sender, message.recipient, ID, message.getContentString(), message.getTime().toString());
             } else if (object instanceof File){
                 File content = (File) object;
                 System.out.println("Envoie d'un fichier");
@@ -66,6 +80,7 @@ public class ChatHandler {
                 this.output.writeObject(message);
                 this.getMessageHistory().add(message);
                 chatPage.Mise_a_jour();
+                agent.getBddHandler().insertMessage(message.sender, message.recipient, ID, message.getFileName()+" was sent but is no more available", message.getTime().toString());
             }
         } catch (IOException e) {
         }

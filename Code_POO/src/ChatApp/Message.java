@@ -17,6 +17,12 @@ public abstract class Message implements Serializable {
         this.time= new Date();
     }
 
+    public Message(User recipient, User sender , Date time){
+        this.recipient=recipient;
+        this.sender=sender;
+        this.time= time;
+    }
+
     public Date getTime (){return this.time;}
     public String getFormatTime(){return this.dateFormat.format(this.time);}
     public String getType(){return "Message";}

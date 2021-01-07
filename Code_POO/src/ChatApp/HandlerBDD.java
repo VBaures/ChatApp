@@ -1,13 +1,18 @@
 package ChatApp;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
+import java.util.Locale;
 
 public class HandlerBDD {
     // Connect to your database.
@@ -83,14 +88,21 @@ public class HandlerBDD {
 
 	}
 	
-	public ArrayList<Message> getHistoriqueMessages(int ID_Conversation) throws SQLException {
+	public ArrayList<Message> getHistoriqueMessages(int ID_Conversation) throws SQLException, IOException, ParseException {
 		ArrayList<Message> messages = new ArrayList<>();
 		String getMessageRequest = "SELECT * FROM message WHERE id_conversation=? ";
 		PreparedStatement PrepStatement = this.connection.prepareStatement(getMessageRequest);
-		PrepStatement.setString(1, Integer.toString(ID_Conversation));
+		PrepStatement.setInt(1,ID_Conversation);
 		ResultSet res = PrepStatement.executeQuery();
-		while (res.next()){
-			//Ajouter les messages à la liste mais je ne sais pas comment récupérer le sender et le receiver
+		while (res.next()) {
+			if (res.getInt("id_sender") == agent.getPseudoHandler().getMain_User().getID()) {
+				User recipient = agent.getPseudoHandler().FindUser(res.getInt("id_receiver"));
+				messages.add(new StringMessage(recipient, agent.getPseudoHandler().getMain_User(), new String(res.getBytes("content")), new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm", Locale.FRANCE).parse(res.getString("date"))));
+
+			} else {
+				User sender = agent.getPseudoHandler().FindUser(res.getInt("id_receiver"));
+				messages.add(new StringMessage(agent.getPseudoHandler().getMain_User(), sender, new String(res.getBytes("content")),new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm", Locale.FRANCE).parse(res.getString("date"))));
+			}
 		}
 		return messages;
 	}
@@ -155,33 +167,28 @@ public class HandlerBDD {
 			return encodedContent;
 	}
 	
-	public int insertMessage(String user1, String user2, int idConversation, Message m) {
-		
-		try {
-	
-//			int idUser1 = this.getIDUser(user1);
-//			int idUser2 = this.getIDUser(user2);
-//			int idConversation = this.getIDConversation(idUser1, idUser2);
-			String dateMessage = m.getFormatTime();
-			byte[] content = this.processMessageContent(m);
-			String insertMessageRequest = "INSERT INTO message(id_conversation, content, date) "
-					+ "VALUES (?, ?, ?);";
-			
-			PreparedStatement PrepStatement = this.connection.prepareStatement(insertMessageRequest);
-			PrepStatement.setInt(1, idConversation);
-			PrepStatement.setBytes(2, content);
-			PrepStatement.setString(3, dateMessage);
-			
-			int nb = PrepStatement.executeUpdate();
+	public void insertMessage(User sender, User receiver, int idConversation, String content, String date) {
 
+		try {
+
+			int idUser1 = sender.getID();
+			int idUser2 = receiver.getID();
+			;
+			String insertMessageRequest = "INSERT INTO message(id_conversation, content, date, id_sender, id_receiver) "
+					+ "VALUES (?, ?, ?, ?, ?);";
+
+			PreparedStatement PrepStatement = this.connection.prepareStatement(insertMessageRequest);
+			System.out.println("Time out: " + PrepStatement.getQueryTimeout());
+			PrepStatement.setInt(1, idConversation);
+			PrepStatement.setString(2, content);
+			PrepStatement.setString(3, date);
+			PrepStatement.setInt(4, idUser1);
+			PrepStatement.setInt(5, idUser2);
+			int nb = PrepStatement.executeUpdate();
 			System.out.println("Nombre de ligne(s) insérée(s) : " + nb);
-		}
-		catch(SQLException e) {
+		} catch (SQLException e) {
 			System.err.println(e);
 			e.printStackTrace();
 		}
-		return 1;
 	}
-	
-	
 }

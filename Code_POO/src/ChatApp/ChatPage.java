@@ -105,11 +105,9 @@ public class ChatPage extends Thread implements ActionListener{
                     System.out.println("Message :"+getvalue);
                     zone_texte.setText("");
                     chatHandler.Send(getvalue);
-                    System.out.println("Message envoyé");}
+                    System.out.println("Message envoyé et enregisté");}
                 }
-
-            else {
-                if (e.getSource()==bouton2){
+            else if (e.getSource()==bouton2){
                 JFileChooser dialogue = new JFileChooser();
                 dialogue.showOpenDialog(null);
                 chatHandler.Send(dialogue.getSelectedFile());
@@ -122,7 +120,6 @@ public class ChatPage extends Thread implements ActionListener{
                     }
                     fram.dispose();
                     System.exit(0);
-                 }
             }
         }
 
@@ -190,7 +187,9 @@ public class ChatPage extends Thread implements ActionListener{
                     }
                 }
             }
-            liste.updateUI();
+            if (liste!=null) {
+                liste.updateUI();
+            }
         }
 
         //declaration de la méthode Mise_a_jour qui rajoute le message envoyé à la liste des messages envoyées
