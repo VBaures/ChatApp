@@ -4,6 +4,8 @@
 
 package ChatApp;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class PseudoHandler {
@@ -11,9 +13,10 @@ public class PseudoHandler {
     //a voir si la liste des personnes connectés n'est pas de type public
     protected ArrayList<User> connectedUsers;
 
-    public PseudoHandler(Agent agent){
+    public PseudoHandler(Agent agent)  {
         this.connectedUsers = new ArrayList<User>();
-            }
+        main_User = new MainUser("notdefine","localhost", 1234, 1235, -1);
+    }
 
     public void UpdateConnectedUsers(User new_User) {
         this.connectedUsers.add(new_User);
@@ -68,16 +71,6 @@ public class PseudoHandler {
     public void ChoosePseudo(String NewPseudo, int id) {
         FindUser(id).setPseudo(NewPseudo);
 
-    }
-
-    public boolean IsConnectedUser (User user) {
-        boolean connecte = false;
-        for (int i = 0; i < connectedUsers.size(); i++) {
-            if (connectedUsers.get(i).username == user.username) {
-                connecte = true;
-            }
-        }
-        return connecte;
     }
 
     //TODO quand on aura fait la base de données

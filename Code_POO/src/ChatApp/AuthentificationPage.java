@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 
 class AuthentificationPage implements ActionListener {
@@ -72,11 +73,20 @@ class AuthentificationPage implements ActionListener {
             String getValue_mdp=ppassword.getText();
             int id=-1;
             try {
-                id = agent.getBddHandler().getIDUser(getvalue_login);
+                id = agent.getBddHandler().getIDUser(getvalue_login, getValue_mdp);
+                System.out.println("ID="+id);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
             if (id!=-1){
+                agent.getPseudoHandler().getMain_User().setID(id);
+                System.out.println(agent.getPseudoHandler().getMain_User());
+                try {
+                    agent.getNetworkHandler().getServerHandler().getUdp().broadcastUDP("Connexion",agent.getPseudoHandler().getMain_User());
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
                 frame.dispose();
                 agent.getPseudoPage().getFrame().setVisible(true);
             }

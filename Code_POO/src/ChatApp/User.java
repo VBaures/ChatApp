@@ -3,7 +3,6 @@ package ChatApp;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    protected String username;
     protected String pseudo;
     protected String addr_IP;
     protected int serverPort;
@@ -11,8 +10,7 @@ public class User implements Serializable {
     protected int ID;
 
     public User(){};
-    public User(String username, String pseudo, String addr_IP, int serverPort, int clientPort, int ID ){
-        this.username = username;
+    public User(String pseudo, String addr_IP, int serverPort, int clientPort, int ID ){
         this.pseudo = pseudo;
         this.addr_IP = addr_IP;
         this.serverPort = serverPort;
@@ -20,9 +18,6 @@ public class User implements Serializable {
         this.ID=ID;
     }
 
-    public String getUserName () {
-        return this.username;
-    }
     public String getPseudo () {
         return this.pseudo;
     }
@@ -31,6 +26,10 @@ public class User implements Serializable {
 
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getType() {return "User";}

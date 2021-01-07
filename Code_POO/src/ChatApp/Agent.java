@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.lang.ref.Cleaner;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public class Agent {
     BDDpage bddpage;
     HandlerBDD bddHandler;
 
-    public Agent(){
+    public Agent() throws IOException {
         networkHandler = new NetworkHandler(this);
         currentChat = new ArrayList<ChatHandler>();
         pseudoHandler = new PseudoHandler(this);
@@ -30,6 +31,7 @@ public class Agent {
         usersWindows = new UsersWindows(this);
         bddpage=new BDDpage(this);
         bddHandler = new HandlerBDD(this);
+        StartAgent();
     }
 
     public void StartAgent() throws IOException {
@@ -38,6 +40,12 @@ public class Agent {
 
     public void StartChat(String pseudo) throws IOException {
         User recipient = pseudoHandler.FindUser(pseudo);
+        try {
+            bddHandler.insertConversation(pseudoHandler.getMain_User().getID(), recipient.getID());
+        }catch (SQLException e){
+            System.out.println(e);
+            e.printStackTrace();
+        }
         ChatHandler chatHandler = new ChatHandler(recipient,this);
         System.out.println("Historique "+chatHandler.getMessageHistory());
         currentChat.add(chatHandler);

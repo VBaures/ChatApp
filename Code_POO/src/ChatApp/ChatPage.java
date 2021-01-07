@@ -38,7 +38,7 @@ public class ChatPage extends Thread implements ActionListener{
             this.agent=agent;
             this.chatHandler=chatHandler;
             this.listMessage = new ArrayList<>();
-            fram= new JFrame("Chat avec " + chatHandler.getRecipient().username);
+            fram= new JFrame("Chat avec " + chatHandler.getRecipient().getPseudo());
         }
 
         //implémentation de la méthode run

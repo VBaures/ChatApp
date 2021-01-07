@@ -66,12 +66,13 @@ public class BDDpage implements ActionListener {
         System.out.println(getvalue_login);
         if (e.getSource()==bouton){
             try {
-                agent.getBddHandler().insertUser(getvalue_login);
+                int nb = agent.getBddHandler().insertUser(getvalue_login, getValue_mdp);
+                if (nb!=0) {
+                    fram.dispose();
+                }
             } catch (SQLException f) {
-                ;
             }
         }
-        fram.dispose();
     }
 
 

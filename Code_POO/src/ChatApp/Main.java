@@ -11,26 +11,7 @@ public class Main {
     static MainUser mainUser;
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        System.out.println("Quel agent veux-tu créer?");
-        Scanner keyboard = new Scanner(System.in);
-        String people = keyboard.nextLine();
-        if (people.equals("Alicia")) {
-            //Creation d'un main user
-            mainUser = new MainUser("Alicia", "notdefine", "localhost", 1235,1245, 2);
-            //user = new User("Lucas", "luc01", "localhost", 1234, 1);
-        }else if (people.equals("Lucas")) {
-            mainUser = new MainUser("Lucas", "notdefine", "localhost", 1234, 1244, 1);
-            //user = new User("Alicia", "alic02", "localhost", 1235, 2);
-        }else if (people.equals("Marcel")) {
-            mainUser = new MainUser("Marcel", "notdefine", "localhost", 1236,1246, 3);
-            //user = new User("Alicia", "alic02", "localhost", 1235, 2);
-        }else if (people.equals("Vincent")) {
-            mainUser = new MainUser("Vincent", "notdefine", "localhost", 1237,1247, 4);
-            //user = new User("Alicia", "alic02", "localhost", 1235, 2);
-        }
         Agent agent = new Agent();
-        agent.getPseudoHandler().setMain_User(mainUser);
-        agent.StartAgent();
         /*while(true) {
             System.out.println("Avec qui voulez-vous communiquer?");
             String destinataire = keyboard.nextLine();

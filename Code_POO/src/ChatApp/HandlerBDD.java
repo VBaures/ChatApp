@@ -90,7 +90,7 @@ public class HandlerBDD {
 	}
 	
 	public int getIDUser(String username, String password) throws SQLException {
-		String getIDRequest = "SELECT id" + "FROM user" + "WHERE username = username" + "AND password = password ;";
+		String getIDRequest = "SELECT id FROM user WHERE username = ? AND password = ?";
 		PreparedStatement PrepStatement = this.connection.prepareStatement(getIDRequest);
 		PrepStatement.setString(1, username);
 		PrepStatement.setString(2, password);
@@ -103,20 +103,23 @@ public class HandlerBDD {
 
 	}
 	
-	public void insertUser(String username, String password) throws SQLException {
-		String insertUserRequest = "INSERT INTO user (username)" + "VALUES (username,password);";
+	public int insertUser(String username, String password) throws SQLException {
+		String insertUserRequest = "INSERT INTO user (username, password) SELECT ? , ? FROM DUAL WHERE NOT EXISTS (SELECT * FROM user WHERE username=? LIMIT 1)";
 		PreparedStatement PrepStatement = this.connection.prepareStatement(insertUserRequest);
 		PrepStatement.setString(1, username);
 		PrepStatement.setString(2, password);
+		PrepStatement.setString(3, username);
 		int nb = PrepStatement.executeUpdate();
-		System.out.println("Nombre de ligne(s) insérée(s) : " + nb);
+		return nb;
 	}
 	
 	private int getIDConversation(int idUser1, int idUser2) throws SQLException {
-		String getIDRequest = "SELECT id_conversation " + "FROM conversation" + "WHERE id_emetteur = ?" + "AND id_recepteur = ? ;";
+		String getIDRequest = "SELECT id_conversation FROM conversation WHERE (id_emetteur = ? AND id_recepteur = ?) OR (id_emetteur = ? AND id_recepteur = ?) ;";
 		PreparedStatement PrepStatement = this.connection.prepareStatement(getIDRequest);
 		PrepStatement.setInt(1, idUser1);
 		PrepStatement.setInt(2, idUser2);
+		PrepStatement.setInt(3, idUser2);
+		PrepStatement.setInt(4, idUser1);
 		ResultSet res = PrepStatement.executeQuery();
 
 		if (res.next()) {
@@ -125,11 +128,15 @@ public class HandlerBDD {
 		return -1;
 	}
 	
-	private void insertConversation(int idUser1, int idUser2) throws SQLException {
-		String insertConversationRequest = "INSERT INTO conversation (id_emetteur, id_recepteur)" + "VALUES (?, ?);";
+	public void insertConversation(int idUser1, int idUser2) throws SQLException {
+		String insertConversationRequest = "INSERT INTO conversation (id_emetteur, id_recepteur) SELECT ? , ? FROM DUAL WHERE NOT EXISTS (SELECT * FROM conversation WHERE ((id_emetteur=? AND id_recepteur=?)OR(id_emetteur=? AND id_recepteur=?)) LIMIT 1)";
 		PreparedStatement PrepStatement = this.connection.prepareStatement(insertConversationRequest);
 		PrepStatement.setInt(1, idUser1);
 		PrepStatement.setInt(2, idUser2);
+		PrepStatement.setInt(3, idUser1);
+		PrepStatement.setInt(4, idUser2);
+		PrepStatement.setInt(5, idUser2);
+		PrepStatement.setInt(6, idUser1);
 		int nb = PrepStatement.executeUpdate();
 
 		System.out.println("Nombre de ligne(s) insérée(s) : " + nb);

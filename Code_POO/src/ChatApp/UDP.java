@@ -58,7 +58,7 @@ public class UDP extends Thread {
                     }
                     System.out.println("Liste connected user");
                     for (int i = 0; i < serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().size(); i++) {
-                        System.out.println(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().get(i).getUserName());
+                        System.out.println(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().get(i).getPseudo());
                     }
                     //serverHandler.getNetworkHandler().getAgent().getAffichage().Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
 
