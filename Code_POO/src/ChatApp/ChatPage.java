@@ -24,7 +24,7 @@ public class ChatPage extends Thread implements ActionListener{
         Agent agent;
         ArrayList<JPanel> listMessage;
         JTextField zone_texte;
-        JPanel liste;
+        JPanel liste = new JPanel();
         JScrollPane pane;
         JScrollBar bare;
         JFrame fram;
@@ -83,6 +83,7 @@ public class ChatPage extends Thread implements ActionListener{
             liste=new JPanel();
             liste.setLayout(layout);
             bare = new JScrollBar(JScrollBar.HORIZONTAL,0,1000,0,1000);
+            debut();
             pane = new JScrollPane(liste);
             pane.setHorizontalScrollBar(bare);
 
@@ -166,29 +167,44 @@ public class ChatPage extends Thread implements ActionListener{
         /*délaration de la méthode debut qui permet d'aller chercher l'éventuel historique
         des messages envoyés entre les deux utilisteurs */
         public void debut (){
-            for (int i = 0; i < chatHandler.getMessageHistory().size(); i++) {
-                if (chatHandler.getMessageHistory().get(i).getRecipient().getPseudo().equals
-                        (agent.getPseudoHandler().getMain_User().getPseudo())) {
-                    if (chatHandler.getMessageHistory().get(i) instanceof StringMessage) {
-                        StringMessage message = (StringMessage) chatHandler.getMessageHistory().get(i);
-                        liste.add(creation(message.getContentString()
-                                , chatHandler.getMessageHistory().get(i).getSender().getPseudo(),
-                                chatHandler.getMessageHistory().get(i).getFormatTime(),
-                                Color.RED), BorderLayout.SOUTH);
+            for (int index = 0; index < chatHandler.getMessageHistory().size(); index++) {
+                System.out.println("element " +index + " historique: "+chatHandler.getMessageHistory().get(index).getSender());
+                if (chatHandler.getMessageHistory().get(index).getRecipient().getPseudo().equals(agent.getPseudoHandler().getMain_User().getPseudo())) {
+                    if (chatHandler.getMessageHistory().get(index) instanceof StringMessage) {
+                        StringMessage message = (StringMessage) chatHandler.getMessageHistory().get(index);
+                        JPanel panel = creation(message.getContentString()
+                                , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
+                                chatHandler.getMessageHistory().get(index).getFormatTime(), Color.RED);
+                        this.liste.add(panel, BorderLayout.SOUTH);
+                        System.out.println("Liste ok");
+                    }
+                    else if (chatHandler.getMessageHistory().get(index) instanceof FileMessage) {
+                        FileMessage message = (FileMessage) chatHandler.getMessageHistory().get(index);
+                        JPanel panel = creation("Fichier: " + message.getFileName()
+                                , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
+                                chatHandler.getMessageHistory().get(index).getFormatTime(), Color.RED);
+                        this.liste.add(panel, BorderLayout.SOUTH);
+                        System.out.println("Liste ok");
+                    }
+                } else {
+                    if (chatHandler.getMessageHistory().get(index) instanceof StringMessage) {
+                        StringMessage message = (StringMessage) chatHandler.getMessageHistory().get(index);
+                        JPanel panel = creation(message.getContentString()
+                                , chatHandler.getMessageHistory().get(index).getSender().getPseudo(), chatHandler.getMessageHistory().get(index).getFormatTime(), Color.BLUE);
+                        this.liste.add(panel, BorderLayout.SOUTH);
+                        System.out.println("Liste ok");
+
+                    }
+                    else if (chatHandler.getMessageHistory().get(index) instanceof FileMessage) {
+                        FileMessage message = (FileMessage) chatHandler.getMessageHistory().get(index);
+                        JPanel panel = creation("Fichier: " + message.getFileName()
+                                , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
+                                chatHandler.getMessageHistory().get(index).getFormatTime(), Color.BLUE);
+                        this.liste.add(panel, BorderLayout.SOUTH);
+                        System.out.println("Liste ok");
+
                     }
                 }
-                else {
-                    if (chatHandler.getMessageHistory().get(i) instanceof StringMessage) {
-                        StringMessage message = (StringMessage) chatHandler.getMessageHistory().get(i);
-                        liste.add(creation(message.getContentString()
-                                , chatHandler.getMessageHistory().get(i).getSender().getPseudo(),
-                                chatHandler.getMessageHistory().get(i).getFormatTime(),
-                                Color.BLUE), BorderLayout.SOUTH);
-                    }
-                }
-            }
-            if (liste!=null) {
-                liste.updateUI();
             }
         }
 
@@ -202,19 +218,18 @@ public class ChatPage extends Thread implements ActionListener{
                    JPanel panel = creation(message.getContentString()
                            , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
                     chatHandler.getMessageHistory().get(index).getFormatTime(), Color.RED);
-                    liste.add(panel, BorderLayout.SOUTH);
-                }
-                else if (chatHandler.getMessageHistory().get(index) instanceof FileMessage) {
+                    this.liste.add(panel, BorderLayout.SOUTH);
+                } else if (chatHandler.getMessageHistory().get(index) instanceof FileMessage) {
                     FileMessage message = (FileMessage) chatHandler.getMessageHistory().get(index);
                     JPanel panel = creation("Fichier: " + message.getFileName()
                             , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
                             chatHandler.getMessageHistory().get(index).getFormatTime(), Color.RED);
-                    liste.add(panel, BorderLayout.SOUTH);
+                    this.liste.add(panel, BorderLayout.SOUTH);
                 }
             } else {
                 if (chatHandler.getMessageHistory().get(index) instanceof StringMessage) {
                     StringMessage message = (StringMessage) chatHandler.getMessageHistory().get(index);
-                    liste.add(creation(message.getContentString()
+                    this.liste.add(creation(message.getContentString()
                             , chatHandler.getMessageHistory().get(index).getSender().getPseudo(), chatHandler.getMessageHistory().get(index).getFormatTime(), Color.BLUE), BorderLayout.SOUTH);
 
                 }
@@ -223,10 +238,10 @@ public class ChatPage extends Thread implements ActionListener{
                     JPanel panel = creation("Fichier: " + message.getFileName()
                             , chatHandler.getMessageHistory().get(index).getSender().getPseudo(),
                             chatHandler.getMessageHistory().get(index).getFormatTime(), Color.BLUE);
-                    liste.add(panel, BorderLayout.SOUTH);
+                    this.liste.add(panel, BorderLayout.SOUTH);
                 }
             }
-            liste.updateUI();
+            this.liste.updateUI();
         }
 
         public JFrame getFram(){

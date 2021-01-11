@@ -97,11 +97,15 @@ public class HandlerBDD {
 		while (res.next()) {
 			if (res.getInt("id_sender") == agent.getPseudoHandler().getMain_User().getID()) {
 				User recipient = agent.getPseudoHandler().FindUser(res.getInt("id_receiver"));
-				messages.add(new StringMessage(recipient, agent.getPseudoHandler().getMain_User(), new String(res.getBytes("content")), new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm", Locale.FRANCE).parse(res.getString("date"))));
+				StringMessage mess = new StringMessage(recipient, agent.getPseudoHandler().getMain_User(), new String(res.getBytes("content")), new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm", Locale.FRANCE).parse(res.getString("date")));
+				messages.add(mess);
+				System.out.println("Sender ajouté: " + mess.getSender().getPseudo());
 
 			} else {
-				User sender = agent.getPseudoHandler().FindUser(res.getInt("id_receiver"));
-				messages.add(new StringMessage(agent.getPseudoHandler().getMain_User(), sender, new String(res.getBytes("content")),new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm", Locale.FRANCE).parse(res.getString("date"))));
+				User sender = agent.getPseudoHandler().FindUser(res.getInt("id_sender"));
+				StringMessage mess = new StringMessage(agent.getPseudoHandler().getMain_User(), sender, new String(res.getBytes("content")),new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm", Locale.FRANCE).parse(res.getString("date")));
+				messages.add(mess);
+				System.out.println("Sender ajouté: " + mess.getSender().getPseudo());
 			}
 		}
 		return messages;
@@ -184,6 +188,7 @@ public class HandlerBDD {
 			PrepStatement.setString(3, date);
 			PrepStatement.setInt(4, idUser1);
 			PrepStatement.setInt(5, idUser2);
+			PrepStatement.setQueryTimeout(30);
 			int nb = PrepStatement.executeUpdate();
 			System.out.println("Nombre de ligne(s) insérée(s) : " + nb);
 		} catch (SQLException e) {

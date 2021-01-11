@@ -32,13 +32,13 @@ public class ChatHandler {
         this.agent=agent;
         try {
             messageHistory = agent.getBddHandler().getHistoriqueMessages(ID);
+            System.out.println("Message history:" +messageHistory);
         }catch (SQLException | IOException | ParseException e){
             System.out.println(e);
             e.printStackTrace();
         }
         chatPage =  new ChatPage(this.agent, this);
         chatPage.start();
-        chatPage.debut();
     }
     public ChatHandler(User recipient, Agent agent){
         try {
@@ -53,13 +53,14 @@ public class ChatHandler {
         this.agent=agent;
         try {
             messageHistory = agent.getBddHandler().getHistoriqueMessages(ID);
+            System.out.println("Message history:" +messageHistory);
         }catch (SQLException | IOException | ParseException e){
             System.out.println(e);
             e.printStackTrace();
         }
         chatPage =  new ChatPage(this.agent, this);
         chatPage.start();
-        chatPage.debut();
+        System.out.println(messageHistory);
     }
 
     public void Send(Object object) {
@@ -72,7 +73,7 @@ public class ChatHandler {
                 System.out.println("Message History :" + messageHistory);
                 chatPage.Mise_a_jour();
                 System.out.println("Mise à jour ok");
-                agent.getBddHandler().insertMessage(message.sender, message.recipient, ID, message.getContentString(), message.getTime().toString());
+                agent.getBddHandler().insertMessage(message.sender, message.recipient, ID, message.getContentString(), message.getFormatTime().toString());
             } else if (object instanceof File){
                 File content = (File) object;
                 System.out.println("Envoie d'un fichier");
