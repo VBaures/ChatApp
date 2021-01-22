@@ -30,7 +30,7 @@ class AuthentificationPage implements ActionListener {
         JPanel panel4= new JPanel(new GridLayout(1,3));
         JLabel label_vide=new JLabel();
         JLabel title= new JLabel("Veuillez vous connectez");
-        JLabel puser = new JLabel("Username ", SwingConstants.LEFT);
+        JLabel puser = new JLabel("Login ", SwingConstants.LEFT);
         pusername= new JTextField(SwingConstants.RIGHT);
         ppassword= new JTextField(2);
         JLabel ppass = new JLabel("Password", SwingConstants.LEFT);
