@@ -20,7 +20,7 @@ public class NetworkHandler extends Thread {
     }
 
     public void StartServer() throws IOException {
-        this.serverHandler= new ServerHandler(this,agent.getPseudoHandler().getMain_User().getServerPort());
+        this.serverHandler= new ServerHandler(this);
         serverHandler.start();
     }
 

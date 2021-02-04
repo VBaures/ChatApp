@@ -1,16 +1,17 @@
 package ChatApp;
 
 import java.io.Serializable;
+import java.net.InetAddress;
 
 public class User implements Serializable {
     protected String pseudo;
-    protected String addr_IP;
+    protected InetAddress addr_IP;
     protected int serverPort;
     protected int clientPort;
     protected int ID;
 
     public User(){};
-    public User(String pseudo, String addr_IP, int serverPort, int clientPort, int ID ){
+    public User(String pseudo, InetAddress addr_IP, int serverPort, int clientPort, int ID ){
         this.pseudo = pseudo;
         this.addr_IP = addr_IP;
         this.serverPort = serverPort;
@@ -33,7 +34,7 @@ public class User implements Serializable {
     }
 
     public String getType() {return "User";}
-    public String getAddr_Ip() {return addr_IP;}
+    public InetAddress getAddr_Ip() {return addr_IP;}
     public int getID () {
         return this.ID;
     }

@@ -1,11 +1,9 @@
 package ChatApp;
 
 import java.io.*;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.Socket;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public class UDP extends Thread {
         ServerHandler serverHandler;
@@ -33,7 +31,7 @@ public class UDP extends Thread {
                     User receive2 = (User) is.readObject();
                     if (receive1.trim().equals("Connection")) {
                         //synchronized (this) {
-                            sendUDP("RetourConnection", serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User(), receive2.getServerPort());
+                            sendUDP("RetourConnection", serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User(), receive2.getAddr_Ip());
                             serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
                         //}
                     } else if (receive1.trim().equals("RetourConnection")) {
@@ -68,25 +66,28 @@ public class UDP extends Thread {
             }
         }
 
-        void sendUDP(String message, Object obj, int port) throws IOException {
-            byte[] buffer1 = message.getBytes();
-            DatagramPacket packet1 = new DatagramPacket(buffer1, buffer1.length, InetAddress.getByName("localhost"), port);
-            datagramSocket.send(packet1);
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(bos);
-            oos.writeObject(obj);
-            oos.flush();
-            byte[] buffer2 = bos.toByteArray();
-            DatagramPacket packet2 = new DatagramPacket(buffer2, buffer2.length, InetAddress.getByName("localhost"), port);
-            datagramSocket.send(packet2);
-        }
+    void sendUDP(String message, Object obj, InetAddress inetAddress) throws IOException {
+        byte[] buffer1 = message.getBytes();
+        DatagramPacket packet1 = new DatagramPacket(buffer1, buffer1.length, inetAddress, 1050);
+        System.out.println(inetAddress);
+        datagramSocket.send(packet1);
+        System.out.println("Packet 1 envoyé");
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(obj);
+        oos.flush();
+        byte[] buffer2 = bos.toByteArray();
+        DatagramPacket packet2 = new DatagramPacket(buffer2, buffer2.length, inetAddress, 1050);
+        datagramSocket.send(packet2);
+        System.out.println("Packet 2 envoyé " + packet1.getLength());
+    }
 
-        void broadcastUDP(String message, Object obj) throws IOException {
-            for (int port = 1234; port <= 1238; port++) {
-                if (port!=serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getServerPort()) {
-                    sendUDP(message, obj, port);
-                }
-            }
-        }
+    void broadcastUDP(String message, Object obj) throws IOException {
+        InetAddress ip = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getAddr_Ip();
+        NetworkInterface networkInterface = NetworkInterface.getByInetAddress(ip);
+        List<InterfaceAddress> list = networkInterface.getInterfaceAddresses();
+        sendUDP(message, obj, list.get(0).getBroadcast());
+        System.out.println("broadcast ok");
+    }
     }
 

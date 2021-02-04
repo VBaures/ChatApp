@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class ServerHandler extends Thread {
-    protected int port;
+    protected int port=1050;
     protected NetworkHandler networkHandler;
     protected ServerSocket servSocketTCP;
     protected DatagramSocket datagramSocket;
@@ -14,8 +14,7 @@ public class ServerHandler extends Thread {
     protected TCP tcp;
 
 
-    public ServerHandler(NetworkHandler networkHandler, int port) {
-        this.port=port;
+    public ServerHandler(NetworkHandler networkHandler) {
         this.networkHandler=networkHandler;
     }
 

@@ -20,7 +20,7 @@ public class ClientHandler extends Thread{
             try {
                 //Scanner keyboard = new Scanner(System.in);
                 //System.out.println("Enter client port");
-                this.link = new Socket(InetAddress.getByName("localhost"), chatHandler.getRecipient().getServerPort(), InetAddress.getByName("localhost"), networkHandler.getAgent().getPseudoHandler().getMain_User().getClientPort());
+                this.link = new Socket(chatHandler.getRecipient().getAddr_Ip(),1050);
                 link.setKeepAlive(false);
                 System.out.println("client link créé");
                 ObjectOutputStream out = new ObjectOutputStream(link.getOutputStream());
