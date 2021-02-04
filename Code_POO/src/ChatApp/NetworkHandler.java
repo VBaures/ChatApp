@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class NetworkHandler extends Thread {
     ServerHandler serverHandler;
-    //RemoteHandler remoteHandler;
     ArrayList<ClientHandler> listClientHandler;
     Agent agent;
 
@@ -21,10 +20,8 @@ public class NetworkHandler extends Thread {
     }
 
     public void StartServer() throws IOException {
-        this.serverHandler= new ServerHandler(this);
+        this.serverHandler= new ServerHandler(this,agent.getPseudoHandler().getMain_User().getServerPort());
         serverHandler.start();
-        //this.remoteHandler = new RemoteHandler(this);
-        //remoteHandler.start();
     }
 
     public Agent getAgent(){
@@ -56,5 +53,4 @@ public class NetworkHandler extends Thread {
     public ServerHandler getServerHandler(){
         return this.serverHandler;
     }
-    //public RemoteHandler getRemoteHandler() { return this.remoteHandler; }
 }
