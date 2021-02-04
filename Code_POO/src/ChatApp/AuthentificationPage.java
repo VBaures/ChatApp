@@ -30,7 +30,7 @@ class AuthentificationPage implements ActionListener {
         JPanel panel4= new JPanel(new GridLayout(1,3));
         JLabel label_vide=new JLabel();
         JLabel title= new JLabel("Veuillez vous connectez");
-        JLabel puser = new JLabel("Username ", SwingConstants.LEFT);
+        JLabel puser = new JLabel("Login ", SwingConstants.LEFT);
         pusername= new JTextField(SwingConstants.RIGHT);
         ppassword= new JTextField(2);
         JLabel ppass = new JLabel("Password", SwingConstants.LEFT);
@@ -75,20 +75,22 @@ class AuthentificationPage implements ActionListener {
             try {
                 id = agent.getBddHandler().getIDUser(getvalue_login, getValue_mdp);
                 System.out.println("ID="+id);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
             if (id!=-1){
+                System.out.println("Mise à jour ID = " + id);
                 agent.getPseudoHandler().getMain_User().setID(id);
+                System.out.println("Nouvel ID= "+agent.getPseudoHandler().getMain_User().getID());
                 System.out.println(agent.getPseudoHandler().getMain_User());
-                try {
-                    agent.getNetworkHandler().getServerHandler().getUdp().broadcastUDP("Connexion",agent.getPseudoHandler().getMain_User());
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-
                 frame.dispose();
                 agent.getPseudoPage().getFrame().setVisible(true);
+                /*try {
+                    agent.StartAgent();
+                    agent.getNetworkHandler().getRemoteHandler().notifyServer();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }*/
+            }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
         }else{
             agent.getBddpage().getFrame().setVisible(true);

@@ -20,7 +20,8 @@ public class TCP extends Thread {
         try {
             ObjectOutputStream outTCP = new ObjectOutputStream(link.getOutputStream());
             ObjectInputStream inTCP = new ObjectInputStream(link.getInputStream());
-            User sender = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUserByPortClient(link.getPort());
+            User sender = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUserByIP(link.getInetAddress().getHostAddress());
+            System.out.println("Sender is: " + link.getInetAddress().toString());
             serverHandler.getNetworkHandler().getAgent().getCurrentChat().add(new ChatHandler(sender, outTCP, link, serverHandler.getNetworkHandler().getAgent()));
             while(true){
                 Object ObjectReceive=inTCP.readObject();

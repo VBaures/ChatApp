@@ -4,18 +4,21 @@
 
 package ChatApp;
 
+import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 public class PseudoHandler {
     protected MainUser main_User;
     //a voir si la liste des personnes connectés n'est pas de type public
     protected ArrayList<User> connectedUsers;
 
-    public PseudoHandler(Agent agent)  {
+    public PseudoHandler(Agent agent) throws UnknownHostException {
         this.connectedUsers = new ArrayList<User>();
-        main_User = new MainUser("notdefine","localhost", 1236,1237, -1);
+        main_User = new MainUser("notdefine",getIpAddress(),-1);
     }
 
     public void UpdateConnectedUsers(User new_User) {
@@ -98,4 +101,53 @@ public class PseudoHandler {
         }
         return null;
     }
+
+    public User FindUserByIP(String inetAddress) {
+        for (int i = 0; i < connectedUsers.size(); i++) {
+            System.out.println(connectedUsers.get(i).getAddr_Ip().toString());
+            System.out.println(inetAddress);
+            if (connectedUsers.get(i).getAddr_Ip().getHostAddress().equals(inetAddress)) {
+                return connectedUsers.get(i);
+            }
+        }
+        return null;
+    }
+
+    public static InetAddress getIpAddress() throws UnknownHostException {
+        UnknownHostException exception = new UnknownHostException("Failed to get IP") ;
+
+        try {
+            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces() ;
+
+            // For each interfaces
+            while(interfaces.hasMoreElements()) {
+                NetworkInterface nInterface = interfaces.nextElement() ;
+                Enumeration<InetAddress> addresses = nInterface.getInetAddresses() ;
+
+                if(nInterface.isLoopback() || ! nInterface.isUp()) {
+                    continue ;
+                }
+
+                // For each addresses of the interface.
+                while(addresses.hasMoreElements()) {
+                    InetAddress addr = addresses.nextElement() ;
+
+                    /*
+                     * We are not using IPv6 addresses. It's a
+                     * choice.
+                     *
+                     * || addr instanceof Inet6Address
+                     */
+                    if (addr instanceof Inet4Address) {
+                        return InetAddress.getByName(addr.getHostAddress()) ;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            exception.initCause(e) ;
+        }
+
+        throw exception ;
+    }
+
 }

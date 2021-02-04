@@ -31,7 +31,6 @@ public class Agent {
         usersWindows = new UsersWindows(this);
         bddpage=new BDDpage(this);
         bddHandler = new HandlerBDD(this);
-        StartAgent();
     }
 
     public void StartAgent() throws IOException {
@@ -65,6 +64,7 @@ public class Agent {
             StopChat(currentChat.get(i));
         }
         networkHandler.getServerHandler().getUdp().broadcastUDP("Disconnect",pseudoHandler.getMain_User());
+        //networkHandler.getRemoteHandler().NotifyDisconnection();
     }
 
     public PseudoHandler getPseudoHandler() {
