@@ -43,7 +43,6 @@ public class UsersWindows extends Thread implements ActionListener {
                 public void windowClosing(WindowEvent e) {
                     try {
                         agent.Disconnect();
-
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }

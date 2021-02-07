@@ -13,14 +13,14 @@ import java.util.Scanner;
 
 public class Agent {
 
-    protected NetworkHandler networkHandler;
-    protected ArrayList <ChatHandler> currentChat;
-    protected PseudoHandler pseudoHandler;
-    AuthentificationPage authentificationPage;
-    PseudoPage pseudoPage;
-    UsersWindows usersWindows;
-    BDDpage bddpage;
-    HandlerBDD bddHandler;
+    private NetworkHandler networkHandler;
+    private ArrayList <ChatHandler> currentChat;
+    private PseudoHandler pseudoHandler;
+    private AuthentificationPage authentificationPage;
+    private PseudoPage pseudoPage;
+    private UsersWindows usersWindows;
+    private BDDpage bddpage;
+    private HandlerBDD bddHandler;
 
     public Agent() throws IOException {
         networkHandler = new NetworkHandler(this);
@@ -31,10 +31,6 @@ public class Agent {
         pseudoPage = new PseudoPage(this);
         usersWindows = new UsersWindows(this);
         bddpage=new BDDpage(this);
-        StartAgent();
-    }
-
-    public void StartAgent() throws IOException {
         networkHandler.StartServer();
     }
 
@@ -47,18 +43,61 @@ public class Agent {
         networkHandler.StartChat(chatHandler);
     }
 
-
-
-
-    public void StopChat(ChatHandler chatHandler){
+    public void StopChat(int SenderID){
+        ChatHandler chatHandler = findChatHandler(SenderID);
         try {
-            System.out.println("Chat trouvé: "+findChatHandler(chatHandler.getRecipient().getID()));
             chatHandler.StopChat();
             networkHandler.StopChat(chatHandler);
             currentChat.remove(chatHandler);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public void StopChat(ChatHandler chatHandler){
+        try {
+            chatHandler.StopChat();
+            networkHandler.StopChat(chatHandler);
+            currentChat.remove(chatHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ReceiveMessage(StringMessage message){
+        findChatHandler(message.getSender().getID()).Receive(message);
+    }
+    public void ReceiveMessage(FileMessage message){
+        findChatHandler(message.getSender().getID()).Receive(message);
+    }
+
+    public boolean LogIn(String username, String password) {
+        int id = -1;
+        try {
+            id = bddHandler.getIDUser(username, password);
+            System.out.println("ID=" + id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        if (id != -1) {
+            pseudoHandler.getMain_User().setID(id);
+            System.out.println(pseudoHandler.getMain_User());
+            try {
+                networkHandler.getServerHandler().getUdp().broadcastUDP("Connexion", pseudoHandler.getMain_User());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean CreateAccount(String username, String password){
+        int nb=-1;
+        try {
+            nb = bddHandler.insertUser(username, password);
+        }catch (SQLException e){}
+        return (nb != 0);
     }
 
     public void Disconnect() throws IOException {

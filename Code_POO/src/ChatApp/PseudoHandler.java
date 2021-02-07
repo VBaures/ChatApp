@@ -77,31 +77,10 @@ public class PseudoHandler {
     }
 
     //TODO quand on aura fait la base de données
-    public void VerifyLogin (String username,String password){}
+    public void VerifyLogin (String username,String password){
+
+    }
     public void NotifyPseudoChange(){ }
-
-    public void setMain_User(MainUser main_User) {
-        this.main_User = main_User;
-    }
-
-    public User FindUserByPortClient(int port) {
-        for (int i = 0; i < connectedUsers.size(); i++) {
-            if (connectedUsers.get(i).getClientPort()==port) {
-                return connectedUsers.get(i);
-            }
-        }
-        return null;
-    }
-
-    public User FindUserByPortServer(int port) {
-        for (int i = 0; i < connectedUsers.size(); i++) {
-            if (connectedUsers.get(i).getServerPort()==port) {
-                return connectedUsers.get(i);
-            }
-        }
-        return null;
-    }
-
     public static InetAddress getIpAddress() throws UnknownHostException {
         UnknownHostException exception = new UnknownHostException("Failed to get IP") ;
 

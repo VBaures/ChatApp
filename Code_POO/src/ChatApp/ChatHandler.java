@@ -65,6 +65,15 @@ public class ChatHandler {
         chatPage.start();
     }
 
+    public void Receive(StringMessage message){
+            this.messageHistory.add(message);
+            this.chatPage.Mise_a_jour();
+    }
+    public void Receive(FileMessage message){
+        this.messageHistory.add(message);
+        this.chatPage.Mise_a_jour();
+    }
+
     public void Send(Object object) {
         try {
             if (object instanceof  String) {
@@ -92,6 +101,7 @@ public class ChatHandler {
     public void StopChat() throws IOException {
         output.writeObject("StopChat");
         socket.close();
+        chatPage.getFram().dispose();
     }
 
     void setOutput(ObjectOutputStream output){
@@ -107,8 +117,6 @@ public class ChatHandler {
     public User getRecipient(){
         return this.recipient;
     }
-
-    public ChatPage getChatPage(){return this.chatPage;}
 
     public ArrayList<Message> getMessageHistory (){return this.messageHistory;}
 

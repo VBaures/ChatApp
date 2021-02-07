@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class PseudoPage implements ActionListener {
@@ -23,7 +25,18 @@ public class PseudoPage implements ActionListener {
 
         //gestion fenêtre
         frame= new JFrame("Choose pseudo");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    agent.Disconnect();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                frame.dispose();
+                System.exit(0);
+            }
+        });
         frame.setSize(new Dimension(1000,1000));
 
         //gestion et création des composants

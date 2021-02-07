@@ -7,9 +7,9 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class ClientHandler extends Thread{
-    NetworkHandler networkHandler;
-    ChatHandler chatHandler;
-    Socket link;
+    private NetworkHandler networkHandler;
+    private ChatHandler chatHandler;
+    private Socket link;
 
     public ClientHandler(NetworkHandler networkHandler, ChatHandler chatHandler) throws IOException {
         this.networkHandler = networkHandler;
@@ -24,13 +24,10 @@ public class ClientHandler extends Thread{
                 link.setKeepAlive(false);
                 System.out.println("client link créé");
                 ObjectOutputStream out = new ObjectOutputStream(link.getOutputStream());
-
                 ObjectInputStream in = new ObjectInputStream(link.getInputStream());
-                networkHandler.getAgent().findChatHandler(chatHandler.getRecipient().getID()).setOutput(out);
-                networkHandler.getAgent().findChatHandler(chatHandler.getRecipient().getID()).setSocket(link);
+                User sender = networkHandler.getAgent().getPseudoHandler().FindUserByIP(link.getInetAddress().getHostAddress());
                 chatHandler.setOutput(out);
                 chatHandler.setSocket(link);
-                User sender = networkHandler.getAgent().getPseudoHandler().FindUserByPortServer(link.getPort());
                 while(true){
                     try {
                         Object ObjectReceive=in.readObject();
@@ -38,19 +35,16 @@ public class ClientHandler extends Thread{
                         if (ObjectReceive instanceof StringMessage) {
                             StringMessage receive = (StringMessage) ObjectReceive;
                             System.out.println("Message reçu :"+ receive.getContentString());
-                            chatHandler.getMessageHistory().add(receive);
-                            chatHandler.getChatPage().Mise_a_jour();
+                            chatHandler.Receive(receive);
                         } else if (ObjectReceive instanceof FileMessage) {
                             FileMessage receive = (FileMessage) ObjectReceive;
                             System.out.println("Message avec file reçu");
-                            chatHandler.getMessageHistory().add(receive);
-                            chatHandler.getChatPage().Mise_a_jour();
+                            chatHandler.Receive(receive);
                         } else if (ObjectReceive instanceof String) {
                             String receive = (String) ObjectReceive;
                             System.out.println(receive);
                             if (receive.equals("StopChat")){
-                                networkHandler.getAgent().getCurrentChat().remove(chatHandler);
-                                chatHandler.getChatPage().getFram().dispose();
+                                networkHandler.getAgent().StopChat(sender.getID());
                                 break;
                             }
                         }

@@ -61,16 +61,11 @@ public class BDDpage implements ActionListener {
     //gestion du bouton
     //TODO: a finir quand BDD prete
     public void actionPerformed(ActionEvent e) {
-        String getvalue_login= plogin.getText();
-        String getValue_mdp=pmdp.getText();
-        System.out.println(getvalue_login);
+        String username= plogin.getText();
+        String password=pmdp.getText();
         if (e.getSource()==bouton){
-            try {
-                int nb = agent.getBddHandler().insertUser(getvalue_login, getValue_mdp);
-                if (nb!=0) {
+            if (agent.CreateAccount(username,password)){
                     fram.dispose();
-                }
-            } catch (SQLException f) {
             }
         }
     }

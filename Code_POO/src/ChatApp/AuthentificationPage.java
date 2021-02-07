@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -15,13 +17,22 @@ class AuthentificationPage implements ActionListener {
     JTextField pusername;
     JTextField ppassword;
 
-
-
     public AuthentificationPage (Agent agent){
         this.agent=agent;
         //gestion fenetre
         frame= new JFrame("Application");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    agent.Disconnect();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                frame.dispose();
+                System.exit(0);
+            }
+        });
         frame.setSize(new Dimension(1000,1000));
 
         //gestion et création des composants
@@ -69,24 +80,9 @@ class AuthentificationPage implements ActionListener {
         //gestion des actions sur les boutons
         public void actionPerformed (ActionEvent e){
         if (e.getSource()==bouton){
-            String getvalue_login= pusername.getText();
-            String getValue_mdp=ppassword.getText();
-            int id=-1;
-            try {
-                id = agent.getBddHandler().getIDUser(getvalue_login, getValue_mdp);
-                System.out.println("ID="+id);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-            if (id!=-1){
-                agent.getPseudoHandler().getMain_User().setID(id);
-                System.out.println(agent.getPseudoHandler().getMain_User());
-                try {
-                    agent.getNetworkHandler().getServerHandler().getUdp().broadcastUDP("Connexion",agent.getPseudoHandler().getMain_User());
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-
+            String username= pusername.getText();
+            String password=ppassword.getText();
+            if (agent.LogIn(username, password)) {
                 frame.dispose();
                 agent.getPseudoPage().getFrame().setVisible(true);
             }
