@@ -12,11 +12,9 @@ public class User implements Serializable {
     protected String Place;
 
     public User(){};
-    public User(String pseudo, InetAddress addr_IP, int serverPort, int clientPort, int ID ){
+    public User(String pseudo, InetAddress addr_IP,int ID ){
         this.pseudo = pseudo;
         this.addr_IP = addr_IP;
-        this.serverPort = serverPort;
-        this.clientPort = clientPort;
         this.ID=ID;
     }
 
@@ -46,5 +44,13 @@ public class User implements Serializable {
     public InetAddress getAddr_Ip() {return addr_IP;}
     public int getID () {
         return this.ID;
+    }
+
+    public void setServerPort(int port) {
+        this.serverPort=port;
+    }
+
+    public void setAddr_IP(InetAddress IP) {
+        this.addr_IP=IP;
     }
 }

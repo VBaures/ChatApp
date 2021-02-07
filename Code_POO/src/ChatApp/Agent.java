@@ -26,11 +26,11 @@ public class Agent {
         networkHandler = new NetworkHandler(this);
         currentChat = new ArrayList<ChatHandler>();
         pseudoHandler = new PseudoHandler(this);
+        bddHandler = new HandlerBDD(this);
         authentificationPage = new AuthentificationPage(this);
         pseudoPage = new PseudoPage(this);
         usersWindows = new UsersWindows(this);
         bddpage=new BDDpage(this);
-        bddHandler = new HandlerBDD(this);
         StartAgent();
     }
 
@@ -41,6 +41,7 @@ public class Agent {
     public void StartChat(String pseudo) throws IOException {
         User recipient = pseudoHandler.FindUser(pseudo);
         ChatHandler chatHandler = new ChatHandler(recipient,this);
+        chatHandler.StartPage();
         System.out.println("Historique "+chatHandler.getMessageHistory());
         currentChat.add(chatHandler);
         networkHandler.StartChat(chatHandler);
@@ -61,6 +62,7 @@ public class Agent {
     }
 
     public void Disconnect() throws IOException {
+        networkHandler.getRemoteHandler().NotifyDisconnection();
         for (int i =0 ; i<currentChat.size();i++){
             StopChat(currentChat.get(i));
         }

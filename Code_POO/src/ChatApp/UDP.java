@@ -35,12 +35,7 @@ public class UDP extends Thread {
                     receive2.setPlace("local");
                     System.out.println("ok4");
                     if (receive1.trim().equals("Connection")) {
-                        System.out.println("Reçu: "+ receive2.getID()+ "Perso:" +serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getID());
-                        if (receive2.getID()!=serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getID()){
-                            System.out.println("reception connection");
-                            //synchronized (this) {
-                            serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
-                            System.out.println("Ajout via local");
+                        if (receive2.getID()!=serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getID()) {
                             sendUDP("RetourConnection", serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User(), receive2.getAddr_Ip());
                             System.out.println("Envoie retour connection");
                         }
@@ -49,8 +44,9 @@ public class UDP extends Thread {
                         System.out.println("Reception retour connection");
                         serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
                         System.out.println("Reception retour");
-                        serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
-                        //}
+                        if (receive2.getPseudo().equals("notdefine")!=true){
+                            serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
+                        }
                     }else if (receive1.trim().equals("Disconnect")) {
                         System.out.println("Deconnexion de: "+receive2.getPseudo());
                         serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().remove(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUser(receive2.getID()));
@@ -59,8 +55,15 @@ public class UDP extends Thread {
                     } else if (receive1.trim().equals("NewPseudo")){
                         if (receive2.getID()!=serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getID()) {
                             User user = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUser(receive2.getID());
-                            serverHandler.getNetworkHandler().getAgent().UpdatePseudo(receive2.getPseudo(), user.getID());
-                            serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
+                            if (user!=null) {
+                                System.out.println("Modification pseudo: " + user);
+                                serverHandler.getNetworkHandler().getAgent().UpdatePseudo(receive2.getPseudo(), user.getID());
+                                serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
+                            }else{
+                                serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
+                                System.out.println("Ajout via local de "+receive2.getID());
+                                serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
+                            }
                         }
                     }
                     System.out.println("Liste connected user");
@@ -77,7 +80,7 @@ public class UDP extends Thread {
 
     void sendUDP(String message, Object obj, InetAddress inetAddress) throws IOException {
         byte[] buffer1 = message.getBytes();
-        DatagramPacket packet1 = new DatagramPacket(buffer1, buffer1.length, inetAddress, 1050);
+        DatagramPacket packet1 = new DatagramPacket(buffer1, buffer1.length, inetAddress, 1040);
         System.out.println(inetAddress);
         datagramSocket.send(packet1);
         System.out.println("Packet 1 envoyé");
@@ -86,7 +89,7 @@ public class UDP extends Thread {
         oos.writeObject(obj);
         oos.flush();
         byte[] buffer2 = bos.toByteArray();
-        DatagramPacket packet2 = new DatagramPacket(buffer2, buffer2.length, inetAddress, 1050);
+        DatagramPacket packet2 = new DatagramPacket(buffer2, buffer2.length, inetAddress, 1040);
         datagramSocket.send(packet2);
         System.out.println("Packet 2 envoyé " + packet1.getLength());
     }

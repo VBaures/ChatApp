@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class ServerHandler extends Thread {
-    protected int port=1050;
+    protected int port=1040;
     protected NetworkHandler networkHandler;
     protected ServerSocket servSocketTCP;
     protected DatagramSocket datagramSocket;
@@ -24,11 +24,8 @@ public class ServerHandler extends Thread {
         try {
             System.out.println("Démarrage server");
             this.servSocketTCP = new ServerSocket(this.port);
-            System.out.println("TCP server ok");
             this.datagramSocket = new DatagramSocket(this.port);
-            System.out.println("TCP server ok 1");
-            this.udp = new UDP(this, datagramSocket);
-            System.out.println("TCP server ok 2");
+            this.udp= new UDP(this, this.datagramSocket);
             udp.start();
             while (true) {
                 Socket linkTCP = servSocketTCP.accept();

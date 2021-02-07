@@ -18,7 +18,7 @@ public class PseudoHandler {
 
     public PseudoHandler(Agent agent) throws UnknownHostException {
         this.connectedUsers = new ArrayList<User>();
-        main_User = new MainUser("notdefine",getIpAddress(), 1246,1247, -1);
+        main_User = new MainUser("notdefine",getIpAddress(),-1);
     }
 
     public void UpdateConnectedUsers(User new_User) {
@@ -137,5 +137,16 @@ public class PseudoHandler {
         }
 
         throw exception ;
+    }
+
+    public User FindUserByIP(String inetAddress) {
+        for (int i = 0; i < connectedUsers.size(); i++) {
+            System.out.println(connectedUsers.get(i).getAddr_Ip().toString());
+            System.out.println(inetAddress);
+            if (connectedUsers.get(i).getAddr_Ip().getHostAddress().equals(inetAddress)) {
+                return connectedUsers.get(i);
+            }
+        }
+        return null;
     }
 }

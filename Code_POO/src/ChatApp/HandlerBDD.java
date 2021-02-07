@@ -30,6 +30,7 @@ public class HandlerBDD {
 	public void OpenConnection() {
 		try {
 			/*Load driver*/
+
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			try {
 				connection=DriverManager.getConnection(url,login,password);

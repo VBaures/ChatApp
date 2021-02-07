@@ -43,6 +43,7 @@ public class UsersWindows extends Thread implements ActionListener {
                 public void windowClosing(WindowEvent e) {
                     try {
                         agent.Disconnect();
+
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
@@ -86,6 +87,7 @@ public class UsersWindows extends Thread implements ActionListener {
     }
 
     public int Close() throws IOException {
+        agent.getNetworkHandler().getRemoteHandler().NotifyDisconnection();
         agent.Disconnect();
         return 0;
     }
@@ -115,6 +117,7 @@ public class UsersWindows extends Thread implements ActionListener {
         }
         else {
             try {
+                agent.getNetworkHandler().getRemoteHandler().NotifyDisconnection();
                 agent.Disconnect();
 
             } catch (IOException ioException) {

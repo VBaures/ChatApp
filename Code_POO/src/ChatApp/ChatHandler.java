@@ -19,7 +19,7 @@ public class ChatHandler {
     int ID;
 
     public ChatHandler(User recipient, ObjectOutputStream out, Socket socket, Agent agent){
-        try {
+       try {
             this.ID = agent.getBddHandler().getIDConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
             System.out.println("ID conversation = "+ID);
         }catch (SQLException e){
@@ -27,6 +27,7 @@ public class ChatHandler {
             e.printStackTrace();
         }
         this.recipient=recipient;
+        System.out.println("User = "+this.recipient);
         this.output=out;
         this.socket=socket;
         this.agent=agent;
@@ -37,8 +38,6 @@ public class ChatHandler {
             System.out.println(e);
             e.printStackTrace();
         }
-        chatPage =  new ChatPage(this.agent, this);
-        chatPage.start();
     }
     public ChatHandler(User recipient, Agent agent){
         try {
@@ -58,9 +57,12 @@ public class ChatHandler {
             System.out.println(e);
             e.printStackTrace();
         }
+        System.out.println(messageHistory);
+    }
+
+    public void StartPage(){
         chatPage =  new ChatPage(this.agent, this);
         chatPage.start();
-        System.out.println(messageHistory);
     }
 
     public void Send(Object object) {

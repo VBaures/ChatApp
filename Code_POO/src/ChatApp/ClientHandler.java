@@ -20,7 +20,7 @@ public class ClientHandler extends Thread{
             try {
                 //Scanner keyboard = new Scanner(System.in);
                 //System.out.println("Enter client port");
-                this.link = new Socket(chatHandler.getRecipient().getAddr_Ip(),1050);
+                this.link = new Socket(chatHandler.getRecipient().getAddr_Ip(),1040);
                 link.setKeepAlive(false);
                 System.out.println("client link créé");
                 ObjectOutputStream out = new ObjectOutputStream(link.getOutputStream());
@@ -38,6 +38,11 @@ public class ClientHandler extends Thread{
                         if (ObjectReceive instanceof StringMessage) {
                             StringMessage receive = (StringMessage) ObjectReceive;
                             System.out.println("Message reçu :"+ receive.getContentString());
+                            chatHandler.getMessageHistory().add(receive);
+                            chatHandler.getChatPage().Mise_a_jour();
+                        } else if (ObjectReceive instanceof FileMessage) {
+                            FileMessage receive = (FileMessage) ObjectReceive;
+                            System.out.println("Message avec file reçu");
                             chatHandler.getMessageHistory().add(receive);
                             chatHandler.getChatPage().Mise_a_jour();
                         } else if (ObjectReceive instanceof String) {
