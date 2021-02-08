@@ -26,12 +26,27 @@
   <component name="ChangeListManager">
     <list default="true" id="51430ecc-8b77-4d86-87fd-f9c5009e24de" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/NetworkHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/NetworkHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/StringMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/StringMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/AuthentificationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/AuthentificationPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/BDDpage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/BDDpage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/ChatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ChatHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/ChatPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ChatPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/EnvoieFichierPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/FileMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/FileMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/HandlerBDD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/HandlerBDD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/JListSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/JListSimple.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/MainUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/MainUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/PseudoHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/PseudoHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/NetworkHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/NetworkHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/RemoteHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/RemoteHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/StringMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/StringMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/UDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/UDP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,17 +125,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.Agent1" />
       <item itemvalue="Application.Agent2" />
@@ -146,8 +150,6 @@
       <workItem from="1612717749944" duration="155000" />
       <workItem from="1612724717282" duration="1272000" />
       <workItem from="1612794289391" duration="4752000" />
-      <workItem from="1612800056100" duration="20000" />
-      <workItem from="1612800823015" duration="4756000" />
     </task>
     <servers />
   </component>

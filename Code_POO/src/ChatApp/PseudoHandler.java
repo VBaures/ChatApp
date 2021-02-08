@@ -4,7 +4,10 @@
 
 package ChatApp;
 
-import java.net.*;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -15,7 +18,7 @@ public class PseudoHandler {
 
     public PseudoHandler(Agent agent) throws UnknownHostException {
         this.connectedUsers = new ArrayList<User>();
-        main_User = new MainUser("notdefine",-1);
+        main_User = new MainUser("notdefine",getIpAddress(),-1);
     }
 
     public void UpdateConnectedUsers(User new_User) {

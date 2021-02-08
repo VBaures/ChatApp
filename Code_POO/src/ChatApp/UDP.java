@@ -27,13 +27,11 @@ public class UDP extends Thread {
                     String receive1 = new String(dataReceive1.getData(), StandardCharsets.UTF_8);
                     DatagramPacket dataReceive2 = new DatagramPacket(new byte[1024], 1024);
                     datagramSocket.receive(dataReceive2);
-                    System.out.println(dataReceive2.getAddress());
                     System.out.println("ok2");
                     ByteArrayInputStream in = new ByteArrayInputStream(dataReceive2.getData());
                     ObjectInputStream is = new ObjectInputStream(in);
                     System.out.println("ok3");
                     User receive2 = (User) is.readObject();
-                    receive2.setAddr_IP(dataReceive2.getAddress());
                     System.out.println("ok4");
                     if (receive1.trim().equals("Connection")) {
                         if (receive2.getID()!=serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getID()) {
@@ -96,7 +94,10 @@ public class UDP extends Thread {
     }
 
     void broadcastUDP(String message, Object obj) throws IOException {
-        sendUDP(message, obj, InetAddress.getByName("255.255.255.255"));
+        InetAddress ip = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getAddr_Ip();
+        NetworkInterface networkInterface = NetworkInterface.getByInetAddress(ip);
+        List<InterfaceAddress> list = networkInterface.getInterfaceAddresses();
+        sendUDP(message, obj, list.get(0).getBroadcast());
         System.out.println("broadcast ok");
     }
     }
