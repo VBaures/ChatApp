@@ -17,8 +17,6 @@ class JListSimple extends JPanel
     JScrollPane pane;
     JList list;
     UsersWindows usersWindows;
-    JList liste_message;
-    JScrollPane pane2;
 
     //déclaration de la méthode Mise_a_jour de la liste
     public void Mise_a_jour (ArrayList<User> connectUsers){

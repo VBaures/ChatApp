@@ -27,11 +27,24 @@
     <list default="true" id="51430ecc-8b77-4d86-87fd-f9c5009e24de" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/MainUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/MainUser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/NetworkHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/NetworkHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/PseudoHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/PseudoHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/StringMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/StringMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/AuthentificationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/AuthentificationPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/BDDpage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/BDDpage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/ChatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ChatHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/ChatPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ChatPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/EnvoieFichierPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/FileMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/FileMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/HandlerBDD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/HandlerBDD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/JListSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/JListSimple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/MainUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/MainUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/NetworkHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/NetworkHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/RemoteHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/RemoteHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/StringMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/StringMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/UDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/UDP.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatApp/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/User.java" afterDir="false" />
     </list>
@@ -64,11 +77,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowRun.ShowToolbar" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="full.screen.before.presentation.mode" value="true" />
-    <property name="last_opened_file_path" value="F:/Code_POO/src/ChatApp/Agent.java" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/ChatApp_Server" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -124,8 +140,21 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606753214813</updated>
+      <workItem from="1612552725209" duration="3319000" />
+      <workItem from="1612609007917" duration="1751000" />
+      <workItem from="1612610787235" duration="4032000" />
+      <workItem from="1612624652155" duration="2238000" />
+      <workItem from="1612628938597" duration="3336000" />
+      <workItem from="1612690993825" duration="8133000" />
+      <workItem from="1612712371389" duration="4426000" />
+      <workItem from="1612717749944" duration="155000" />
+      <workItem from="1612724717282" duration="1272000" />
+      <workItem from="1612794289391" duration="4752000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -146,22 +175,14 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/ChatApp/FileMessage.java</url>
-          <line>20</line>
-          <properties class="ChatApp.FileMessage" method="&lt;init&gt;">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ChatApp/ChatHandler.java</url>
-          <line>57</line>
+          <line>56</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ChatApp/Agent.java</url>
-          <line>44</line>
+          <line>41</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>

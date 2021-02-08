@@ -32,7 +32,6 @@ public class UDP extends Thread {
                     ObjectInputStream is = new ObjectInputStream(in);
                     System.out.println("ok3");
                     User receive2 = (User) is.readObject();
-                    receive2.setPlace("local");
                     System.out.println("ok4");
                     if (receive1.trim().equals("Connection")) {
                         if (receive2.getID()!=serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getID()) {

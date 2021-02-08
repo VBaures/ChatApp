@@ -165,13 +165,6 @@ public class HandlerBDD {
 		System.out.println("Nombre de ligne(s) insérée(s) : " + nb);
 	}
 	
-	private byte[] processMessageContent(Message m) {
-			StringMessage mTxt = (StringMessage) m;
-			String mContent = mTxt.getContentString();
-			byte[] encodedContent = Base64.getEncoder().encode(mContent.getBytes());
-			return encodedContent;
-	}
-	
 	public void insertMessage(User sender, User receiver, int idConversation, String content, String date) {
 
 		try {

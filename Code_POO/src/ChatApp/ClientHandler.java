@@ -2,25 +2,21 @@ package ChatApp;
 
 import java.io.*;
 import java.net.InetAddress;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
-
 public class ClientHandler extends Thread{
     private NetworkHandler networkHandler;
     private ChatHandler chatHandler;
     private Socket link;
 
-    public ClientHandler(NetworkHandler networkHandler, ChatHandler chatHandler) throws IOException {
+    public ClientHandler(NetworkHandler networkHandler, ChatHandler chatHandler){
         this.networkHandler = networkHandler;
         this.chatHandler = chatHandler;
     }
 
     public void run() {
             try {
-                //Scanner keyboard = new Scanner(System.in);
-                //System.out.println("Enter client port");
-                this.link = new Socket(chatHandler.getRecipient().getAddr_Ip(),1040);
+                System.out.println("Adress IP "+chatHandler.getRecipient().getAddr_Ip());
+                this.link = new Socket(chatHandler.getRecipient().getAddr_Ip().getHostAddress(),1040, InetAddress.getByName("0.0.0.0"),0);
                 link.setKeepAlive(false);
                 System.out.println("client link créé");
                 ObjectOutputStream out = new ObjectOutputStream(link.getOutputStream());
@@ -49,6 +45,7 @@ public class ClientHandler extends Thread{
                             }
                         }
                     } catch (IOException e) {
+                        e.printStackTrace();
                         break;
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();

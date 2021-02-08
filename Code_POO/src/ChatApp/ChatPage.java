@@ -4,18 +4,13 @@
  */
 
 package ChatApp;
-
-import org.w3c.dom.Document;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ChatPage extends Thread implements ActionListener{
 

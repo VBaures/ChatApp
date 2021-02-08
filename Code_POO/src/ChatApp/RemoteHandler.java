@@ -55,6 +55,8 @@ public class RemoteHandler extends Thread{
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         System.out.println("Recup 0");
         connection.setRequestMethod("GET");
+        connection.setDoOutput(true);
+        connection.setRequestProperty("Place",networkHandler.getAgent().getPseudoHandler().getMain_User().getPlace());
             System.out.println("Recup 1.1.1");
                 InputStream reader = connection.getInputStream();
                 InputStreamReader r = new InputStreamReader(reader);
@@ -70,7 +72,7 @@ public class RemoteHandler extends Thread{
                     User find = networkHandler.getAgent().getPseudoHandler().FindUser(Integer.parseInt(user[0]));
                         System.out.println("User trouvé" + find);
                         if (find != null) {
-                            if (user[3].trim().equals("connected") && find.getPlace().trim().equals("remote")) {
+                            if (user[3].trim().equals("connected")) {
                                 find.setPseudo(user[1]);
                                 find.setAddr_IP(InetAddress.getByName(user[2].substring(0)));
                                 find.setID(Integer.parseInt(user[0]));
@@ -82,7 +84,6 @@ public class RemoteHandler extends Thread{
                             if (networkHandler.getAgent().getPseudoHandler().getMain_User().getID() != Integer.parseInt(user[0])&&user[3].trim().equals("connected")) {
                                 System.out.println("Ajout via remote");
                                 User newUser = new User(user[1], InetAddress.getByName(user[2].substring(0)), Integer.parseInt(user[0]));
-                                newUser.setPlace("remote");
                                 networkHandler.getAgent().getPseudoHandler().getConnectedUsers().add(newUser);
                                 System.out.println(networkHandler.getAgent().getPseudoHandler().getConnectedUsers());
                             }

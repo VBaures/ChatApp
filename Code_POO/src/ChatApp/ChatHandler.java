@@ -112,20 +112,10 @@ public class ChatHandler {
         this.socket=socket;
     }
 
-    ObjectOutputStream getOutput (){return this.output;}
 
     public User getRecipient(){
         return this.recipient;
     }
 
     public ArrayList<Message> getMessageHistory (){return this.messageHistory;}
-
-
-    boolean isEqual(ChatHandler chatHandler){
-        boolean bool = false;
-        if ((this.recipient == chatHandler.getRecipient())&(this.output == chatHandler.getOutput())) {
-            bool=true;
-        }
-        return bool;
-    }
 }
