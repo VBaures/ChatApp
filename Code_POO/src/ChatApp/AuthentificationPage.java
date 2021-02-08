@@ -11,7 +11,8 @@ import java.io.IOException;
 class AuthentificationPage implements ActionListener {
     Agent agent;
     JFrame frame;
-    JButton bouton;
+    JButton bouton1;
+    JButton bouton2;
     JButton bouton_BDD;
     JTextField pusername;
     JTextField ppassword;
@@ -46,8 +47,10 @@ class AuthentificationPage implements ActionListener {
         JLabel ppass = new JLabel("Password", SwingConstants.LEFT);
 
         //les boutons
-        bouton= new JButton("S'AUTHENTIFIER");
-        bouton.addActionListener(this );
+        bouton1= new JButton("S'AUTHENTIFIER INDOOR USER");
+        bouton1.addActionListener(this );
+        bouton2= new JButton("S'AUTHENTIFIER OUTDOOR USER");
+        bouton2.addActionListener(this );
 
         bouton_BDD=new JButton("Je me connecte pour la première fois");
         bouton_BDD.addActionListener(this);
@@ -61,7 +64,8 @@ class AuthentificationPage implements ActionListener {
         panel1.add(ppass,BorderLayout.LINE_START);
         panel1.add(ppassword,BorderLayout.CENTER);
 
-        panel2.add(bouton, BorderLayout.CENTER);
+        panel2.add(bouton1, BorderLayout.PAGE_END);
+        panel2.add(bouton2, BorderLayout.PAGE_START);
         panel4.add(bouton_BDD,BorderLayout.LINE_END);
 
         //ajout panels dans la fenetre
@@ -78,16 +82,20 @@ class AuthentificationPage implements ActionListener {
         //TODO; a completer quand BDD prete
         //gestion des actions sur les boutons
         public void actionPerformed (ActionEvent e){
-        if (e.getSource()==bouton){
+        if (e.getSource()==bouton1){
             String username= pusername.getText();
             String password=ppassword.getText();
             if (agent.LogIn(username, password)) {
                 frame.dispose();
                 agent.getPseudoPage().getFrame().setVisible(true);
             }
-        }else{
+        }else {
+            if (e.getSource() == bouton2) {
+
+            }
             agent.getBddpage().getFrame().setVisible(true);
         }
+
     }
 }
 

@@ -19,7 +19,6 @@ public class PseudoPage implements ActionListener {
     JTextField ppseudo;
     JFrame frame;
     JButton bouton1;
-    JButton bouton2;
 
     //déclaration du constructeur de la classe
     public PseudoPage (Agent agent){
@@ -47,17 +46,14 @@ public class PseudoPage implements ActionListener {
         JLabel title= new JLabel("Veuillez rentrer un pseudo");
         JLabel pseudo = new JLabel("Pseudo ", SwingConstants.LEFT);
         ppseudo= new JTextField(SwingConstants.RIGHT);
-        bouton1= new JButton("Indoor User");
+        bouton1= new JButton("Valider");
         bouton1.addActionListener(this );
-        bouton2= new JButton("Outdoor User");
-        bouton2.addActionListener(this );
 
         //ajout composant panels
         panel1.add(title,BorderLayout.PAGE_START);
         panel1.add(pseudo,BorderLayout.LINE_START);
         panel1.add(ppseudo,BorderLayout.CENTER);
         panel2.add(bouton1, BorderLayout.PAGE_START);
-        panel2.add(bouton2,BorderLayout.PAGE_END);
 
         //ajout panels dans la fenetre
         frame.getContentPane().add(panel1, BorderLayout.PAGE_START);
@@ -70,9 +66,7 @@ public class PseudoPage implements ActionListener {
     /* gestion du bouton: on vérifie l'unicité du pseudonyme choisi par l'utilisateur et on en informe
     les autres utilisateurs de l'application */
     public void actionPerformed (ActionEvent e){
-        if (e.getSource()==bouton1){
-            
-        }
+
         String getvalue= ppseudo.getText();
         System.out.println("Message :"+getvalue);
         System.out.println(agent.getPseudoHandler().VerifyPseudo(getvalue));
