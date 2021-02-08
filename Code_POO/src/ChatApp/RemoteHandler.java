@@ -28,7 +28,7 @@ public class RemoteHandler extends Thread{
             connection.setRequestProperty("cmd","connected");
             connection.setRequestProperty("ID",Integer.toString(networkHandler.getAgent().getPseudoHandler().getMain_User().getID()));
             connection.setRequestProperty("pseudo", networkHandler.getAgent().getPseudoHandler().getMain_User().getPseudo().trim());
-            connection.setRequestProperty("IP",networkHandler.getAgent().getPseudoHandler().getMain_User().getAddr_Ip().getHostAddress());
+            connection.setRequestProperty("place",networkHandler.getAgent().getPseudoHandler().getMain_User().getPlace());
             System.out.println("Envoie ok " + connection.getResponseCode());
             connection.disconnect();
         }catch (IOException e){}
@@ -43,7 +43,7 @@ public class RemoteHandler extends Thread{
              connection.setRequestProperty("cmd","disconnected");
              connection.setRequestProperty("ID",Integer.toString(networkHandler.getAgent().getPseudoHandler().getMain_User().getID()));
              connection.setRequestProperty("pseudo", networkHandler.getAgent().getPseudoHandler().getMain_User().getPseudo().trim());
-             connection.setRequestProperty("IP",networkHandler.getAgent().getPseudoHandler().getMain_User().getAddr_Ip().getHostAddress());
+             connection.setRequestProperty("place",networkHandler.getAgent().getPseudoHandler().getMain_User().getPlace());
              System.out.println("Envoie deconnection ok " + connection.getResponseCode());
              connection.disconnect();
          }catch (IOException e){}
@@ -56,7 +56,7 @@ public class RemoteHandler extends Thread{
         System.out.println("Recup 0");
         connection.setRequestMethod("GET");
         connection.setDoOutput(true);
-        connection.setRequestProperty("Place",networkHandler.getAgent().getPseudoHandler().getMain_User().getPlace());
+        connection.setRequestProperty("place",networkHandler.getAgent().getPseudoHandler().getMain_User().getPlace());
             System.out.println("Recup 1.1.1");
                 InputStream reader = connection.getInputStream();
                 InputStreamReader r = new InputStreamReader(reader);

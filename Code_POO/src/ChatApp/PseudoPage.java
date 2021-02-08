@@ -51,7 +51,6 @@ public class PseudoPage implements ActionListener {
         bouton1.addActionListener(this );
         bouton2= new JButton("Outdoor User");
         bouton2.addActionListener(this );
-
         //ajout composant panels
         panel1.add(title,BorderLayout.PAGE_START);
         panel1.add(pseudo,BorderLayout.LINE_START);
@@ -71,22 +70,34 @@ public class PseudoPage implements ActionListener {
     les autres utilisateurs de l'application */
     public void actionPerformed (ActionEvent e){
         if (e.getSource()==bouton1){
-            
-        }
-        String getvalue= ppseudo.getText();
-        System.out.println("Message :"+getvalue);
-        System.out.println(agent.getPseudoHandler().VerifyPseudo(getvalue));
-        if (agent.getPseudoHandler().VerifyPseudo(getvalue)){
-            agent.getPseudoHandler().getMain_User().setPseudo(getvalue);
-            try {
-                System.out.println("Id envoyé " +agent.getPseudoHandler().getMain_User().getID());
-                agent.getNetworkHandler().getServerHandler().getUdp().broadcastUDP("NewPseudo", agent.getPseudoHandler().getMain_User());
-                agent.getNetworkHandler().getRemoteHandler().notifyServer();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+            String getvalue= ppseudo.getText();
+            System.out.println("Message :"+getvalue);
+            System.out.println(agent.getPseudoHandler().VerifyPseudo(getvalue));
+            if (agent.getPseudoHandler().VerifyPseudo(getvalue)){
+                agent.getPseudoHandler().getMain_User().setPseudo(getvalue);
+                agent.getPseudoHandler().getMain_User().setPlace("indoor");
+                try {
+                    System.out.println("Id envoyé " +agent.getPseudoHandler().getMain_User().getID());
+                    agent.getNetworkHandler().getServerHandler().getUdp().broadcastUDP("NewPseudo", agent.getPseudoHandler().getMain_User());
+                    agent.getNetworkHandler().getRemoteHandler().notifyServer();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                frame.setVisible(false);
+                agent.getUsersWindows().getFrame().setVisible(true);
             }
-            frame.setVisible(false);
-            agent.getUsersWindows().getFrame().setVisible(true);
+        }else if ((e.getSource()==bouton2)) {
+            String getvalue = ppseudo.getText();
+            System.out.println("Message :" + getvalue);
+            System.out.println(agent.getPseudoHandler().VerifyPseudo(getvalue));
+            if (agent.getPseudoHandler().VerifyPseudo(getvalue)) {
+                agent.getPseudoHandler().getMain_User().setPseudo(getvalue);
+                agent.getPseudoHandler().getMain_User().setPlace("remote");
+                    System.out.println("Id envoyé " + agent.getPseudoHandler().getMain_User().getID());
+                    agent.getNetworkHandler().getRemoteHandler().notifyServer();
+                frame.setVisible(false);
+                agent.getUsersWindows().getFrame().setVisible(true);
+            }
         }
     }
 

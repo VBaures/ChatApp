@@ -26,12 +26,8 @@
   <component name="ChangeListManager">
     <list default="true" id="51430ecc-8b77-4d86-87fd-f9c5009e24de" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Code_POO/ChatApp/ServerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/MainUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/MainUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/PseudoHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/PseudoHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/ServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatApp/UDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/UDP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/PseudoPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/PseudoPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatApp/RemoteHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatApp/RemoteHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +143,7 @@
       <workItem from="1612724717282" duration="1272000" />
       <workItem from="1612794289391" duration="4752000" />
       <workItem from="1612800056100" duration="20000" />
-      <workItem from="1612800823015" duration="4756000" />
+      <workItem from="1612800823015" duration="6614000" />
     </task>
     <servers />
   </component>
