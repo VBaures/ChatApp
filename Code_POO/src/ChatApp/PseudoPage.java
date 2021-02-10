@@ -66,16 +66,22 @@ public class PseudoPage implements ActionListener {
     /* gestion du bouton: on vérifie l'unicité du pseudonyme choisi par l'utilisateur et on en informe
     les autres utilisateurs de l'application */
     public void actionPerformed (ActionEvent e){
-
         String getvalue= ppseudo.getText();
         System.out.println("Message :"+getvalue);
         System.out.println(agent.getPseudoHandler().VerifyPseudo(getvalue));
         if (agent.getPseudoHandler().VerifyPseudo(getvalue)){
             agent.getPseudoHandler().getMain_User().setPseudo(getvalue);
             try {
-                System.out.println("Id envoyé " +agent.getPseudoHandler().getMain_User().getID());
-                agent.getNetworkHandler().getServerHandler().getUdp().broadcastUDP("NewPseudo", agent.getPseudoHandler().getMain_User());
-                agent.getNetworkHandler().getRemoteHandler().notifyServer();
+                System.out.println("Id envoyé " + agent.getPseudoHandler().getMain_User().getID());
+                if (agent.getPseudoHandler().getMain_User().getPlace().equals("indoor")){
+                    System.out.println("Notif indoor connect");
+                    agent.getNetworkHandler().getServerHandler().getUdp().broadcastUDP("NewPseudo", agent.getPseudoHandler().getMain_User());
+                    System.out.println("Notif indoor connect broadcast ok");
+                    agent.getNetworkHandler().getRemoteHandler().notifyServer();
+                    System.out.println("Notif indoor connect servlet ok");
+                } else if (agent.getPseudoHandler().getMain_User().getPlace().equals("remote")){
+                    agent.getNetworkHandler().getRemoteHandler().notifyServer();
+                }
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }

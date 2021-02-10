@@ -13,13 +13,11 @@ public class UDP extends Thread {
         public UDP(ServerHandler serverHandler, DatagramSocket datagramSocket) {
             this.serverHandler = serverHandler;
             this.datagramSocket = datagramSocket;
-
         }
 
         @Override
         public void run() {
             try {
-                broadcastUDP("Connection",serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User());
                 while (true) {
                     DatagramPacket dataReceive1 = new DatagramPacket(new byte[1024], 1024);
                     datagramSocket.receive(dataReceive1);
@@ -30,40 +28,21 @@ public class UDP extends Thread {
                     System.out.println("ok2");
                     ByteArrayInputStream in = new ByteArrayInputStream(dataReceive2.getData());
                     ObjectInputStream is = new ObjectInputStream(in);
-                    System.out.println("ok3");
-                    User receive2 = (User) is.readObject();
+                    Object receive2 = is.readObject();
                     System.out.println("ok4");
                     if (receive1.trim().equals("Connection")) {
-                        if (receive2.getID()!=serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getID()) {
-                            sendUDP("RetourConnection", serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User(), receive2.getAddr_Ip());
+                        if (dataReceive2.getAddress().equals(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getAddr_Ip())) {
+                            sendUDP("RetourConnection", serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User(), dataReceive2.getAddress());
                             System.out.println("Envoie retour connection");
                         }
                     } else if (receive1.trim().equals("RetourConnection")) {
-                        //synchronized (this) {
-                        System.out.println("Reception retour connection");
-                        serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
-                        System.out.println("Reception retour");
-                        if (receive2.getPseudo().equals("notdefine")!=true){
-                            serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
-                        }
+                        serverHandler.getNetworkHandler().getAgent().UpdateUsers(receive2);
                     }else if (receive1.trim().equals("Disconnect")) {
-                        System.out.println("Deconnexion de: "+receive2.getPseudo());
-                        serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().remove(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUser(receive2.getID()));
-                        serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
+                        System.out.println("Deconnexion");
+                        serverHandler.getNetworkHandler().getAgent().RemoveUser(receive2);
 
                     } else if (receive1.trim().equals("NewPseudo")){
-                        if (receive2.getID()!=serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getID()) {
-                            User user = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUser(receive2.getID());
-                            if (user!=null) {
-                                System.out.println("Modification pseudo: " + user);
-                                serverHandler.getNetworkHandler().getAgent().UpdatePseudo(receive2.getPseudo(), user.getID());
-                                serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
-                            }else{
-                                serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().add(receive2);
-                                System.out.println("Ajout via local de "+receive2.getID());
-                                serverHandler.getNetworkHandler().getAgent().getUsersWindows().jListSimple.Mise_a_jour(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers());
-                            }
-                        }
+                            serverHandler.getNetworkHandler().getAgent().UpdateUsers(receive2);
                     }
                     System.out.println("Liste connected user");
                     for (int i = 0; i < serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().size(); i++) {
@@ -77,7 +56,7 @@ public class UDP extends Thread {
             }
         }
 
-    void sendUDP(String message, Object obj, InetAddress inetAddress) throws IOException {
+    public void sendUDP(String message, Object obj, InetAddress inetAddress) throws IOException {
         byte[] buffer1 = message.getBytes();
         DatagramPacket packet1 = new DatagramPacket(buffer1, buffer1.length, inetAddress, 1040);
         System.out.println(inetAddress);
@@ -93,12 +72,27 @@ public class UDP extends Thread {
         System.out.println("Packet 2 envoyé " + packet1.getLength());
     }
 
-    void broadcastUDP(String message, Object obj) throws IOException {
-        InetAddress ip = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getAddr_Ip();
-        NetworkInterface networkInterface = NetworkInterface.getByInetAddress(ip);
-        List<InterfaceAddress> list = networkInterface.getInterfaceAddresses();
-        sendUDP(message, obj, list.get(0).getBroadcast());
+    public void broadcastUDP(String message, Object obj) throws IOException {
+        sendUDP(message, obj, getBroadcastAddress());
         System.out.println("broadcast ok");
     }
+
+    private InetAddress getBroadcastAddress() throws SocketException {
+        InetAddress ip = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getAddr_Ip();
+        System.out.println("broadcast 5");
+        NetworkInterface networkInterface = NetworkInterface.getByInetAddress(ip);
+        System.out.println("broadcast 2");
+        List<InterfaceAddress> list = networkInterface.getInterfaceAddresses();
+        System.out.println("broadcast 1");
+        for (int i=0; i<list.size();i++){
+            if (list.get(i).getAddress().equals(ip)){
+                System.out.println("Broadcast =" + list.get(i).getBroadcast());
+                return list.get(i).getBroadcast();
+            }
+        }
+        return null;
+    }
+
+
     }
 

@@ -4,10 +4,7 @@
 
 package ChatApp;
 
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -19,11 +16,52 @@ public class PseudoHandler {
     public PseudoHandler(Agent agent) throws UnknownHostException {
         this.connectedUsers = new ArrayList<User>();
         main_User = new MainUser("notdefine",getIpAddress(),-1);
+        System.out.println("Addresse IP = "+getIpAddress());
     }
 
-    public void UpdateConnectedUsers(User new_User) {
-        this.connectedUsers.add(new_User);
+    public void UpdateUsers(String pseudo, InetAddress address,int ID) {
+        User find = FindUser(ID);
+        if (main_User.getID() != ID) {
+            if (find==null) {
+                System.out.println("Ajout via remote");
+                User user = new User(pseudo, address, ID);
+                connectedUsers.add(user);
+            } else if (find.getPseudo().equals(pseudo)==false) {
+                find.setPseudo(pseudo);
+            }
+        }
     }
+
+    public void UpdateUsers(Object object) {
+        User user = (User) object;
+        User find = FindUser(user.getID());
+        if (main_User.getID() != user.getID()) {
+            if (find!=null) {
+                System.out.println("Ajout via remote");
+                connectedUsers.add(user);
+            } else if (find.getPseudo().equals(user.getPseudo())==false) {
+                find.setPseudo(user.getPseudo());
+            }
+        }
+    }
+
+    public void RemoveUser(int ID){
+        User find = FindUser(ID);
+        if (find!=null) {
+            connectedUsers.remove(find);
+        }
+    }
+
+    public void RemoveUser(Object object){
+        User user = (User) object;
+        User find = FindUser(user.getID());
+        if (find!=null) {
+            connectedUsers.remove(find);
+        }
+    }
+
+    //user[3].trim().equals("connected")
+
 
     public MainUser getMain_User() {
         return main_User;

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.lang.ref.Cleaner;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
@@ -22,8 +23,7 @@ public class Agent {
     private BDDpage bddpage;
     private HandlerBDD bddHandler;
 
-    public Agent() throws IOException {
-        networkHandler = new NetworkHandler(this);
+    public Agent() throws IOException { ;
         currentChat = new ArrayList<ChatHandler>();
         pseudoHandler = new PseudoHandler(this);
         bddHandler = new HandlerBDD(this);
@@ -31,7 +31,10 @@ public class Agent {
         pseudoPage = new PseudoPage(this);
         usersWindows = new UsersWindows(this);
         bddpage=new BDDpage(this);
-        networkHandler.StartServer();
+    }
+
+    public void StartServers(){
+        networkHandler = new NetworkHandler(this);
     }
 
     public void StartChat(String pseudo) throws IOException {
@@ -47,7 +50,6 @@ public class Agent {
         ChatHandler chatHandler = findChatHandler(SenderID);
         try {
             chatHandler.StopChat();
-            networkHandler.StopChat(chatHandler);
             currentChat.remove(chatHandler);
         } catch (IOException e) {
             e.printStackTrace();
@@ -56,7 +58,6 @@ public class Agent {
     public void StopChat(ChatHandler chatHandler){
         try {
             chatHandler.StopChat();
-            networkHandler.StopChat(chatHandler);
             currentChat.remove(chatHandler);
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,6 +71,25 @@ public class Agent {
         findChatHandler(message.getSender().getID()).Receive(message);
     }
 
+    public void UpdateUsers(Object object) {
+        pseudoHandler.UpdateUsers(object);
+        usersWindows.jListSimple.Mise_a_jour(pseudoHandler.getConnectedUsers());
+    }
+
+    public void UpdateUsers(String pseudo, InetAddress address, int ID) {
+        pseudoHandler.UpdateUsers(pseudo,address,ID);
+        usersWindows.jListSimple.Mise_a_jour(pseudoHandler.getConnectedUsers());
+    }
+
+    public void RemoveUser(int ID) {
+        pseudoHandler.RemoveUser(ID);
+        usersWindows.jListSimple.Mise_a_jour(pseudoHandler.getConnectedUsers());
+    }
+    public void RemoveUser(Object object) {
+        pseudoHandler.RemoveUser(object);
+        usersWindows.jListSimple.Mise_a_jour(pseudoHandler.getConnectedUsers());
+    }
+
     public boolean LogIn(String username, String password) {
         int id = -1;
         try {
@@ -81,11 +101,6 @@ public class Agent {
         if (id != -1) {
             pseudoHandler.getMain_User().setID(id);
             System.out.println(pseudoHandler.getMain_User());
-            try {
-                networkHandler.getServerHandler().getUdp().broadcastUDP("Connexion", pseudoHandler.getMain_User());
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
             return true;
         }else{
             return false;
@@ -101,11 +116,15 @@ public class Agent {
     }
 
     public void Disconnect() throws IOException {
-        networkHandler.getRemoteHandler().NotifyDisconnection();
         for (int i =0 ; i<currentChat.size();i++){
             StopChat(currentChat.get(i));
         }
-        networkHandler.getServerHandler().getUdp().broadcastUDP("Disconnect",pseudoHandler.getMain_User());
+        if (pseudoHandler.getMain_User().getPlace().equals("indoor")) {
+            networkHandler.getRemoteHandler().NotifyDisconnection();
+            networkHandler.getServerHandler().getUdp().broadcastUDP("Disconnect", pseudoHandler.getMain_User());
+        } else if (pseudoHandler.getMain_User().getPlace().equals("remote")){
+            networkHandler.getRemoteHandler().NotifyDisconnection();
+        }
     }
 
     public PseudoHandler getPseudoHandler() {

@@ -4,10 +4,8 @@ import java.io.*;
 import java.net.*;
 
 public class ServerHandler extends Thread {
-    protected int port=1040;
     protected NetworkHandler networkHandler;
-    protected ServerSocket servSocketTCP;
-    protected DatagramSocket datagramSocket;
+    protected int port=1040;
     protected UDP udp;
     protected TCP tcp;
 
@@ -21,10 +19,10 @@ public class ServerHandler extends Thread {
     public void run() {
         try {
             System.out.println("Démarrage server");
-            this.servSocketTCP = new ServerSocket(this.port,50,InetAddress.getByName("0.0.0.0"));
+            ServerSocket servSocketTCP = new ServerSocket(this.port);
             System.out.println("Addresse du TCP "+servSocketTCP);
-            this.datagramSocket = new DatagramSocket(this.port);
-            this.udp= new UDP(this, this.datagramSocket);
+            DatagramSocket datagramSocket = new DatagramSocket(this.port);
+            this.udp= new UDP(this, datagramSocket);
             udp.start();
             while (true) {
                 Socket linkTCP = servSocketTCP.accept();

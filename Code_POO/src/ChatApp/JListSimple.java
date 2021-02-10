@@ -22,7 +22,9 @@ class JListSimple extends JPanel
     public void Mise_a_jour (ArrayList<User> connectUsers){
         ArrayList<String> connected = new ArrayList<String>();
         for(int i=0; i<connectUsers.size(); i++){
-            connected.add(connectUsers.get(i).getPseudo());
+            if (connectUsers.get(i).getPseudo().equals("notdefine")==false) {
+                connected.add(connectUsers.get(i).getPseudo());
+            }
         }
         list.setListData(connected.toArray());
     }

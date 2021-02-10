@@ -12,6 +12,11 @@ public class NetworkHandler extends Thread {
     public NetworkHandler(Agent agent){
         this.agent=agent;
         this.listClientHandler=new ArrayList<>();
+        try {
+            StartServer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void StartServer() throws IOException {

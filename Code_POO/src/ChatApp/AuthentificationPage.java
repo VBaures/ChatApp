@@ -9,13 +9,13 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 class AuthentificationPage implements ActionListener {
-    Agent agent;
-    JFrame frame;
-    JButton bouton1;
-    JButton bouton2;
-    JButton bouton_BDD;
-    JTextField pusername;
-    JTextField ppassword;
+    private Agent agent;
+    private JFrame frame;
+    private JButton bouton1;
+    private JButton bouton2;
+    private JButton bouton_BDD;
+    private JTextField pusername;
+    private JTextField ppassword;
 
     public AuthentificationPage (Agent agent){
         this.agent=agent;
@@ -24,11 +24,6 @@ class AuthentificationPage implements ActionListener {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                try {
-                    agent.Disconnect();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
                 frame.dispose();
                 System.exit(0);
             }
@@ -81,18 +76,24 @@ class AuthentificationPage implements ActionListener {
 
         //TODO; a completer quand BDD prete
         //gestion des actions sur les boutons
-        public void actionPerformed (ActionEvent e){
-        if (e.getSource()==bouton1){
-            String username= pusername.getText();
-            String password=ppassword.getText();
-            if (agent.LogIn(username, password)) {
-                frame.dispose();
-                agent.getPseudoPage().getFrame().setVisible(true);
-            }
-        }else {
-            if (e.getSource() == bouton2) {
-
-            }
+        public void actionPerformed (ActionEvent e) {
+            String username = pusername.getText();
+            String password = ppassword.getText();
+            if (e.getSource() == bouton1) {
+                if (agent.LogIn(username, password)) {
+                    agent.getPseudoHandler().getMain_User().setPlace("indoor");
+                    frame.dispose();
+                    agent.getPseudoPage().getFrame().setVisible(true);
+                    agent.StartServers();
+                }
+            } else if (e.getSource() == bouton2) {
+                if (agent.LogIn(username, password)) {
+                    agent.getPseudoHandler().getMain_User().setPlace("remote");
+                    frame.dispose();
+                    agent.getPseudoPage().getFrame().setVisible(true);
+                    agent.StartServers();
+                }
+            } else{
             agent.getBddpage().getFrame().setVisible(true);
         }
 
