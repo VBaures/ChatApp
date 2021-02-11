@@ -18,6 +18,7 @@ public class UDP extends Thread {
         @Override
         public void run() {
             try {
+                broadcastUDP("Connection", serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User());
                 while (true) {
                     DatagramPacket dataReceive1 = new DatagramPacket(new byte[1024], 1024);
                     datagramSocket.receive(dataReceive1);
@@ -31,18 +32,21 @@ public class UDP extends Thread {
                     Object receive2 = is.readObject();
                     System.out.println("ok4");
                     if (receive1.trim().equals("Connection")) {
-                        if (dataReceive2.getAddress().equals(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getAddr_Ip())) {
+                        System.out.println("Reception Connection de"+dataReceive2.getAddress());
+                        if (dataReceive2.equals(serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User().getAddr_Ip())==false) {
                             sendUDP("RetourConnection", serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getMain_User(), dataReceive2.getAddress());
                             System.out.println("Envoie retour connection");
                         }
                     } else if (receive1.trim().equals("RetourConnection")) {
                         serverHandler.getNetworkHandler().getAgent().UpdateUsers(receive2);
+                        System.out.println("Ajout via local");
                     }else if (receive1.trim().equals("Disconnect")) {
                         System.out.println("Deconnexion");
                         serverHandler.getNetworkHandler().getAgent().RemoveUser(receive2);
 
                     } else if (receive1.trim().equals("NewPseudo")){
                             serverHandler.getNetworkHandler().getAgent().UpdateUsers(receive2);
+                            System.out.println("Ajout ou modif via local");
                     }
                     System.out.println("Liste connected user");
                     for (int i = 0; i < serverHandler.getNetworkHandler().getAgent().getPseudoHandler().getConnectedUsers().size(); i++) {
@@ -53,6 +57,7 @@ public class UDP extends Thread {
                 }
             } catch (IOException | ClassNotFoundException e) {
                 System.err.println("Problème reception ! ");
+                e.printStackTrace();
             }
         }
 

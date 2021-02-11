@@ -23,7 +23,6 @@ public class PseudoHandler {
         User find = FindUser(ID);
         if (main_User.getID() != ID) {
             if (find==null) {
-                System.out.println("Ajout via remote");
                 User user = new User(pseudo, address, ID);
                 connectedUsers.add(user);
             } else if (find.getPseudo().equals(pseudo)==false) {
@@ -36,8 +35,7 @@ public class PseudoHandler {
         User user = (User) object;
         User find = FindUser(user.getID());
         if (main_User.getID() != user.getID()) {
-            if (find!=null) {
-                System.out.println("Ajout via remote");
+            if (find==null) {
                 connectedUsers.add(user);
             } else if (find.getPseudo().equals(user.getPseudo())==false) {
                 find.setPseudo(user.getPseudo());

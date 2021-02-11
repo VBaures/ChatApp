@@ -84,7 +84,7 @@ public class ChatHandler {
                 System.out.println("Message History :" + messageHistory);
                 chatPage.Mise_a_jour();
                 System.out.println("Mise à jour ok");
-                agent.getBddHandler().insertMessage(message.sender, message.recipient, ID, message.getContentString(), message.getFormatTime().toString());
+                agent.getBddHandler().insertMessage(message.sender, message.recipient, ID, message.getContentString(), message.getFormatTime().toString(),null);
             } else if (object instanceof File){
                 File content = (File) object;
                 System.out.println("Envoie d'un fichier");
@@ -92,7 +92,7 @@ public class ChatHandler {
                 this.output.writeObject(message);
                 this.getMessageHistory().add(message);
                 chatPage.Mise_a_jour();
-                agent.getBddHandler().insertMessage(message.sender, message.recipient, ID, message.getFileName()+" was sent but is no more available", message.getTime().toString());
+                agent.getBddHandler().insertMessage(message.sender, message.recipient, ID, message.getFileName(), message.getFormatTime().toString(), message.getContentFile());
             }
         } catch (IOException e) {
         }

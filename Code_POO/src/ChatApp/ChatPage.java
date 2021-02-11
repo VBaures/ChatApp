@@ -244,7 +244,7 @@ public class ChatPage extends Thread implements ActionListener{
         }
 
     public void openFile(MouseEvent e) {
-        Message message = chatHandler.getMessageHistory().get(listMessage.indexOf(e.getSource())%listMessage.size());
+        Message message = chatHandler.getMessageHistory().get((listMessage.indexOf(e.getSource())+listMessage.size())%listMessage.size());
         if (message instanceof FileMessage){
             FileMessage fileMessage = (FileMessage) message;
             JFileChooser dialogue = new JFileChooser();

@@ -36,6 +36,7 @@ public class RemoteHandler extends Thread{
             connection.setRequestProperty("ID",Integer.toString(networkHandler.getAgent().getPseudoHandler().getMain_User().getID()));
             System.out.println("Connection au servlet ok5");
             connection.setRequestProperty("pseudo", networkHandler.getAgent().getPseudoHandler().getMain_User().getPseudo().trim());
+            connection.setRequestProperty("place", networkHandler.getAgent().getPseudoHandler().getMain_User().getPlace());
             connection.getResponseCode();
             System.out.println("Reponse ok");
             connection.disconnect();
@@ -51,6 +52,7 @@ public class RemoteHandler extends Thread{
              connection.setRequestProperty("cmd","disconnected");
              connection.setRequestProperty("ID",Integer.toString(networkHandler.getAgent().getPseudoHandler().getMain_User().getID()));
              connection.setRequestProperty("pseudo", networkHandler.getAgent().getPseudoHandler().getMain_User().getPseudo().trim());
+             connection.setRequestProperty("place", networkHandler.getAgent().getPseudoHandler().getMain_User().getPlace());
              connection.disconnect();
          }catch (IOException e){}
      }
@@ -62,7 +64,7 @@ public class RemoteHandler extends Thread{
             System.out.println("Recup 0");
             connection.setRequestMethod("GET");
             connection.setDoOutput(true);
-            connection.setRequestProperty("Place", networkHandler.getAgent().getPseudoHandler().getMain_User().getPlace());
+            connection.setRequestProperty("place", networkHandler.getAgent().getPseudoHandler().getMain_User().getPlace());
             System.out.println("Recup 1.1.1");
             InputStream reader = connection.getInputStream();
             System.out.println("Recup 1.1.1.1 " + reader);
@@ -71,7 +73,6 @@ public class RemoteHandler extends Thread{
             BufferedReader in = new BufferedReader(r);
             System.out.println("Recup 2");
             String line;
-            System.out.println("Line reçu: " + in.readLine());
             while ((line = in.readLine()) != null) {
                 String[] user = line.split(":");
                 System.out.println("Line reçu: " + line);

@@ -98,15 +98,23 @@ public class HandlerBDD {
 		while (res.next()) {
 			if (res.getInt("id_sender") == agent.getPseudoHandler().getMain_User().getID()) {
 				User recipient = agent.getPseudoHandler().FindUser(res.getInt("id_receiver"));
-				StringMessage mess = new StringMessage(recipient, agent.getPseudoHandler().getMain_User(), new String(res.getBytes("content")), new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm", Locale.FRANCE).parse(res.getString("date")));
-				messages.add(mess);
-				System.out.println("Sender ajouté: " + mess.getSender().getPseudo());
+				if (res.getBytes("file")==null) {
+					StringMessage mess = new StringMessage(recipient, agent.getPseudoHandler().getMain_User(), new String(res.getBytes("content")), new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm", Locale.FRANCE).parse(res.getString("date")));
+					messages.add(mess);
+				}else{
+					FileMessage mess = new FileMessage(recipient, agent.getPseudoHandler().getMain_User(), new String(res.getBytes("content")), new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm", Locale.FRANCE).parse(res.getString("date")),res.getBytes("file"));
+					messages.add(mess);
+				}
 
 			} else {
 				User sender = agent.getPseudoHandler().FindUser(res.getInt("id_sender"));
-				StringMessage mess = new StringMessage(agent.getPseudoHandler().getMain_User(), sender, new String(res.getBytes("content")),new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm", Locale.FRANCE).parse(res.getString("date")));
-				messages.add(mess);
-				System.out.println("Sender ajouté: " + mess.getSender().getPseudo());
+				if (res.getBytes("file")==null) {
+					StringMessage mess = new StringMessage(agent.getPseudoHandler().getMain_User(), sender, new String(res.getBytes("content")), new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm", Locale.FRANCE).parse(res.getString("date")));
+					messages.add(mess);
+				}else{
+					FileMessage mess = new FileMessage(agent.getPseudoHandler().getMain_User(), sender, new String(res.getBytes("content")), new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm", Locale.FRANCE).parse(res.getString("date")), res.getBytes("file"));
+					messages.add(mess);
+				}
 			}
 		}
 		return messages;
@@ -165,15 +173,15 @@ public class HandlerBDD {
 		System.out.println("Nombre de ligne(s) insérée(s) : " + nb);
 	}
 	
-	public void insertMessage(User sender, User receiver, int idConversation, String content, String date) {
+	public void insertMessage(User sender, User receiver, int idConversation, String content, String date, byte[] file) {
 
 		try {
 
 			int idUser1 = sender.getID();
 			int idUser2 = receiver.getID();
 			;
-			String insertMessageRequest = "INSERT INTO message(id_conversation, content, date, id_sender, id_receiver) "
-					+ "VALUES (?, ?, ?, ?, ?);";
+			String insertMessageRequest = "INSERT INTO message(id_conversation, content, date, id_sender, id_receiver, file) "
+					+ "VALUES (?, ?, ?, ?, ?,?);";
 
 			PreparedStatement PrepStatement = this.connection.prepareStatement(insertMessageRequest);
 			System.out.println("Time out: " + PrepStatement.getQueryTimeout());
@@ -182,6 +190,7 @@ public class HandlerBDD {
 			PrepStatement.setString(3, date);
 			PrepStatement.setInt(4, idUser1);
 			PrepStatement.setInt(5, idUser2);
+			PrepStatement.setBytes(6, file);
 			PrepStatement.setQueryTimeout(30);
 			int nb = PrepStatement.executeUpdate();
 			System.out.println("Nombre de ligne(s) insérée(s) : " + nb);
