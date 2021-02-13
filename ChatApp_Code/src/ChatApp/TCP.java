@@ -22,7 +22,6 @@ public class TCP extends Thread {
             ObjectInputStream inTCP = new ObjectInputStream(link.getInputStream());
             User sender = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUserByIP(link.getInetAddress().getHostAddress());
             ChatHandler chat = new ChatHandler(sender, outTCP, link, serverHandler.getNetworkHandler().getAgent());
-            chat.StartPage();
             System.out.println("Chat initié par :"+chat.getRecipient().getPseudo());
             serverHandler.getNetworkHandler().getAgent().getCurrentChat().add(chat);
             while(true){

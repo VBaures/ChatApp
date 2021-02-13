@@ -1,4 +1,8 @@
-package ChatApp;
+package ChatApp;/*
+This class handle the client side of a network link between two users
+@author Vincent Baures
+@date 2021-02-13
+*/
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,58 +15,55 @@ public class ClientHandler extends Thread{
     private ChatHandler chatHandler;
     private Socket link;
 
-    public ClientHandler(NetworkHandler networkHandler, ChatHandler chatHandler){
+/*==========CONSTRUCTOR==========*/
+    public ClientHandler(NetworkHandler networkHandler, ChatHandler chatHandler) {
         this.networkHandler = networkHandler;
         this.chatHandler = chatHandler;
     }
 
+/*==========RUN METHOD==========*/
     public void run() {
-            try {
-                System.out.println("Adress IP "+chatHandler.getRecipient().getAddr_Ip());
-                this.link = new Socket(chatHandler.getRecipient().getAddr_Ip().getHostAddress(),1040, InetAddress.getByName("0.0.0.0"),0);
-                link.setKeepAlive(false);
-                System.out.println("client link créé");
-                ObjectOutputStream out = new ObjectOutputStream(link.getOutputStream());
-                ObjectInputStream in = new ObjectInputStream(link.getInputStream());
-                User sender = networkHandler.getAgent().getPseudoHandler().FindUserByIP(link.getInetAddress().getHostAddress());
-                chatHandler.setOutput(out);
-                chatHandler.setSocket(link);
-                while(true){
-                    try {
-                        Object ObjectReceive=in.readObject();
-                        System.out.println(ObjectReceive);
-                        if (ObjectReceive instanceof StringMessage) {
-                            StringMessage receive = (StringMessage) ObjectReceive;
-                            System.out.println("Message reçu :"+ receive.getContentString());
-                            chatHandler.Receive(receive);
-                        } else if (ObjectReceive instanceof FileMessage) {
-                            FileMessage receive = (FileMessage) ObjectReceive;
-                            System.out.println("Message avec file reçu");
-                            chatHandler.Receive(receive);
-                        } else if (ObjectReceive instanceof String) {
-                            String receive = (String) ObjectReceive;
-                            System.out.println(receive);
-                            if (receive.equals("StopChat")){
-                                networkHandler.getAgent().StopChat(sender.getID());
-                                break;
-                            }
+        try {
+            this.link = new Socket(chatHandler.getRecipient().getAddr_Ip().getHostAddress(),1040, InetAddress.getByName("0.0.0.0"),0);
+            link.setKeepAlive(false);
+            ObjectOutputStream out = new ObjectOutputStream(link.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(link.getInputStream());
+            User sender = networkHandler.getAgent().getPseudoHandler().FindUserByIP(link.getInetAddress().getHostAddress());
+            chatHandler.setOutput(out);
+            chatHandler.setSocket(link);
+            while(true){
+                try {
+                    Object ObjectReceive=in.readObject();
+                    System.out.println(ObjectReceive);
+                    if (ObjectReceive instanceof StringMessage) {
+                        StringMessage receive = (StringMessage) ObjectReceive;
+                        System.out.println("Message reçu :"+ receive.getContentString());
+                        chatHandler.Receive(receive);
+                    } else if (ObjectReceive instanceof FileMessage) {
+                        FileMessage receive = (FileMessage) ObjectReceive;
+                        System.out.println("Message avec file reçu");
+                        chatHandler.Receive(receive);
+                    } else if (ObjectReceive instanceof String) {
+                        String receive = (String) ObjectReceive;
+                        System.out.println(receive);
+                        if (receive.equals("StopChat")){
+                            networkHandler.getAgent().StopChat(sender.getID());
+                            break;
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        break;
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
                     }
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                    break;
                 }
-                out.close();
-                in.close();
-                link.close();
-
-            } catch(IOException e){
-                    System.err.println("LA CONNEXION A ETE INTERROMPUE ! ");
             }
+            out.close();
+            in.close();
+            link.close();
+        } catch(IOException e){
+        }
     }
 
+/*==========GETTERS AND SETTERS==========*/
     public ChatHandler getChatHandler(){
         return this.chatHandler;
     }

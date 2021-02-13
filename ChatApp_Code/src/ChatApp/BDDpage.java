@@ -1,8 +1,9 @@
-/*
-    Classe gérant l'authentification de l'utilisateur à la base de donnée.
- */
+package ChatApp;/*
+This class implement the windows used to create an account
 
-package ChatApp;
+@author Vincent Baures Alicia Calmet
+@date 2021-02-13
+*/
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,54 +11,53 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BDDpage implements ActionListener {
+    private JFrame fram;
+    private Agent agent;
+    private JButton bouton;
+    private JTextField pmdp;
+    private JTextField plogin;
 
-    //déclaration des composant et des objets
-    JFrame fram;
-    Agent agent;
-    JButton bouton;
-    JTextField pmdp;
-    JTextField plogin;
-
-    //définition du constructeur de la classe
+/*=======Constructor============*/
     public BDDpage (Agent agent){
         this.agent=agent;
 
-        //gestion fenetre
+        //Frame Creation
         fram=new JFrame("Inscription Utilisateur ");
         fram.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         fram.getContentPane().setPreferredSize(new Dimension(200,100));
 
-        //gestion et création des composants
+        //Handling and creation of components
         JPanel panel1= new JPanel(new GridLayout(2,2));
         JPanel panel2= new JPanel();
         JLabel login= new JLabel("Login :");
         JLabel mdp=new JLabel("Mot de passe :");
         plogin=new JTextField();
         pmdp =new JTextField();
-        bouton=new JButton("Envoyer");
-        bouton.addActionListener(this);
-        bouton.setForeground(Color.GRAY);
         login.setForeground(Color.DARK_GRAY);
         mdp.setForeground(Color.DARK_GRAY);
 
-        //ajout composant panels
+        //Creation of buttons
+        bouton=new JButton("Envoyer");
+        bouton.addActionListener(this);
+        bouton.setForeground(Color.GRAY);
+
+        //Add components to panels
         panel1.add(login,BorderLayout.LINE_START);
         panel1.add(plogin,BorderLayout.CENTER);
         panel1.add(mdp,BorderLayout.LINE_START);
         panel1.add(pmdp,BorderLayout.CENTER);
         panel2.add(bouton,BorderLayout.CENTER);
 
-        //ajout panels dans la fenetre
+        //Add panels to the frame
         fram.getContentPane().add(panel1, BorderLayout.PAGE_START);
         fram.getContentPane().add(panel2, BorderLayout.CENTER);
 
-        //gestion fenetre
+        //Frame handling
         fram.pack();
         fram.setLocationRelativeTo(null);
     }
 
-    //gestion du bouton
-    //TODO: a finir quand BDD prete
+/*================Buttons events===========*/
     public void actionPerformed(ActionEvent e) {
         String username= plogin.getText();
         String password=pmdp.getText();
@@ -68,6 +68,6 @@ public class BDDpage implements ActionListener {
         }
     }
 
-
+/*========GETTERS AND SETTERS========*/
     public JFrame getFrame() { return fram; }
 }

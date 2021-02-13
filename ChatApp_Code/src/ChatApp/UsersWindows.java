@@ -1,8 +1,6 @@
-/*
+package ChatApp;/*
     Classe gérant l'affichage de la liste des pseudonymes des utilisateurs de l'application.
  */
-
-package ChatApp;
 
 import javax.swing.*;
 import java.awt.*;

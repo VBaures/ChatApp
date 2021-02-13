@@ -1,8 +1,10 @@
-/*
-    Classe gérant la liste des pseudonymes des utilisateurs de l'application.
- */
+package ChatApp;/*
+This class handle the list of pseudos displayed in the connected users windows
 
-package ChatApp;
+@author Vincent Baures and Alicia Calmet
+@date 2021-02-13
+*/
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,25 +13,15 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
-class JListSimple extends JPanel
+class JListSimple extends JPanel implements ActionListener
 {
     //déclaration des composant et des objets
     JScrollPane pane;
     JList list;
     UsersWindows usersWindows;
 
-    //déclaration de la méthode Mise_a_jour de la liste
-    public void Mise_a_jour (ArrayList<User> connectUsers){
-        ArrayList<String> connected = new ArrayList<String>();
-        for(int i=0; i<connectUsers.size(); i++){
-            if (connectUsers.get(i).getPseudo().equals("notdefine")==false) {
-                connected.add(connectUsers.get(i).getPseudo());
-            }
-        }
-        list.setListData(connected.toArray());
-    }
 
-    //déclaration du constructeur de la classe
+/*==========CONSTRUCTORS==========*/
     public JListSimple(UsersWindows usersWindows) {
         this.usersWindows=usersWindows;
         this.setLayout(new BorderLayout( ));
@@ -38,15 +30,14 @@ class JListSimple extends JPanel
         // Ajout JList dans le panel
         pane = new JScrollPane(list);
         JButton btnPrint = new JButton("Chatter");
-        btnPrint.addActionListener(new SessionChat( ));
+        btnPrint.addActionListener(this);
 
         add(pane, BorderLayout.CENTER);
         add(btnPrint, BorderLayout.SOUTH);
     }
-    
-    // Afficher le éléments sélectionnés de la JList
-    class SessionChat implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
+
+/*================Buttons events===========*/
+    public void actionPerformed(ActionEvent e) {
             int selected[] = list.getSelectedIndices( );
             System.out.println("Début de chat avec :  ");
 
@@ -61,6 +52,15 @@ class JListSimple extends JPanel
                 }
             }
         }
-    }
 
+/*This function  add a new pseudo to the list*/
+    public void Mise_a_jour (ArrayList<User> connectUsers){
+        ArrayList<String> connected = new ArrayList<String>();
+        for(int i=0; i<connectUsers.size(); i++){
+            if (connectUsers.get(i).getPseudo().equals("notdefine")==false) {
+                connected.add(connectUsers.get(i).getPseudo());
+            }
+        }
+        list.setListData(connected.toArray());
+    }
 }

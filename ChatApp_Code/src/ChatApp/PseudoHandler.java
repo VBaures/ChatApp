@@ -1,8 +1,6 @@
-/*
+package ChatApp;/*
     Classe gérant le pseudonyme de l'utilisateur et l'unicité des pseudonymes.
  */
-
-package ChatApp;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;

@@ -1,4 +1,10 @@
-package ChatApp;
+package ChatApp;/*
+This class handle each conversation the user will start
+
+@author Vincent Baures
+@date 2021-02-13
+*/
+
 
 import java.io.File;
 import java.io.IOException;
@@ -9,61 +15,57 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 public class ChatHandler {
-    Socket socket;
-    ObjectOutputStream output;
-    User recipient;
-    ArrayList<Message> messageHistory = new ArrayList<Message>();
-    Agent agent;
-    ChatPage chatPage;
+    private Socket socket;
+    private ObjectOutputStream output;
+    private User recipient;
+    private ArrayList<Message> messageHistory = new ArrayList<Message>();
+    private Agent agent;
+    private ChatPage chatPage;
     int ID;
 
+/*==========CONSTRUCTORS==========*/
     public ChatHandler(User recipient, ObjectOutputStream out, Socket socket, Agent agent){
-       try {
-            this.ID = agent.getBddHandler().getIDConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
-            System.out.println("ID conversation = "+ID);
-        }catch (SQLException e){
-            System.out.println(e);
-            e.printStackTrace();
-        }
+        this.agent=agent;
+        //Recipient specification
         this.recipient=recipient;
-        System.out.println("User = "+this.recipient);
+        //Link via network to the recipient
         this.output=out;
         this.socket=socket;
-        this.agent=agent;
+        //Message history reception
         try {
+            this.ID = agent.getBddHandler().getIDConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
             messageHistory = agent.getBddHandler().getHistoriqueMessages(ID);
-            System.out.println("Message history:" +messageHistory);
         }catch (SQLException | IOException | ParseException e){
             System.out.println(e);
             e.printStackTrace();
         }
+        //Display the conversation windows
+        StartPage();
     }
     public ChatHandler(User recipient, Agent agent){
+        this.agent=agent;
+        //Recipient specification
+        this.recipient=recipient;
+        //Message history reception
         try {
             agent.getBddHandler().insertConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
             ID = agent.getBddHandler().getIDConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
-            System.out.println("ID conversation = "+ID);
-        }catch (SQLException e){
-            System.out.println(e);
-            e.printStackTrace();
-        }
-        this.recipient=recipient;
-        this.agent=agent;
-        try {
             messageHistory = agent.getBddHandler().getHistoriqueMessages(ID);
-            System.out.println("Message history:" +messageHistory);
         }catch (SQLException | IOException | ParseException e){
             System.out.println(e);
             e.printStackTrace();
         }
-        System.out.println(messageHistory);
+        //Display the conversation windows
+        StartPage();
     }
 
-    public void StartPage(){
+/* This function create and display a windows to caht with the recipient*/
+    private void StartPage(){
         chatPage =  new ChatPage(this.agent, this);
         chatPage.start();
     }
 
+/* Those functions handle the reception of a new message */
     public void Receive(StringMessage message){
             this.messageHistory.add(message);
             this.chatPage.Mise_a_jour();
@@ -73,48 +75,53 @@ public class ChatHandler {
         this.chatPage.Mise_a_jour();
     }
 
+/* This function handle the sending of a new message */
     public void Send(Object object) {
         try {
+            //Sending of a string message
             if (object instanceof  String) {
                 String content = (String) object;
                 StringMessage message = new StringMessage(recipient, agent.getPseudoHandler().getMain_User(), content);
+                //Send the message trough the network
                 this.output.writeObject(message);
+                //Add the message to the history and to the database
                 this.getMessageHistory().add(message);
-                System.out.println("Message History :" + messageHistory);
-                chatPage.Mise_a_jour();
-                System.out.println("Mise à jour ok");
                 agent.getBddHandler().insertMessage(message.sender, message.recipient, ID, message.getContentString(), message.getFormatTime().toString(),null);
+                //Update of the chat windows
+                chatPage.Mise_a_jour();
+            //Sending of a file message
             } else if (object instanceof File){
                 File content = (File) object;
-                System.out.println("Envoie d'un fichier");
                 FileMessage message = new FileMessage(recipient, agent.getPseudoHandler().getMain_User(), content.getPath());
+                //Send the message trough the network
                 this.output.writeObject(message);
+                //Add the message to the history and to the database
                 this.getMessageHistory().add(message);
-                chatPage.Mise_a_jour();
                 agent.getBddHandler().insertMessage(message.sender, message.recipient, ID, message.getFileName(), message.getFormatTime().toString(), message.getContentFile());
+                //Update of the chat windows
+                chatPage.Mise_a_jour();
             }
         } catch (IOException e) {
         }
     }
 
+/* This function handle the end of the chat */
     public void StopChat() throws IOException {
+        //Notify the recipient
         output.writeObject("StopChat");
+        //Close network connections
         socket.close();
+        //Close the chat window
         chatPage.getFram().dispose();
     }
 
-    void setOutput(ObjectOutputStream output){
-        this.output=output;
-    }
 
-    void setSocket(Socket socket){
-        this.socket=socket;
-    }
+/*==========GETTERS AND SETTERS==========*/
+    void setOutput(ObjectOutputStream output){ this.output=output; }
 
+    void setSocket(Socket socket){ this.socket=socket; }
 
-    public User getRecipient(){
-        return this.recipient;
-    }
+    public User getRecipient(){ return this.recipient; }
 
-    public ArrayList<Message> getMessageHistory (){return this.messageHistory;}
+    public ArrayList<Message> getMessageHistory (){ return this.messageHistory; }
 }

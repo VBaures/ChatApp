@@ -1,8 +1,6 @@
-/*
+package ChatApp;/*
     Classe gérant le pseudonyme d'un utilisateur et l'unicité des pseudonymes.
  */
-
-package ChatApp;
 
 import javax.swing.*;
 import java.awt.*;
