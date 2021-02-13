@@ -1,3 +1,9 @@
+/*
+This class handle a TCP server connection to the TCP client of an other user
+
+@author Vincent Baures
+@date 2021-02-13
+*/
 package ChatApp;
 
 import java.io.IOException;
@@ -9,12 +15,13 @@ public class TCP extends Thread {
     ServerHandler serverHandler;
     Socket link;
 
-
+/*===========CONSTRUCTOR==========*/
     public TCP(ServerHandler serverHandler, Socket link){
         this.serverHandler=serverHandler;
         this.link=link;
     }
 
+/*===========RUN METHOD==========*/
     @Override
     public void run() {
         try {

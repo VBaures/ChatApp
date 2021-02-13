@@ -1,8 +1,10 @@
-package ChatApp;/*
+/*
 This class handle the client side of a network link between two users
 @author Vincent Baures
 @date 2021-02-13
 */
+
+package ChatApp;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

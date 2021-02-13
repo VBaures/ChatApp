@@ -1,9 +1,11 @@
-package ChatApp;/*
+/*
 This class handle the connection to the database and the reqests
 
 @author Vincent Baures and Arnaud Bouisson
 @date 2021-02-13
 */
+
+package ChatApp;
 
 import java.io.IOException;
 import java.sql.*;

@@ -1,6 +1,11 @@
-package ChatApp;/*
-    Classe gérant le pseudonyme de l'utilisateur et l'unicité des pseudonymes.
- */
+/*
+This class handle all the information regarding the users connected and the main user
+
+@author Vincent Baures and Alicia Calmet
+@date 2021-02-13
+*/
+
+package ChatApp;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -10,16 +15,17 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 
 public class PseudoHandler {
-    protected MainUser main_User;
-    //a voir si la liste des personnes connectés n'est pas de type public
-    protected ArrayList<User> connectedUsers;
+    private MainUser main_User;
+    private ArrayList<User> connectedUsers;
 
+/*==========CONSTRUCTOR==========*/
     public PseudoHandler(Agent agent) throws UnknownHostException {
         this.connectedUsers = new ArrayList<User>();
-        main_User = new MainUser("notdefine",getIpAddress(),-1);
-        System.out.println("Addresse IP = "+getIpAddress());
+        main_User = new MainUser("notdefine",InetAddress.getLocalHost(),-1);
+        System.out.println("Addresse IP = "+InetAddress.getLocalHost());
     }
 
+/*Those functions add a user to the list if it does not exist or modify his information */
     public void UpdateUsers(String pseudo, InetAddress address,int ID) {
         User find = FindUser(ID);
         if (main_User.getID() != ID) {
@@ -31,7 +37,6 @@ public class PseudoHandler {
             }
         }
     }
-
     public void UpdateUsers(Object object) {
         User user = (User) object;
         User find = FindUser(user.getID());
@@ -44,13 +49,13 @@ public class PseudoHandler {
         }
     }
 
+/* THose functions remove a user from the list if he is in it */
     public void RemoveUser(int ID){
         User find = FindUser(ID);
         if (find!=null) {
             connectedUsers.remove(find);
         }
     }
-
     public void RemoveUser(Object object){
         User user = (User) object;
         User find = FindUser(user.getID());
@@ -59,23 +64,7 @@ public class PseudoHandler {
         }
     }
 
-    //user[3].trim().equals("connected")
-
-
-    public MainUser getMain_User() {
-        return main_User;
-    }
-
-    public ArrayList<User> getConnectedUsers() {
-        return connectedUsers;
-    }
-
-    //on va mettre a jour la liste des personnes connectés. Par exemple une personne vient d'activer
-    // l'application, il faut donc le savoir pour avoir la possibilité de communiquer avec elle ultérieurement.
-    public void UpdateConnectedUser(User new_User) {
-    }
-
-    //on regarde dans l'array. A la recherche de Bernard.....
+/* This function verify if a pseudo is already used by someone in the list*/
     public boolean VerifyPseudo(String Pseudo) {
         boolean non_utilise = true;
         System.out.println("Users connectés:" + connectedUsers);
@@ -86,8 +75,8 @@ public class PseudoHandler {
         }
         return non_utilise;
     }
-    //...on a trouvé Bernard
 
+/*Those function find a user in the list via his pseudo, ID or IP address*/
     public User FindUser (String Pseudo){
         for (int i = 0; i < connectedUsers.size(); i++) {
             if (connectedUsers.get(i).getPseudo().equals(Pseudo)) {
@@ -96,7 +85,6 @@ public class PseudoHandler {
         }
         return(null);
     }
-
     public User FindUser (int id){
         for (int i = 0; i < connectedUsers.size(); i++) {
             if (connectedUsers.get(i).getID()==id) {
@@ -105,56 +93,6 @@ public class PseudoHandler {
         }
         return(null);
     }
-
-    //si le pseudo est ok alors l'utilisateur prend ce pseudo
-    //cette fonction est utilise pour CHANGER LE PSEUDO aussi
-    public void ChoosePseudo(String NewPseudo, int id) {
-        FindUser(id).setPseudo(NewPseudo);
-
-    }
-
-    //TODO quand on aura fait la base de données
-    public void VerifyLogin (String username,String password){
-
-    }
-    public void NotifyPseudoChange(){ }
-    public static InetAddress getIpAddress() throws UnknownHostException {
-        UnknownHostException exception = new UnknownHostException("Failed to get IP") ;
-
-        try {
-            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces() ;
-
-            // For each interfaces
-            while(interfaces.hasMoreElements()) {
-                NetworkInterface nInterface = interfaces.nextElement() ;
-                Enumeration<InetAddress> addresses = nInterface.getInetAddresses() ;
-
-                if(nInterface.isLoopback() || ! nInterface.isUp()) {
-                    continue ;
-                }
-
-                // For each addresses of the interface.
-                while(addresses.hasMoreElements()) {
-                    InetAddress addr = addresses.nextElement() ;
-
-                    /*
-                     * We are not using IPv6 addresses. It's a
-                     * choice.
-                     *
-                     * || addr instanceof Inet6Address
-                     */
-                    if (addr instanceof Inet4Address) {
-                        return InetAddress.getByName(addr.getHostAddress()) ;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            exception.initCause(e) ;
-        }
-
-        throw exception ;
-    }
-
     public User FindUserByIP(String inetAddress) {
         for (int i = 0; i < connectedUsers.size(); i++) {
             System.out.println(connectedUsers.get(i).getAddr_Ip().toString());
@@ -165,4 +103,9 @@ public class PseudoHandler {
         }
         return null;
     }
+
+/*==========GETTERS AND SETTERS==========*/
+    public MainUser getMain_User() { return main_User; }
+    public ArrayList<User> getConnectedUsers() { return connectedUsers; }
+
 }

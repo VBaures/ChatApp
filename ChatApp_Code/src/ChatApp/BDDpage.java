@@ -1,9 +1,11 @@
-package ChatApp;/*
+/*
 This class implement the windows used to create an account
 
 @author Vincent Baures Alicia Calmet
 @date 2021-02-13
 */
+
+package ChatApp;
 
 import javax.swing.*;
 import java.awt.*;

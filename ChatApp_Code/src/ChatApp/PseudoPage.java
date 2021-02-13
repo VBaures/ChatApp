@@ -1,6 +1,10 @@
-package ChatApp;/*
-    Classe gérant le pseudonyme d'un utilisateur et l'unicité des pseudonymes.
- */
+/*
+This class handle the windows that allows the user to choose his pseudo
+
+@author Alicia Calmet
+@date 2021-02-13
+*/
+package ChatApp;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,18 +15,16 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class PseudoPage implements ActionListener {
+    private Agent agent;
+    private JTextField ppseudo;
+    private JFrame frame;
+    private JButton bouton1;
 
-    //déclaration descomposant et des objets
-    Agent agent;
-    JTextField ppseudo;
-    JFrame frame;
-    JButton bouton1;
-
-    //déclaration du constructeur de la classe
+/*=============CONSTRUCTOR=============*/
     public PseudoPage (Agent agent){
         this.agent=agent;
 
-        //gestion fenêtre
+        //Frame Creation
         frame= new JFrame("Choose pseudo");
         frame.addWindowListener(new WindowAdapter() {
             @Override
@@ -38,31 +40,32 @@ public class PseudoPage implements ActionListener {
         });
         frame.setSize(new Dimension(1000,1000));
 
-        //gestion et création des composants
+        //Handling and creation of components
         JPanel panel1= new JPanel(new BorderLayout());
         JPanel panel2= new JPanel(new BorderLayout());
         JLabel title= new JLabel("Veuillez rentrer un pseudo");
         JLabel pseudo = new JLabel("Pseudo ", SwingConstants.LEFT);
         ppseudo= new JTextField(SwingConstants.RIGHT);
+
+        //Creation of buttons
         bouton1= new JButton("Valider");
         bouton1.addActionListener(this );
 
-        //ajout composant panels
+        //Add components to panels
         panel1.add(title,BorderLayout.PAGE_START);
         panel1.add(pseudo,BorderLayout.LINE_START);
         panel1.add(ppseudo,BorderLayout.CENTER);
         panel2.add(bouton1, BorderLayout.PAGE_START);
 
-        //ajout panels dans la fenetre
+        //Add panels to the frame
         frame.getContentPane().add(panel1, BorderLayout.PAGE_START);
         frame.getContentPane().add(panel2, BorderLayout.PAGE_END);
 
-        //gestion fenêtre
+        //Frame handling
         frame.pack();
         frame.setLocationRelativeTo(null); }
 
-    /* gestion du bouton: on vérifie l'unicité du pseudonyme choisi par l'utilisateur et on en informe
-    les autres utilisateurs de l'application */
+/*================Buttons events===========*/
     public void actionPerformed (ActionEvent e){
         String getvalue= ppseudo.getText();
         System.out.println("Message :"+getvalue);

@@ -1,9 +1,11 @@
-package ChatApp;/*
+/*
 This class implement the windows where the users will connect to the application
 
 @author Vincent Baures and Alicia Calmet
 @date 2021-02-13
 */
+
+package ChatApp;
 
 import javax.swing.*;
 import java.awt.*;

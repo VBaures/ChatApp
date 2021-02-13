@@ -1,3 +1,10 @@
+/*
+This class handle creation of UDP connection and TCP connection server side
+
+@author Vincent Baures
+@date 2021-02-13
+*/
+
 package ChatApp;
 
 import java.io.IOException;
@@ -6,18 +13,17 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerHandler extends Thread {
-    protected NetworkHandler networkHandler;
-    protected int port=1040;
-    protected UDP udp;
-    protected TCP tcp;
+    private NetworkHandler networkHandler;
+    private int port=1040;
+    private UDP udp;
+    private TCP tcp;
 
-
+/*==========CONSTRUCTOR==========*/
     public ServerHandler(NetworkHandler networkHandler) {
         this.networkHandler=networkHandler;
     }
 
-    ;
-
+/*==========RUN METHOD==========*/
     public void run() {
         try {
             System.out.println("Démarrage server");
@@ -37,11 +43,7 @@ public class ServerHandler extends Thread {
         }
     }
 
-    public UDP getUdp() {
-        return udp;
-    }
-
-    public NetworkHandler getNetworkHandler(){
-        return this.networkHandler;
-    }
+/*=========GETTERS AND SETTERS==========*/
+    public UDP getUdp() { return udp; }
+    public NetworkHandler getNetworkHandler(){ return this.networkHandler; }
 }

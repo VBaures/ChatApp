@@ -1,8 +1,10 @@
-package ChatApp;/*
+/*
 This class display the chat session between two users
 @author Alicia Calmet
 @date 2021-02-13
 */
+
+package ChatApp;
 
 import javax.swing.*;
 import java.awt.*;

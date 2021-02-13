@@ -1,3 +1,10 @@
+/*
+This class is a abstract that class that represent a message without entering in the details of its content
+
+@author Vincent Baures and Alicia Calmet
+@date 2021-02-13
+*/
+
 package ChatApp;
 
 import java.io.Serializable;
@@ -12,25 +19,20 @@ public abstract class Message implements Serializable {
     protected User recipient;
     protected User sender;
 
+/*==========CONSTRUCTORS==========*/
     public Message(User recipient, User sender){
         this.recipient=recipient;
         this.sender=sender;
         this.time= new Date();
     }
-
     public Message(User recipient, User sender , Date time){
         this.recipient=recipient;
         this.sender=sender;
         this.time= time;
     }
 
-    public Date getTime (){return this.time;}
+/*==========GETTERS AND SETTERS==========*/
     public String getFormatTime(){return this.dateFormat.format(this.time);}
-    public String getType(){return "Message";}
-    public User getRecipient() {
-        return this.recipient;
-    }
-    public User getSender() {
-        return this.sender;
-    }
+    public User getRecipient() { return this.recipient; }
+    public User getSender() { return this.sender; }
 }

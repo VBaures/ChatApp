@@ -1,9 +1,11 @@
-package ChatApp;/*
-This class is a specification of a message object fot it to contain a file
+/*
+This class is a specification of a message object for it to contain a file
 
 @author Vincent Baures and Alicia Calmet
 @date 2021-02-13
 */
+
+package ChatApp;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -32,6 +34,5 @@ public class FileMessage extends Message implements Serializable {
 
 /*==========GETTERS AND SETTERS==========*/
     public byte[] getContentFile (){ return this.content; }
-
     public String getFileName() { return this.fileName; }
 }

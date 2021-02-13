@@ -1,7 +1,10 @@
-package ChatApp;/*
-    Classe gérant l'affichage de la liste des pseudonymes des utilisateurs de l'application.
- */
+/*
+This class display the window that contain the list of the connected users
 
+@author Alicia Calmet
+@date 2021-02-13
+*/
+package ChatApp;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,31 +13,32 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class UsersWindows extends Thread implements ActionListener {
 
-    //déclaration des composant et des objets
-    JFrame frame;
-    JListSimple jListSimple;
-    Agent agent;
-    JMenuBar barre_menu;
-    JMenu m1;
-    JMenu m2;
-    JMenuItem  m11;
-    JMenuItem m12;
-    JMenuItem m22;
+    private JFrame frame;
+    private JListSimple jListSimple;
+    private Agent agent;
+    private JMenuBar barre_menu;
+    private JMenu m1;
+    private JMenu m2;
+    private JMenuItem  m11;
+    private JMenuItem m12;
+    private JMenuItem m22;
 
-    //declaration du constructeur de la classe
+/*==========CONSTRUCTOR==========*/
     public UsersWindows(Agent agent){
         jListSimple=new JListSimple(this);
         this.agent=agent;
         this.start();
     }
 
-    //implementation de la méthode run de la classe
+/*==========CONSTRUCTOR==========*/
     public void run(){
 
-        //gestion fenetre
+        //Frame Creation
         frame = new JFrame("Connectés");
         frame.addWindowListener(new WindowAdapter() {
                 @Override
@@ -50,7 +54,7 @@ public class UsersWindows extends Thread implements ActionListener {
             });
         frame.setContentPane(jListSimple);
 
-        //gestion et création des composants
+        //Handling and creation of components
         barre_menu=new JMenuBar();
         m1= new JMenu("Options");
         m2=new JMenu("J'ai besoin d'aide !");
@@ -66,48 +70,32 @@ public class UsersWindows extends Thread implements ActionListener {
         m1.add(m12);
         m2.add(m22);
 
-        //ajout composant panels
+        //Add panels to the frame
         frame.getContentPane().add(BorderLayout.NORTH,barre_menu);
 
-        //gestion fenetre
+        //Frame handling
         frame.setSize(250, 200);
         frame.setLocationRelativeTo(null);
-        /*while(true){
-            jListSimple.Mise_a_jour(agent.getPseudoHandler().getConnectedUsers());
-        }*/
     }
 
-    public Agent getAgent(){return this.agent;}
-
-    public JFrame getFrame() {
-        return frame;
-    }
-
-    public int Close() throws IOException {
-        agent.getNetworkHandler().getRemoteHandler().NotifyDisconnection();
-        agent.Disconnect();
-        return 0;
-    }
-
-    //gestion du bouton
+/*================Buttons events===========*/
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==m11){
             agent.getPseudoPage().getFrame().setVisible(true);
         }
         else if (e.getSource()==m22){
-            File fichier = new File("C:/Users/calme/Documents/include.pdf");
             // On vérifie que la classe Desktop soit bien supportée :
             if (Desktop.isDesktopSupported()) {
                 // On récupère l'instance du desktop :
                 Desktop desktop = Desktop.getDesktop();
                 // On vérifie que la fonction open est bien supportée :
-                if (desktop.isSupported(Desktop.Action.OPEN)) {
-                    // Et on lance l'application associé au fichier pour l'ouvrir :
+                if (desktop.isSupported(Desktop.Action.BROWSE)) {
                     try {
-                        desktop.open(fichier);
-                    }
-                    catch(IOException ex) {
-                        // Gestion de l'erreur
+                        URI uri = new URI("https://github.com/VBaures/Projet-COO/raw/master/guide_utilisation_poo.pdf");
+                        Desktop dt = Desktop.getDesktop();
+                        dt.browse(uri);
+                    } catch (IOException | URISyntaxException ioException) {
+                        ioException.printStackTrace();
                     }
                 }
             }
@@ -124,4 +112,10 @@ public class UsersWindows extends Thread implements ActionListener {
             System.exit(0);
         }
     }
+
+    public Agent getAgent(){return this.agent;}
+    public JFrame getFrame() {
+        return frame;
+    }
+    public JListSimple getjListSimple() { return jListSimple; }
 }

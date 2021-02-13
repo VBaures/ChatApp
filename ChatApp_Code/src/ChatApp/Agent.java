@@ -1,10 +1,11 @@
-package ChatApp;/*
+/*
 This class is the principal class of our application.
 His purpose is to do the link between all the sides of our application
 
 @author Vincent Baures and Alicia Calmet
 @date 2021-02-13
 */
+package ChatApp;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -50,6 +51,7 @@ public class Agent {
     /* Those functions stop a chat by closing the chat handler of the chat */
     public void StopChat(int SenderID) {
         ChatHandler chatHandler = findChatHandler(SenderID);
+        networkHandler.StopChat(chatHandler);
         try {
             chatHandler.StopChat();
             currentChat.remove(chatHandler);
@@ -59,6 +61,7 @@ public class Agent {
     }
 
     public void StopChat(ChatHandler chatHandler) {
+        networkHandler.StopChat(chatHandler);
         try {
             chatHandler.StopChat();
             currentChat.remove(chatHandler);
@@ -79,23 +82,23 @@ public class Agent {
     /* Those function are used when user's information are received from the UDP or HTTP server */
     public void UpdateUsers(Object object) {
         pseudoHandler.UpdateUsers(object);
-        usersWindows.jListSimple.Mise_a_jour(pseudoHandler.getConnectedUsers());
+        usersWindows.getjListSimple().Mise_a_jour(pseudoHandler.getConnectedUsers());
     }
 
     public void UpdateUsers(String pseudo, InetAddress address, int ID) {
         pseudoHandler.UpdateUsers(pseudo, address, ID);
-        usersWindows.jListSimple.Mise_a_jour(pseudoHandler.getConnectedUsers());
+        usersWindows.getjListSimple().Mise_a_jour(pseudoHandler.getConnectedUsers());
     }
 
     /* This function are used when we receive a disconnection signal from a user */
     public void RemoveUser(int ID) {
         pseudoHandler.RemoveUser(ID);
-        usersWindows.jListSimple.Mise_a_jour(pseudoHandler.getConnectedUsers());
+        usersWindows.getjListSimple().Mise_a_jour(pseudoHandler.getConnectedUsers());
     }
 
     public void RemoveUser(Object object) {
         pseudoHandler.RemoveUser(object);
-        usersWindows.jListSimple.Mise_a_jour(pseudoHandler.getConnectedUsers());
+        usersWindows.getjListSimple().Mise_a_jour(pseudoHandler.getConnectedUsers());
     }
 
     /* This function verify if the specify username and password are valid or not */

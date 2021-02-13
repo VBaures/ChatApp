@@ -1,3 +1,9 @@
+/*
+This class handle the connection to the remote server via HTTP
+
+@author Vincent Baures
+@date 2021-02-13
+*/
 package ChatApp;
 
 import java.io.BufferedReader;
@@ -14,6 +20,8 @@ import java.util.TimerTask;
 public class RemoteHandler extends Thread{
     private NetworkHandler networkHandler;
     private URL url;
+
+/*==========CONSTRUCTORS==========*/
     public RemoteHandler(NetworkHandler networkHandler) {
         this.networkHandler=networkHandler;
         try{
@@ -22,6 +30,7 @@ public class RemoteHandler extends Thread{
         }
     }
 
+/* This function notify the remote server with information concerning the main user */
     public void notifyServer(){
         try {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -44,6 +53,7 @@ public class RemoteHandler extends Thread{
         }catch (IOException e){}
     }
 
+/* This function inform the remote server of the disconnection of the main user */
      public void NotifyDisconnection(){
          try {
              HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -58,7 +68,8 @@ public class RemoteHandler extends Thread{
          }catch (IOException e){}
      }
 
-     public void getInformation(){
+/* This function ask who is connected to the remote server */
+    public void getInformation(){
         try {
             System.out.println("Recupération info");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -87,6 +98,7 @@ public class RemoteHandler extends Thread{
         }catch (IOException e){}
     }
 
+/*========== RUN METHOD ==========*/
      public void run(){
         Timer timer = new Timer();
          TimerTask timerTask = new TimerTask() {

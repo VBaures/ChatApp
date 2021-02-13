@@ -1,10 +1,11 @@
-package ChatApp;/*
+/*
 This class handle the list of pseudos displayed in the connected users windows
 
 @author Vincent Baures and Alicia Calmet
 @date 2021-02-13
 */
 
+package ChatApp;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,12 +14,10 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
-class JListSimple extends JPanel implements ActionListener
-{
-    //déclaration des composant et des objets
-    JScrollPane pane;
-    JList list;
-    UsersWindows usersWindows;
+class JListSimple extends JPanel implements ActionListener {
+    private JScrollPane pane;
+    private JList list;
+    private UsersWindows usersWindows;
 
 
 /*==========CONSTRUCTORS==========*/
@@ -27,7 +26,6 @@ class JListSimple extends JPanel implements ActionListener
         this.setLayout(new BorderLayout( ));
         list=new JList();
 
-        // Ajout JList dans le panel
         pane = new JScrollPane(list);
         JButton btnPrint = new JButton("Chatter");
         btnPrint.addActionListener(this);

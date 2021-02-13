@@ -1,3 +1,10 @@
+/*
+This class handle all the network aspect of the network, the TCP and UDP servers, the connection to the remote sever and the creation of TCP clients
+
+@author Vincent Baures
+@date 2021-02-13
+*/
+
 package ChatApp;
 
 import java.io.IOException;
@@ -9,6 +16,7 @@ public class NetworkHandler extends Thread {
     ArrayList<ClientHandler> listClientHandler;
     Agent agent;
 
+/*=======CONSTRUCTOR==========*/
     public NetworkHandler(Agent agent){
         this.agent=agent;
         this.listClientHandler=new ArrayList<>();
@@ -19,23 +27,22 @@ public class NetworkHandler extends Thread {
         }
     }
 
-    public void StartServer() throws IOException {
+/*This function create and start the classes that will handle the TCP and UDP server as well as the HTTP connection to the remote server*/
+    private void StartServer() throws IOException {
         this.serverHandler= new ServerHandler(this);
         serverHandler.start();
         this.remoteHandler = new RemoteHandler(this);
         remoteHandler.start();
     }
 
-    public Agent getAgent(){
-        return agent;
-    }
-
+/* This function create a new TCP client */
     public void StartChat(ChatHandler chatHandler) throws IOException {
         ClientHandler client = new ClientHandler(this, chatHandler );
         listClientHandler.add(client);
         client.start();
     }
 
+/* This function destroy a  TCP client */
     public void StopChat(ChatHandler chatHandler){
         ClientHandler clientHandler = findClientHandler(chatHandler.getRecipient().getID());
         if (clientHandler!=null){
@@ -43,7 +50,8 @@ public class NetworkHandler extends Thread {
         }
     }
 
-    public ClientHandler findClientHandler(int ID){
+/* This function retrieve a  TCP client via the recipient ID */
+    private ClientHandler findClientHandler(int ID){
         for (int i=0; i<listClientHandler.size(); i++){
             if (listClientHandler.get(i).getChatHandler().getRecipient().getID()==ID){
                 return listClientHandler.get(i);
@@ -52,8 +60,8 @@ public class NetworkHandler extends Thread {
         return null;
     }
 
-    public ServerHandler getServerHandler(){
-        return this.serverHandler;
-    }
+/*==========GETTERS AND SETTERS==========*/
+    public Agent getAgent(){ return agent; }
+    public ServerHandler getServerHandler(){ return this.serverHandler; }
     public RemoteHandler getRemoteHandler() { return this.remoteHandler; }
 }

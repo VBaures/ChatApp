@@ -1,10 +1,11 @@
-package ChatApp;/*
+/*
 This class handle each conversation the user will start
 
 @author Vincent Baures
 @date 2021-02-13
 */
 
+package ChatApp;
 
 import java.io.File;
 import java.io.IOException;
