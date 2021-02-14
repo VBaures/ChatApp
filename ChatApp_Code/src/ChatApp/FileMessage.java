@@ -24,7 +24,6 @@ public class FileMessage extends Message implements Serializable {
         Path path = Paths.get(filePath);
         this.fileName = path.getFileName().toString();
         this.content= Files.readAllBytes(path);
-        System.out.println("Date message "+this.getFormatTime());
     }
     public FileMessage (User recipient, User sender, String fileName, Date date, byte[] content) throws IOException {
         super(recipient,sender,date);

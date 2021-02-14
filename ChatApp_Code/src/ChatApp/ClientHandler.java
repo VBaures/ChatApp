@@ -39,11 +39,9 @@ public class ClientHandler extends Thread{
                     System.out.println(ObjectReceive);
                     if (ObjectReceive instanceof StringMessage) {
                         StringMessage receive = (StringMessage) ObjectReceive;
-                        System.out.println("Message reçu :"+ receive.getContentString());
                         chatHandler.Receive(receive);
                     } else if (ObjectReceive instanceof FileMessage) {
                         FileMessage receive = (FileMessage) ObjectReceive;
-                        System.out.println("Message avec file reçu");
                         chatHandler.Receive(receive);
                     } else if (ObjectReceive instanceof String) {
                         String receive = (String) ObjectReceive;

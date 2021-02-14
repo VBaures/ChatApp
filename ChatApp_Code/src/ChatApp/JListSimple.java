@@ -37,16 +37,12 @@ class JListSimple extends JPanel implements ActionListener {
 /*================Buttons events===========*/
     public void actionPerformed(ActionEvent e) {
             int selected[] = list.getSelectedIndices( );
-            System.out.println("Début de chat avec :  ");
-
             for (int i=0; i < selected.length; i++) {
                 String element =
                         (String)list.getModel( ).getElementAt(selected[i]);
-                System.out.println("  " + element);
                 try {
                     usersWindows.getAgent().StartChat(element);
                 } catch (IOException ioException) {
-                    ioException.printStackTrace();
                 }
             }
         }

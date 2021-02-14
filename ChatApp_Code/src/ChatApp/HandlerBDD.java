@@ -155,7 +155,6 @@ public class HandlerBDD {
 		PrepStatement.setInt(3, idUser2);
 		PrepStatement.setInt(4, idUser1);
 		ResultSet res = PrepStatement.executeQuery();
-
 		if (res.next()) {
 			return res.getInt("id_conversation");
 		}
@@ -172,9 +171,7 @@ public class HandlerBDD {
 		PrepStatement.setInt(4, idUser2);
 		PrepStatement.setInt(5, idUser2);
 		PrepStatement.setInt(6, idUser1);
-		int nb = PrepStatement.executeUpdate();
 
-		System.out.println("Nombre de ligne(s) insérée(s) : " + nb);
 	}
 
 /*This function insert a new message in the database*/
@@ -193,11 +190,7 @@ public class HandlerBDD {
 			PrepStatement.setInt(5, idUser2);
 			PrepStatement.setBytes(6, file);
 			PrepStatement.setQueryTimeout(30);
-			int nb = PrepStatement.executeUpdate();
-			System.out.println("Nombre de ligne(s) insérée(s) : " + nb);
 		} catch (SQLException e) {
-			System.err.println(e);
-			e.printStackTrace();
 		}
 	}
 }

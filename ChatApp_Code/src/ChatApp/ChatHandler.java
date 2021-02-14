@@ -22,7 +22,7 @@ public class ChatHandler {
     private ArrayList<Message> messageHistory = new ArrayList<Message>();
     private Agent agent;
     private ChatPage chatPage;
-    int ID;
+    private int ID;
 
 /*==========CONSTRUCTORS==========*/
     public ChatHandler(User recipient, ObjectOutputStream out, Socket socket, Agent agent){
@@ -37,8 +37,6 @@ public class ChatHandler {
             this.ID = agent.getBddHandler().getIDConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
             messageHistory = agent.getBddHandler().getHistoriqueMessages(ID);
         }catch (SQLException | IOException | ParseException e){
-            System.out.println(e);
-            e.printStackTrace();
         }
         //Display the conversation windows
         StartPage();
@@ -53,8 +51,6 @@ public class ChatHandler {
             ID = agent.getBddHandler().getIDConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
             messageHistory = agent.getBddHandler().getHistoriqueMessages(ID);
         }catch (SQLException | IOException | ParseException e){
-            System.out.println(e);
-            e.printStackTrace();
         }
         //Display the conversation windows
         StartPage();

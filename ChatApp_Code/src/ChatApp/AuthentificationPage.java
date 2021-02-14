@@ -82,27 +82,26 @@ class AuthentificationPage implements ActionListener {
 
 
 /*================Buttons events===========*/
-        public void actionPerformed (ActionEvent e) {
-            String username = pusername.getText();
-            String password = ppassword.getText();
-            if (e.getSource() == bouton1) {
-                if (agent.LogIn(username, password)) {
-                    agent.getPseudoHandler().getMain_User().setPlace("indoor");
-                    frame.dispose();
-                    agent.getPseudoPage().getFrame().setVisible(true);
-                    agent.StartServers();
-                }
-            } else if (e.getSource() == bouton2) {
-                if (agent.LogIn(username, password)) {
-                    agent.getPseudoHandler().getMain_User().setPlace("remote");
-                    frame.dispose();
-                    agent.getPseudoPage().getFrame().setVisible(true);
-                    agent.StartServers();
-                }
-            } else{
+    public void actionPerformed (ActionEvent e) {
+        String username = pusername.getText();
+        String password = ppassword.getText();
+        if (e.getSource() == bouton1) {
+            if (agent.LogIn(username, password)) {
+                agent.getPseudoHandler().getMain_User().setPlace("indoor");
+                frame.dispose();
+                agent.getPseudoPage().getFrame().setVisible(true);
+                agent.StartServers();
+            }
+        } else if (e.getSource() == bouton2) {
+            if (agent.LogIn(username, password)) {
+                agent.getPseudoHandler().getMain_User().setPlace("remote");
+                frame.dispose();
+                agent.getPseudoPage().getFrame().setVisible(true);
+                agent.StartServers();
+            }
+        } else{
             agent.getBddpage().getFrame().setVisible(true);
         }
-
     }
 }
 

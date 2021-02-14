@@ -67,7 +67,6 @@ public class PseudoHandler {
 /* This function verify if a pseudo is already used by someone in the list*/
     public boolean VerifyPseudo(String Pseudo) {
         boolean non_utilise = true;
-        System.out.println("Users connectés:" + connectedUsers);
         for (int i = 0; i < connectedUsers.size(); i++) {
             if ((connectedUsers.get(i).getPseudo().trim().equals(Pseudo)) || Pseudo.equals("")) {
                 non_utilise = false;

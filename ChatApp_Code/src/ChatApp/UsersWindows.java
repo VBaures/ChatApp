@@ -84,11 +84,8 @@ public class UsersWindows extends Thread implements ActionListener {
             agent.getPseudoPage().getFrame().setVisible(true);
         }
         else if (e.getSource()==m22){
-            // On vérifie que la classe Desktop soit bien supportée :
             if (Desktop.isDesktopSupported()) {
-                // On récupère l'instance du desktop :
                 Desktop desktop = Desktop.getDesktop();
-                // On vérifie que la fonction open est bien supportée :
                 if (desktop.isSupported(Desktop.Action.BROWSE)) {
                     try {
                         URI uri = new URI("https://github.com/VBaures/Projet-COO/raw/master/guide_utilisation_poo.pdf");
@@ -102,7 +99,6 @@ public class UsersWindows extends Thread implements ActionListener {
         }
         else {
             try {
-                agent.getNetworkHandler().getRemoteHandler().NotifyDisconnection();
                 agent.Disconnect();
 
             } catch (IOException ioException) {

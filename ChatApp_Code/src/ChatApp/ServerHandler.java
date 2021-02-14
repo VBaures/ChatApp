@@ -26,9 +26,7 @@ public class ServerHandler extends Thread {
 /*==========RUN METHOD==========*/
     public void run() {
         try {
-            System.out.println("Démarrage server");
             ServerSocket servSocketTCP = new ServerSocket(this.port);
-            System.out.println("Addresse du TCP "+servSocketTCP);
             DatagramSocket datagramSocket = new DatagramSocket(this.port);
             this.udp= new UDP(this, datagramSocket);
             udp.start();
@@ -39,7 +37,6 @@ public class ServerHandler extends Thread {
                 tcp.start();
             }
         } catch (IOException e) {
-            System.err.println("Le server est déjà utilisé ! ");
         }
     }
 

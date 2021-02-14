@@ -29,18 +29,14 @@ public class TCP extends Thread {
             ObjectInputStream inTCP = new ObjectInputStream(link.getInputStream());
             User sender = serverHandler.getNetworkHandler().getAgent().getPseudoHandler().FindUserByIP(link.getInetAddress().getHostAddress());
             ChatHandler chat = new ChatHandler(sender, outTCP, link, serverHandler.getNetworkHandler().getAgent());
-            System.out.println("Chat initié par :"+chat.getRecipient().getPseudo());
             serverHandler.getNetworkHandler().getAgent().getCurrentChat().add(chat);
             while(true){
                 Object ObjectReceive=inTCP.readObject();
-                System.out.println("Objet Reçu = "+ ObjectReceive);
                 if (ObjectReceive instanceof StringMessage) {
                     StringMessage receive = (StringMessage) ObjectReceive;
-                    System.out.println("Message reçu :"+ receive.getContentString());
                     serverHandler.getNetworkHandler().getAgent().ReceiveMessage(receive);
                 } else if (ObjectReceive instanceof FileMessage) {
                     FileMessage receive = (FileMessage) ObjectReceive;
-                    System.out.println("Message avec file reçu");
                     serverHandler.getNetworkHandler().getAgent().ReceiveMessage(receive);
 
                 } else if (ObjectReceive instanceof String) {
@@ -54,7 +50,6 @@ public class TCP extends Thread {
             link.close();
 
         } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Problème reception ! ");
         }
     }
 }

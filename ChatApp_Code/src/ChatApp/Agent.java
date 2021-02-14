@@ -22,9 +22,8 @@ public class Agent {
     private BDDpage bddpage;
     private HandlerBDD bddHandler;
 
-    /*======================CONSTRUCTOR======================*/
+/*======================CONSTRUCTOR======================*/
     public Agent() throws IOException {
-        ;
         currentChat = new ArrayList<ChatHandler>();
         pseudoHandler = new PseudoHandler(this);
         bddHandler = new HandlerBDD(this);
@@ -34,21 +33,20 @@ public class Agent {
         bddpage = new BDDpage(this);
     }
 
-    /* This fonction starts all the servers that means the TCP, UDP and HTTP servers */
+/* This fonction starts all the servers that means the TCP, UDP and HTTP servers */
     public void StartServers() {
         networkHandler = new NetworkHandler(this);
     }
 
-    /* This fonction starts a chat by creating a chat handler associated to a recipient user */
+/* This fonction starts a chat by creating a chat handler associated to a recipient user */
     public void StartChat(String pseudo) throws IOException {
         User recipient = pseudoHandler.FindUser(pseudo);
         ChatHandler chatHandler = new ChatHandler(recipient, this);
-        System.out.println("Historique " + chatHandler.getMessageHistory());
         currentChat.add(chatHandler);
         networkHandler.StartChat(chatHandler);
     }
 
-    /* Those functions stop a chat by closing the chat handler of the chat */
+/* Those functions stop a chat by closing the chat handler of the chat */
     public void StopChat(int SenderID) {
         ChatHandler chatHandler = findChatHandler(SenderID);
         networkHandler.StopChat(chatHandler);
@@ -59,7 +57,6 @@ public class Agent {
             e.printStackTrace();
         }
     }
-
     public void StopChat(ChatHandler chatHandler) {
         networkHandler.StopChat(chatHandler);
         try {
@@ -70,56 +67,50 @@ public class Agent {
         }
     }
 
-    /* This function are used when one of the servers intercept an incoming message */
+/* This function are used when one of the servers intercept an incoming message */
     public void ReceiveMessage(StringMessage message) {
         findChatHandler(message.getSender().getID()).Receive(message);
     }
-
     public void ReceiveMessage(FileMessage message) {
         findChatHandler(message.getSender().getID()).Receive(message);
     }
 
-    /* Those function are used when user's information are received from the UDP or HTTP server */
+/* Those function are used when user's information are received from the UDP or HTTP server */
     public void UpdateUsers(Object object) {
         pseudoHandler.UpdateUsers(object);
         usersWindows.getjListSimple().Mise_a_jour(pseudoHandler.getConnectedUsers());
     }
-
     public void UpdateUsers(String pseudo, InetAddress address, int ID) {
         pseudoHandler.UpdateUsers(pseudo, address, ID);
         usersWindows.getjListSimple().Mise_a_jour(pseudoHandler.getConnectedUsers());
     }
 
-    /* This function are used when we receive a disconnection signal from a user */
+/* This function are used when we receive a disconnection signal from a user */
     public void RemoveUser(int ID) {
         pseudoHandler.RemoveUser(ID);
         usersWindows.getjListSimple().Mise_a_jour(pseudoHandler.getConnectedUsers());
     }
-
     public void RemoveUser(Object object) {
         pseudoHandler.RemoveUser(object);
         usersWindows.getjListSimple().Mise_a_jour(pseudoHandler.getConnectedUsers());
     }
 
-    /* This function verify if the specify username and password are valid or not */
+/* This function verify if the specify username and password are valid or not */
     public boolean LogIn(String username, String password) {
         int id = -1;
         try {
             id = bddHandler.getIDUser(username, password);
-            System.out.println("ID=" + id);
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
         if (id != -1) {
             pseudoHandler.getMain_User().setID(id);
-            System.out.println(pseudoHandler.getMain_User());
             return true;
         } else {
             return false;
         }
     }
 
-    /* This function add a new account to the database */
+/* This function add a new account to the database */
     public boolean CreateAccount(String username, String password) {
         int nb = -1;
         try {
@@ -129,7 +120,7 @@ public class Agent {
         return (nb != 0);
     }
 
-    /* This function occurs when we quit the application, notify the server a well as all the local user and close all the chat still open*/
+/* This function occurs when we quit the application, notify the server a well as all the local user and close all the chat still open*/
     public void Disconnect() throws IOException {
         for (int i = 0; i < currentChat.size(); i++) {
             StopChat(currentChat.get(i));
@@ -143,7 +134,7 @@ public class Agent {
         bddHandler.CloseConnection();
     }
 
-    /* This function find the chat handler corresponding to a recipient ID*/
+/* This function find the chat handler corresponding to a recipient ID*/
     public ChatHandler findChatHandler(int id) {
         ChatHandler chat = null;
         int i;
@@ -155,7 +146,7 @@ public class Agent {
         return chat;
     }
 
-    /*============GETTERS AND SETTERS============*/
+/*============GETTERS AND SETTERS============*/
     public PseudoHandler getPseudoHandler() {
         return pseudoHandler;
     }
@@ -172,9 +163,7 @@ public class Agent {
         return this.pseudoPage;
     }
 
-    public BDDpage getBddpage() {
-        return this.bddpage;
-    }
+    public BDDpage getBddpage() { return this.bddpage; }
 
     public HandlerBDD getBddHandler() {
         return bddHandler;

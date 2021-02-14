@@ -95,12 +95,10 @@ public class ChatPage extends Thread implements ActionListener{
             String getvalue= zone_texte.getText();
             if (getvalue.equals("")){}
             else {
-                System.out.println("Message :"+getvalue);
                 zone_texte.setText("");
                 chatHandler.Send(getvalue);
-                System.out.println("Message envoyé et enregisté");}
-        }
-        else if (e.getSource()==bouton2){
+            }
+        } else if (e.getSource()==bouton2){
             JFileChooser dialogue = new JFileChooser();
             dialogue.showOpenDialog(null);
             chatHandler.Send(dialogue.getSelectedFile());
@@ -149,31 +147,26 @@ public class ChatPage extends Thread implements ActionListener{
 /* Function adding all the message of the history */
     public void debut (){
         for (int index = 0; index < chatHandler.getMessageHistory().size(); index++) {
-            System.out.println("element " +index + " historique: "+chatHandler.getMessageHistory().get(index).getSender());
             if (chatHandler.getMessageHistory().get(index).getRecipient().getPseudo().equals(agent.getPseudoHandler().getMain_User().getPseudo())) {
                 if (chatHandler.getMessageHistory().get(index) instanceof StringMessage) {
                     StringMessage message = (StringMessage) chatHandler.getMessageHistory().get(index);
                     JPanel panel = creation(message.getContentString(), chatHandler.getMessageHistory().get(index).getSender().getPseudo(), chatHandler.getMessageHistory().get(index).getFormatTime(), Color.RED);
                     this.liste.add(panel, BorderLayout.SOUTH);
-                    System.out.println("Liste ok");
                 }
                 else if (chatHandler.getMessageHistory().get(index) instanceof FileMessage) {
                     FileMessage message = (FileMessage) chatHandler.getMessageHistory().get(index);
                     JPanel panel = creation("Fichier: " + message.getFileName(), chatHandler.getMessageHistory().get(index).getSender().getPseudo(), chatHandler.getMessageHistory().get(index).getFormatTime(), Color.RED);
                     this.liste.add(panel, BorderLayout.SOUTH);
-                    System.out.println("Liste ok");
                 }
             } else {
                 if (chatHandler.getMessageHistory().get(index) instanceof StringMessage) {
                     StringMessage message = (StringMessage) chatHandler.getMessageHistory().get(index);
                     JPanel panel = creation(message.getContentString(), chatHandler.getMessageHistory().get(index).getSender().getPseudo(), chatHandler.getMessageHistory().get(index).getFormatTime(), Color.BLUE);this.liste.add(panel, BorderLayout.SOUTH);
-                    System.out.println("Liste ok");
                 }
                 else if (chatHandler.getMessageHistory().get(index) instanceof FileMessage) {
                     FileMessage message = (FileMessage) chatHandler.getMessageHistory().get(index);
                     JPanel panel = creation("Fichier: " + message.getFileName(), chatHandler.getMessageHistory().get(index).getSender().getPseudo(), chatHandler.getMessageHistory().get(index).getFormatTime(), Color.BLUE);
                     this.liste.add(panel, BorderLayout.SOUTH);
-                    System.out.println("Liste ok");
                 }
             }
         }
@@ -214,12 +207,10 @@ public class ChatPage extends Thread implements ActionListener{
             dialogue.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             dialogue.showOpenDialog(e.getComponent());
             dialogue.getCurrentDirectory();
-            System.out.println("Enregistrement fichier sous: " + dialogue.getSelectedFile().toString()+"\\"+fileMessage.getFileName());
             try {
                 FileOutputStream stream = new FileOutputStream(dialogue.getSelectedFile().toString()+"\\"+fileMessage.getFileName());
                 stream.write(fileMessage.getContentFile());
                 stream.close();
-                System.out.println("Fin enregistrement");
             } catch (FileNotFoundException f){
 
             } catch (IOException ioException) {
