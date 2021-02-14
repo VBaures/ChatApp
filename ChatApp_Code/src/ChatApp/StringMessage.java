@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class StringMessage extends Message implements Serializable {
-    protected String Content;
+    private String Content;
 
 /*==========CONSTRUCTORS==========*/
     public StringMessage(User recipient, User sender, String content){

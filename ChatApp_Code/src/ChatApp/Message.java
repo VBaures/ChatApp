@@ -14,10 +14,10 @@ import java.util.Date;
 import java.util.Locale;
 
 public abstract class Message implements Serializable {
-    protected Date time;
-    protected DateFormat dateFormat = new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm ",Locale.FRANCE) ;
-    protected User recipient;
-    protected User sender;
+    private Date time;
+    private DateFormat dateFormat = new SimpleDateFormat("dd MMMMMMMMM yyyy - HH:mm ",Locale.FRANCE) ;
+    private User recipient;
+    private User sender;
 
 /*==========CONSTRUCTORS==========*/
     public Message(User recipient, User sender){

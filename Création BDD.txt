@@ -1,0 +1,30 @@
+	private void createTableUser() throws SQLException {
+		String createTableUser = "CREATE TABLE IF NOT EXISTS user (\r\n"
+				+ "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\r\n"
+				+ "    username TEXT NOT NULL\r\n" + ");";
+
+		Statement statement = this.connection.createStatement();
+		statement.execute(createTableUser);
+	}
+
+	private void createTableMessage() throws SQLException {
+		String createTableMessage = "CREATE TABLE IF NOT EXISTS message (\r\n"
+				+ "    id_message      INTEGER PRIMARY KEY AUTOINCREMENT,\r\n"
+				+ "    id_conversation INTEGER REFERENCES conversation (id_conversation) \r\n" + "                            NOT NULL,\r\n"
+				+ "    content         BLOB,\r\n"
+				+ "    date            INTEGER NOT NULL\r\n" + ");";
+
+		Statement statement = this.connection.createStatement();
+		statement.execute(createTableMessage);
+	}
+
+	private void createTableConversation() throws SQLException {
+		String createTableConversation = "CREATE TABLE IF NOT EXISTS conversation (\r\n"
+				+ "    id_conversation INTEGER PRIMARY KEY AUTOINCREMENT,\r\n"
+				+ "    id_emetteur     INTEGER REFERENCES user (id) \r\n" + "                            NOT NULL,\r\n"
+				+ "    id_recepteur    INTEGER REFERENCES user (id) \r\n" + "                            NOT NULL\r\n" + ");";
+
+		Statement statement = this.connection.createStatement();
+		statement.execute(createTableConversation);
+
+	}

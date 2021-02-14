@@ -12,8 +12,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class TCP extends Thread {
-    ServerHandler serverHandler;
-    Socket link;
+    private ServerHandler serverHandler;
+    private Socket link;
 
 /*===========CONSTRUCTOR==========*/
     public TCP(ServerHandler serverHandler, Socket link){

@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class NetworkHandler extends Thread {
-    ServerHandler serverHandler;
-    RemoteHandler remoteHandler;
-    ArrayList<ClientHandler> listClientHandler;
-    Agent agent;
+    private ServerHandler serverHandler;
+    private RemoteHandler remoteHandler;
+    private ArrayList<ClientHandler> listClientHandler;
+    private Agent agent;
 
 /*=======CONSTRUCTOR==========*/
     public NetworkHandler(Agent agent){

@@ -104,6 +104,7 @@ public class Agent {
         }
         if (id != -1) {
             pseudoHandler.getMain_User().setID(id);
+            System.out.println(pseudoHandler.getMain_User());
             return true;
         } else {
             return false;

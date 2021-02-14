@@ -13,8 +13,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class UDP extends Thread {
-    ServerHandler serverHandler;
-    DatagramSocket datagramSocket;
+    private ServerHandler serverHandler;
+    private DatagramSocket datagramSocket;
 
 /*===========CONSTRUCTOR==========*/
     public UDP(ServerHandler serverHandler, DatagramSocket datagramSocket) {

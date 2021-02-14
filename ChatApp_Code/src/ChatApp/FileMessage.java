@@ -15,8 +15,8 @@ import java.nio.file.Paths;
 import java.util.Date;
 
 public class FileMessage extends Message implements Serializable {
-    protected byte[] content;
-    protected String fileName;
+    private byte[] content;
+    private String fileName;
 
 /*==========CONSTRUCTORS==========*/
     public FileMessage (User recipient, User sender, String filePath) throws IOException {

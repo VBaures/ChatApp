@@ -34,6 +34,7 @@ public class ChatHandler {
         this.socket=socket;
         //Message history reception
         try {
+            agent.getBddHandler().insertConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
             this.ID = agent.getBddHandler().getIDConversation(agent.getPseudoHandler().getMain_User().getID(), recipient.getID());
             messageHistory = agent.getBddHandler().getHistoriqueMessages(ID);
         }catch (SQLException | IOException | ParseException e){
@@ -83,7 +84,7 @@ public class ChatHandler {
                 this.output.writeObject(message);
                 //Add the message to the history and to the database
                 this.getMessageHistory().add(message);
-                agent.getBddHandler().insertMessage(message.sender, message.recipient, ID, message.getContentString(), message.getFormatTime().toString(),null);
+                agent.getBddHandler().insertMessage(message.getSender(), message.getRecipient(), ID, message.getContentString(), message.getFormatTime().toString(),null);
                 //Update of the chat windows
                 chatPage.Mise_a_jour();
             //Sending of a file message
@@ -94,7 +95,7 @@ public class ChatHandler {
                 this.output.writeObject(message);
                 //Add the message to the history and to the database
                 this.getMessageHistory().add(message);
-                agent.getBddHandler().insertMessage(message.sender, message.recipient, ID, message.getFileName(), message.getFormatTime().toString(), message.getContentFile());
+                agent.getBddHandler().insertMessage(message.getSender(), message.getRecipient(), ID, message.getFileName(), message.getFormatTime().toString(), message.getContentFile());
                 //Update of the chat windows
                 chatPage.Mise_a_jour();
             }
@@ -114,9 +115,9 @@ public class ChatHandler {
 
 
 /*==========GETTERS AND SETTERS==========*/
-    void setOutput(ObjectOutputStream output){ this.output=output; }
+    public void setOutput(ObjectOutputStream output){ this.output=output; }
 
-    void setSocket(Socket socket){ this.socket=socket; }
+    public void setSocket(Socket socket){ this.socket=socket; }
 
     public User getRecipient(){ return this.recipient; }
 

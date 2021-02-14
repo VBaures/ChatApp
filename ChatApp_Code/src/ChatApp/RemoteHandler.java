@@ -62,7 +62,7 @@ public class RemoteHandler extends Thread{
      }
 
 /* This function ask who is connected to the remote server */
-    public void getInformation(){
+    private void getInformation(){
         try {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
