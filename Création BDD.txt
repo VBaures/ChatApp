@@ -1,30 +1,21 @@
-	private void createTableUser() throws SQLException {
-		String createTableUser = "CREATE TABLE IF NOT EXISTS user (\r\n"
-				+ "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\r\n"
-				+ "    username TEXT NOT NULL\r\n" + ");";
 
-		Statement statement = this.connection.createStatement();
-		statement.execute(createTableUser);
-	}
+Création de la table user:
+CREATE TABLE IF NOT EXISTS user(
+	id       INTEGER PRIMARY KEY AUTO_INCREMENT,
+	username TEXT NOT NULL);
 
-	private void createTableMessage() throws SQLException {
-		String createTableMessage = "CREATE TABLE IF NOT EXISTS message (\r\n"
-				+ "    id_message      INTEGER PRIMARY KEY AUTOINCREMENT,\r\n"
-				+ "    id_conversation INTEGER REFERENCES conversation (id_conversation) \r\n" + "                            NOT NULL,\r\n"
-				+ "    content         BLOB,\r\n"
-				+ "    date            INTEGER NOT NULL\r\n" + ");";
+Création de la table message:
+CREATE TABLE IF NOT EXISTS message( 
+	id_conversation INTEGER NOT NULL REFERENCES conversation (id_conversation),
+	content BLOB,
+	date INTEGER NOT NULL,
+     	id_sender INTEGER NOT NULL REFERENCES user (id),
+     	id_receiver INTEGER NOT NULL REFERENCES user (id),
+     	file LONGBLOB);eMessage);
 
-		Statement statement = this.connection.createStatement();
-		statement.execute(createTableMessage);
-	}
-
-	private void createTableConversation() throws SQLException {
-		String createTableConversation = "CREATE TABLE IF NOT EXISTS conversation (\r\n"
-				+ "    id_conversation INTEGER PRIMARY KEY AUTOINCREMENT,\r\n"
-				+ "    id_emetteur     INTEGER REFERENCES user (id) \r\n" + "                            NOT NULL,\r\n"
-				+ "    id_recepteur    INTEGER REFERENCES user (id) \r\n" + "                            NOT NULL\r\n" + ");";
-
-		Statement statement = this.connection.createStatement();
-		statement.execute(createTableConversation);
-
-	}
+Création de la table conversation:
+CREATE TABLE IF NOT EXISTS conversation (
+	id_conversation INTEGER PRIMARY KEY AUTO_INCREMENT,
+	id_emetteur     INTEGER NOT NULL REFERENCES user (id),
+	id_recepteur    INTEGER NOT NULL REFERENCES user (id));
+	

@@ -82,6 +82,8 @@ public class PseudoPage implements ActionListener {
             }
             frame.setVisible(false);
             agent.getUsersWindows().getFrame().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null,"Pseudo déjà utilisé");
         }
     }
 

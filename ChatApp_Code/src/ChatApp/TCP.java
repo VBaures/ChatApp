@@ -21,6 +21,7 @@ public class TCP extends Thread {
         this.link=link;
     }
 
+
 /*===========RUN METHOD==========*/
     @Override
     public void run() {

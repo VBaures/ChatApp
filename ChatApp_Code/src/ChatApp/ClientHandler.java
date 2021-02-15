@@ -36,7 +36,6 @@ public class ClientHandler extends Thread{
             while(true){
                 try {
                     Object ObjectReceive=in.readObject();
-                    System.out.println(ObjectReceive);
                     if (ObjectReceive instanceof StringMessage) {
                         StringMessage receive = (StringMessage) ObjectReceive;
                         chatHandler.Receive(receive);
@@ -45,7 +44,6 @@ public class ClientHandler extends Thread{
                         chatHandler.Receive(receive);
                     } else if (ObjectReceive instanceof String) {
                         String receive = (String) ObjectReceive;
-                        System.out.println(receive);
                         if (receive.equals("StopChat")){
                             networkHandler.getAgent().StopChat(sender.getID());
                             break;

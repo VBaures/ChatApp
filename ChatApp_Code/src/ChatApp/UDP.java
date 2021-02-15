@@ -56,7 +56,6 @@ public class UDP extends Thread {
     private void sendUDP(String message, Object obj, InetAddress inetAddress) throws IOException {
         byte[] buffer1 = message.getBytes();
         DatagramPacket packet1 = new DatagramPacket(buffer1, buffer1.length, inetAddress, 1040);
-        System.out.println(inetAddress);
         datagramSocket.send(packet1);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bos);

@@ -91,6 +91,8 @@ class AuthentificationPage implements ActionListener {
                 frame.dispose();
                 agent.getPseudoPage().getFrame().setVisible(true);
                 agent.StartServers();
+            } else {
+                JOptionPane.showMessageDialog(null,"Compte inconnu");
             }
         } else if (e.getSource() == bouton2) {
             if (agent.LogIn(username, password)) {
@@ -98,6 +100,8 @@ class AuthentificationPage implements ActionListener {
                 frame.dispose();
                 agent.getPseudoPage().getFrame().setVisible(true);
                 agent.StartServers();
+            } else {
+                JOptionPane.showMessageDialog(null,"Compte inconnu");
             }
         } else{
             agent.getBddpage().getFrame().setVisible(true);

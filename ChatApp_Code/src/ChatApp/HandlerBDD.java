@@ -7,6 +7,7 @@ This class handle the connection to the database and the reqests
 
 package ChatApp;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.sql.*;
 import java.text.ParseException;
@@ -35,8 +36,7 @@ public class HandlerBDD {
 				connection=DriverManager.getConnection(url,login,password);
 			}
 			catch(SQLException e) {
-				System.err.println(e);
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null,"Probème de connection à la base de données.\nVeuillez vérifier votre connection au VPN et redémarrer l'application");
 			}
 		}
 		catch (ClassNotFoundException e) {

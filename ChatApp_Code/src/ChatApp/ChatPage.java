@@ -103,9 +103,8 @@ public class ChatPage extends Thread implements ActionListener{
             dialogue.showOpenDialog(null);
             chatHandler.Send(dialogue.getSelectedFile());
         }else{
-                agent.StopChat(chatHandler);
+            agent.StopChat(chatHandler);
             fram.dispose();
-            System.exit(0);
         }
     }
 

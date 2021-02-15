@@ -66,6 +66,8 @@ public class BDDpage implements ActionListener {
         if (e.getSource()==bouton){
             if (agent.CreateAccount(username,password)){
                     fram.dispose();
+            }else {
+                JOptionPane.showMessageDialog(null,"Ce compte existe déjà");
             }
         }
     }
