@@ -88,7 +88,7 @@ public class UsersWindows extends Thread implements ActionListener {
                 Desktop desktop = Desktop.getDesktop();
                 if (desktop.isSupported(Desktop.Action.BROWSE)) {
                     try {
-                        URI uri = new URI("https://github.com/VBaures/Projet-COO/raw/master/guide_utilisation_poo.pdf");
+                        URI uri = new URI("https://github.com/VBaures/ChatApp/raw/master/Rapport_POO.pdf");
                         Desktop dt = Desktop.getDesktop();
                         dt.browse(uri);
                     } catch (IOException | URISyntaxException ioException) {
